@@ -16,6 +16,7 @@ import {
 	WrapperTable,
 	WrapperTitle,
 } from "./styles";
+import { Modal } from "../../components/modal";
 
 const Home = () => {
 	const theme = useTheme();
@@ -35,6 +36,7 @@ const Home = () => {
 				/>
 			</WrapperTitle>
 
+			<Modal />
 			{/** COMPONENTE DE FILTRO */}
 			<ContainerFiltered>
 				<Filter />
