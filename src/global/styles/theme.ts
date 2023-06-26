@@ -21,7 +21,7 @@ const colors = {
 	natural_200: "#fcfcfc",
 	purple_400: "#7840B0",
 	red_300: "#EE5B5B",
-	red_500: "#c62828",
+	red_500: "#DC3545",
 	slate_500: "#25262D",
 	slate_700: "#051C3B",
 	slate_600: "#2F3A4A",
