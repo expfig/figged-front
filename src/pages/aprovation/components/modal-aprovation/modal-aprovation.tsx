@@ -19,6 +19,7 @@ import {
 	ButtonClosed,
 	WrapperTextDescriptionModal,
 	WrapperButtonModal,
+	SubTitle,
 } from "./modal-styles";
 
 const ModalAprovation = ({
@@ -27,12 +28,9 @@ const ModalAprovation = ({
 	onAprovationDocumentAndCoil,
 }: ModalAprovationProps) => {
 	const theme = useTheme();
+
 	return (
-		<Modal
-			isOpen={isModalOpen}
-			width="40%"
-			onRequestCloseClick={onOpenAndClosedClick}
-		>
+		<Modal isOpen={isModalOpen} onRequestCloseClick={onOpenAndClosedClick}>
 			<WrapperHeader>
 				<WrapperHeaderTitle>
 					<Text
@@ -43,7 +41,6 @@ const ModalAprovation = ({
 						color={theme.colors.black_200}
 						size={18}
 						weight="600"
-						width={"70%"}
 					/>
 				</WrapperHeaderTitle>
 
@@ -57,17 +54,9 @@ const ModalAprovation = ({
 			</WrapperHeader>
 
 			<WrapperTextDescriptionModal>
-				<Text
-					text="Você tem certeza que deseja aprovar o documento/foto selecionada?"
-					align="center"
-					letterHeight={28}
-					letterSpacing={0.5}
-					color={theme.colors.gray_500}
-					size={18}
-					weight="400"
-					marginTop={6}
-					width={70}
-				/>
+				<SubTitle>
+					Você tem certeza que deseja aprovar o documento/foto selecionada?
+				</SubTitle>
 			</WrapperTextDescriptionModal>
 
 			<WrapperButtonModal>

@@ -48,7 +48,6 @@ const Aprovation = () => {
 					}}
 				/>
 			)}
-
 			{isModalReproach && (
 				<ModalCancelAprovation
 					isModalOpen={isModalReproach}
@@ -77,7 +76,6 @@ const Aprovation = () => {
 					marginBottom={16}
 				/>
 			</WrapperTitle>
-
 			<WrapperImage>
 				<ImageCustom
 					type="pedente"
@@ -107,7 +105,6 @@ const Aprovation = () => {
 					}}
 				/>
 			</WrapperImage>
-
 			<Table />
 		</ContainerMain>
 	);
