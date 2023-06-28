@@ -1,15 +1,28 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /**
  * IMPORTS
  */
 
+import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
+// redux
+import { useDispatch, useSelector } from "react-redux";
+
+// react-select
 import Select from "react-select";
 
 // Use o componente Async para carregar opções de uma fonte remota enquanto o usuário digita.
 import AsyncSelect from "react-select/async";
 
+// actions
+import { actions as ActionsFilter } from "../../features/filter";
+
+// selectors
+import { selectFilter } from "../../features/filter/selectores";
+
 // components
+import { Button } from "../button";
 import { Text } from "../text/text";
 
 // data fake
@@ -21,6 +34,9 @@ import {
 	type DrivernameOption,
 } from "./data-fake";
 
+// typings
+import { type FilterDataProps } from "./interface";
+
 // styles
 import {
 	ContainerFiltered,
@@ -28,10 +44,26 @@ import {
 	WrapperTitle,
 	FooterBottom,
 } from "./styles";
-import { Button } from "../button";
 
 const Filter = () => {
 	const theme = useTheme();
+	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
+
+	// use dispatch
+	const dispatch = useDispatch();
+
+	// use selector
+	const selectedWork = useSelector(selectFilter);
+
+	const [groups, setGroups] = useState<FilterDataProps[]>([]);
+
+	const handleFilter = useCallback(async () => {
+		const responseFilter = await dispatch(
+			ActionsFilter.fetchAllgroups({ token })
+		);
+
+		return responseFilter;
+	}, []);
 
 	const filterColors = (inputValue: string) => {
 		return colourOptions.filter(i =>
@@ -62,6 +94,22 @@ const Filter = () => {
 			callback(filterDriveName(inputValue));
 		}, 1000);
 	};
+
+	const handleTransformeData = () => {
+		const novo = selectedWork.map((data: FilterDataProps) => {
+			return {
+				value: data.id,
+				label: data.text,
+			};
+		});
+
+		setGroups(novo);
+	};
+
+	useEffect(() => {
+		handleTransformeData();
+	}, []);
+
 	return (
 		<ContainerFiltered>
 			<WrapperTitle>
@@ -88,7 +136,7 @@ const Filter = () => {
 							marginBottom: 12,
 						}),
 					}}
-					options={options}
+					options={groups}
 					onChange={text => {}}
 				/>
 
@@ -182,6 +230,7 @@ const Filter = () => {
 					/>
 
 					<Button
+						onClick={handleFilter}
 						title="Realizar Filtro"
 						backgroundColor={theme.colors.blue_100}
 						color={theme.colors.natural}
