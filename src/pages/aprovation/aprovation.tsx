@@ -36,7 +36,7 @@ const Aprovation = () => {
 	};
 
 	return (
-		<ContainerMain>
+		<>
 			{isModal && (
 				<ModalAprovation
 					isModalOpen={isModal}
@@ -59,54 +59,55 @@ const Aprovation = () => {
 					}}
 				/>
 			)}
-
-			<WrapperTitle>
-				<Text
-					width={"100%"}
-					marginTop={18}
-					text={`Documento do Comprovante da Viagem ${JSON.stringify(
-						idBobina
-					)} (Aguardando)`}
-					align="left"
-					letterHeight={24}
-					letterSpacing={0.5}
-					color={theme.colors.black_200}
-					size={24}
-					weight="600"
-					marginBottom={16}
-				/>
-			</WrapperTitle>
-			<WrapperImage>
-				<ImageCustom
-					type="pedente"
-					onClickApproved={() => {
-						setIsModal(!isModal);
-					}}
-					onClickDisapproved={() => {
-						setIsModalReproach(!isModalReproach);
-					}}
-				/>
-				<ImageCustom
-					type="pedente"
-					onClickApproved={() => {
-						setIsModal(!isModal);
-					}}
-					onClickDisapproved={() => {
-						setIsModalReproach(!isModalReproach);
-					}}
-				/>
-				<ImageCustom
-					type="pedente"
-					onClickApproved={() => {
-						setIsModal(!isModal);
-					}}
-					onClickDisapproved={() => {
-						setIsModalReproach(!isModalReproach);
-					}}
-				/>
-			</WrapperImage>
-			<Table />
-		</ContainerMain>
+			<ContainerMain>
+				<WrapperTitle>
+					<Text
+						width={"100%"}
+						marginTop={18}
+						text={`Documento do Comprovante da Viagem ${JSON.stringify(
+							idBobina
+						)} (Aguardando)`}
+						align="left"
+						letterHeight={24}
+						letterSpacing={0.5}
+						color={theme.colors.black_200}
+						size={24}
+						weight="600"
+						marginBottom={16}
+					/>
+				</WrapperTitle>
+				<WrapperImage>
+					<ImageCustom
+						type="pedente"
+						onClickApproved={() => {
+							setIsModal(!isModal);
+						}}
+						onClickDisapproved={() => {
+							setIsModalReproach(!isModalReproach);
+						}}
+					/>
+					<ImageCustom
+						type="pedente"
+						onClickApproved={() => {
+							setIsModal(!isModal);
+						}}
+						onClickDisapproved={() => {
+							setIsModalReproach(!isModalReproach);
+						}}
+					/>
+					<ImageCustom
+						type="pedente"
+						onClickApproved={() => {
+							setIsModal(!isModal);
+						}}
+						onClickDisapproved={() => {
+							setIsModalReproach(!isModalReproach);
+						}}
+					/>
+				</WrapperImage>
+				<Table />
+			</ContainerMain>
+		</>
 	);
 };
 
