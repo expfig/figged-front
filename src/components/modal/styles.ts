@@ -1,21 +1,30 @@
 /**
  * IMPORTS
  */
+import ReactModal from "react-modal";
 import styled from "styled-components";
 
-const Container = styled.div`
+const ContainerMdal = styled(ReactModal)`
 	width: 100%;
-	height: 100vh;
 	position: absolute;
-	z-index: 9999;
-	background-color: #000000;
-	opacity: 0.2;
-
-	box-shadow: -3px 0px 50px 29px rgba(18, 18, 18, 0.96);
-
-	-webkit-box-shadow: -3px 0px 50px 29px rgba(18, 18, 18, 0.96);
-
-	-moz-box-shadow: -3px 0px 50px 29px rgba(18, 18, 18, 0.96);
+	inset: 0;
+	background-color: rgba(18, 18, 18, 0.7);
+	width: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	bottom: auto;
+	border-radius: 4px;
+	z-index: 999999;
+	@media screen and (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		width: 350px;
+		/* height: 100%; */
+	}
 `;
 
 const WrapperTitle = styled.div`
@@ -26,4 +35,4 @@ const WrapperTitle = styled.div`
 /**
  * EXPORTS
  */
-export { Container, WrapperTitle };
+export { ContainerMdal, WrapperTitle };

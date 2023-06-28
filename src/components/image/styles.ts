@@ -20,7 +20,7 @@ const Container = styled.div`
 	@media screen and (max-width: 768px) {
 		display: block;
 		width: 100%;
-		background-color: transparent;
+		height: 30.62rem;
 	}
 `;
 
@@ -82,6 +82,16 @@ const FooterImage = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1rem;
+
+	@media screen and (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		width: 350px;
+		margin-top: 1rem;
+		padding-right: 38px;
+	}
 `;
 
 /**

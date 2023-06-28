@@ -22,9 +22,12 @@ import { type ModalAprovationProps } from "./interface";
 import {
 	WrapperHeader,
 	WrapperHeaderTitle,
+	SubTitle,
 	WrapperMain,
 	ButtonClosed,
 	WrapperTextDescriptionModal,
+	WrapperSelect,
+	WrapperTextArea,
 	Label,
 	TextArea,
 	WrapperButtonModal,
@@ -38,13 +41,10 @@ const ModalCancelAprovation = ({
 	const theme = useTheme();
 
 	const [disapprovalReason, setDisapprovalReason] = useState("");
+	const [onFocused, setOnFocused] = useState(false);
 
 	return (
-		<Modal
-			isOpen={isModalOpen}
-			width="40%"
-			onRequestCloseClick={onOpenAndClosedClick}
-		>
+		<Modal isOpen={isModalOpen} onRequestCloseClick={onOpenAndClosedClick}>
 			<WrapperHeader>
 				<WrapperHeaderTitle>
 					<Text
@@ -70,43 +70,51 @@ const ModalCancelAprovation = ({
 
 			<WrapperMain>
 				<WrapperTextDescriptionModal>
-					<Text
-						text="Você tem certeza que deseja realizar a reprovação do documento/foto selecionada?"
-						align="center"
-						letterHeight={28}
-						letterSpacing={0.5}
-						color={theme.colors.gray_500}
-						size={18}
-						weight="400"
-						marginTop={6}
-						width={100}
-					/>
+					<SubTitle>
+						Você tem certeza que deseja realizar a reprovação do documento/foto
+						selecionada?
+					</SubTitle>
 				</WrapperTextDescriptionModal>
 
-				<Select
-					placeholder={"Selecione o motivo da reprovação"}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
-					options={options}
-					onChange={text => {
-						setDisapprovalReason(text?.value ? text?.value : "");
-					}}
-				/>
+				<WrapperSelect>
+					<Select
+						placeholder={"Selecione o motivo da reprovação"}
+						styles={{
+							control: (baseStyles, state) => ({
+								...baseStyles,
+								borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
+								marginBottom: 12,
+							}),
+						}}
+						options={options}
+						onChange={text => {
+							setDisapprovalReason(text?.value ? text?.value : "");
+						}}
+					/>
+				</WrapperSelect>
 
 				{disapprovalReason === "Nenhuma das opção abaixo" && (
-					<>
+					<WrapperTextArea>
 						<Label>Mensagem:</Label>
-						<TextArea onChange={() => {}} />
-					</>
+						<TextArea
+							onChange={() => {}}
+							onFocus={() => {
+								setOnFocused(true);
+							}}
+							onBlur={() => {
+								setOnFocused(false);
+							}}
+							borderColor={
+								onFocused ? theme.colors.blue_100 : theme.colors.gray_500
+							}
+						/>
+					</WrapperTextArea>
 				)}
 			</WrapperMain>
 
-			<WrapperButtonModal>
+			<WrapperButtonModal
+				textArea={disapprovalReason === "Nenhuma das opção abaixo"}
+			>
 				<Button
 					onClick={onOpenAndClosedClick}
 					width={"46%"}
