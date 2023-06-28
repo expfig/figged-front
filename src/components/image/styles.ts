@@ -8,15 +8,15 @@ import { type WrapperHeaderProps } from "./interface";
 
 const Container = styled.div`
 	width: 30%;
-	height: 450px;
+	height: 28.12rem;
 	border-radius: 0.25rem;
 	border: 1px solid ${({ theme }) => theme.colors.gray_200};
-	background-color: transparent;
 	margin-bottom: 1.5rem;
 	display: column;
 	align-items: center;
 	justify-content: space-around;
 
+	// quando a tela atingir 768px
 	@media screen and (max-width: 768px) {
 		display: block;
 		width: 100%;
@@ -31,7 +31,7 @@ const WrapperHeader = styled.div<WrapperHeaderProps>`
 	align-items: center;
 	justify-content: center;
 	background-color: ${({ theme, type }) =>
-		type === "aprovado" ? theme.colors.green_200 : "#0d6efd"};
+		type === "aprovado" ? theme.colors.green_200 : theme.colors.blue_80};
 	border-top-right-radius: 0.25rem;
 	border-top-left-radius: 0.25rem;
 `;
@@ -74,23 +74,21 @@ const WrapperTextUser = styled.div`
 
 const FooterImage = styled.div`
 	width: 100%;
-	height: 60px;
+	height: 5.62rem;
 	margin-top: 4px;
-	background-color: transparent;
+	border-radius: 0.25rem;
+	border-bottom: 1px solid ${({ theme }) => theme.colors.gray_200};
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1rem;
 
+	// quando a tela atingir 768px
 	@media screen and (max-width: 768px) {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		width: 350px;
 		margin-top: 1rem;
-		padding-right: 38px;
 	}
 `;
 
