@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
 // redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // react-select
 import Select from "react-select";
@@ -19,7 +19,7 @@ import AsyncSelect from "react-select/async";
 import { actions as ActionsFilter } from "../../features/filter";
 
 // selectors
-import { selectFilter } from "../../features/filter/selectores";
+// import { selectFilter } from "../../features/filter/selectores";
 
 // components
 import { Button } from "../button";
@@ -35,7 +35,11 @@ import {
 } from "./data-fake";
 
 // typings
-import { type FilterDataProps } from "./interface";
+import {
+	type FilterDataProps,
+	type IFilterRequestProps,
+	type FilterDataGroupsProps,
+} from "./interface";
 
 // styles
 import {
@@ -53,19 +57,35 @@ const Filter = () => {
 	const dispatch = useDispatch();
 
 	// use selector
-	const selectedWork = useSelector(selectFilter);
+	// const selectedWork = useSelector(selectFilter);
 
-	const [groups, setGroups] = useState<FilterDataProps[]>([]);
+	const [groups, setGroups] = useState<FilterDataGroupsProps[]>([]);
 
 	const handleFilter = useCallback(async () => {
-		const responseFilter = await dispatch(
-			ActionsFilter.fetchAllgroups({ token })
-		);
+		try {
+			const responseFilter: IFilterRequestProps = await dispatch(
+				ActionsFilter.fetchAllgroups({ token })
+			);
 
-		return responseFilter;
-	}, []);
+			if (responseFilter.payload.data.length > 0) {
+				const newData = responseFilter.payload.data?.map(
+					(data: FilterDataProps) => {
+						return {
+							value: data?.id,
+							label: data?.text,
+						};
+					}
+				);
 
-	const filterColors = (inputValue: string) => {
+				setGroups(newData);
+			}
+			return responseFilter;
+		} catch (error) {
+			return error;
+		}
+	}, [groups]);
+
+	const filterData = (inputValue: string) => {
 		return colourOptions.filter(i =>
 			i.label.toLowerCase().includes(inputValue.toLowerCase())
 		);
@@ -82,7 +102,7 @@ const Filter = () => {
 		callback: (options: ColourOption[]) => void
 	) => {
 		setTimeout(() => {
-			callback(filterColors(inputValue));
+			callback(filterData(inputValue));
 		}, 1000);
 	};
 
@@ -95,19 +115,8 @@ const Filter = () => {
 		}, 1000);
 	};
 
-	const handleTransformeData = () => {
-		const novo = selectedWork.map((data: FilterDataProps) => {
-			return {
-				value: data.id,
-				label: data.text,
-			};
-		});
-
-		setGroups(novo);
-	};
-
 	useEffect(() => {
-		handleTransformeData();
+		handleFilter();
 	}, []);
 
 	return (

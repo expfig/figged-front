@@ -58,6 +58,7 @@
         "@typescript-eslint/no-namespace": "off", // <--- UTILIZAÇÃO DE RENOMEAR O NAMESPACE TYPESCRIPT
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/no-floating-promises": "off", // <---
         "react/jsx-filename-extension": [
             1,
             {
