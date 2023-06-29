@@ -22,4 +22,5 @@ export type IFilterResponse = IFilterstate;
  */
 export const types = {
 	GET_ALL_GROUPS: `${NAME}/get-all-groups`,
+	GET_ALL_TYPES: `${NAME}/get-all-types`,
 };

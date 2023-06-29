@@ -3,23 +3,13 @@
  * IMPORTS
  */
 
-import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
-
-// redux
-import { useDispatch } from "react-redux";
 
 // react-select
 import Select from "react-select";
 
 // Use o componente Async para carregar opções de uma fonte remota enquanto o usuário digita.
 import AsyncSelect from "react-select/async";
-
-// actions
-import { actions as ActionsFilter } from "../../features/filter";
-
-// selectors
-// import { selectFilter } from "../../features/filter/selectores";
 
 // components
 import { Button } from "../button";
@@ -34,13 +24,6 @@ import {
 	type DrivernameOption,
 } from "./data-fake";
 
-// typings
-import {
-	type FilterDataProps,
-	type IFilterRequestProps,
-	type FilterDataGroupsProps,
-} from "./interface";
-
 // styles
 import {
 	ContainerFiltered,
@@ -48,42 +31,14 @@ import {
 	WrapperTitle,
 	FooterBottom,
 } from "./styles";
+import { type FilterDataGroupsProps } from "./interface";
 
-const Filter = () => {
+interface FilterProps {
+	groups: FilterDataGroupsProps[];
+	types: FilterDataGroupsProps[];
+}
+const Filter = ({ groups, types }: FilterProps) => {
 	const theme = useTheme();
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
-
-	// use dispatch
-	const dispatch = useDispatch();
-
-	// use selector
-	// const selectedWork = useSelector(selectFilter);
-
-	const [groups, setGroups] = useState<FilterDataGroupsProps[]>([]);
-
-	const handleFilter = useCallback(async () => {
-		try {
-			const responseFilter: IFilterRequestProps = await dispatch(
-				ActionsFilter.fetchAllgroups({ token })
-			);
-
-			if (responseFilter.payload.data.length > 0) {
-				const newData = responseFilter.payload.data?.map(
-					(data: FilterDataProps) => {
-						return {
-							value: data?.id,
-							label: data?.text,
-						};
-					}
-				);
-
-				setGroups(newData);
-			}
-			return responseFilter;
-		} catch (error) {
-			return error;
-		}
-	}, [groups]);
 
 	const filterData = (inputValue: string) => {
 		return colourOptions.filter(i =>
@@ -114,10 +69,6 @@ const Filter = () => {
 			callback(filterDriveName(inputValue));
 		}, 1000);
 	};
-
-	useEffect(() => {
-		handleFilter();
-	}, []);
 
 	return (
 		<ContainerFiltered>
@@ -159,7 +110,7 @@ const Filter = () => {
 							marginBottom: 12,
 						}),
 					}}
-					options={options}
+					options={types}
 					onChange={text => {}}
 				/>
 
@@ -239,7 +190,7 @@ const Filter = () => {
 					/>
 
 					<Button
-						onClick={handleFilter}
+						onClick={() => {}}
 						title="Realizar Filtro"
 						backgroundColor={theme.colors.blue_100}
 						color={theme.colors.natural}

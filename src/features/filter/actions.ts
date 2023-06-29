@@ -4,7 +4,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // import { createAxiosInstance } from "../../infra/services/http/axios/api";
 import axios from "axios";
-import { types } from "./actions-types";
+import { types, type IFilterResponse } from "./actions-types";
 
 const BASE_URL = "http://10.0.0.155:1111/figged";
 
@@ -12,7 +12,7 @@ interface Data {
 	token: string;
 }
 
-const fetchAllgroups = createAsyncThunk<any, any>(
+const fetchAllgroups = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_GROUPS,
 
 	// request fetch
@@ -24,7 +24,19 @@ const fetchAllgroups = createAsyncThunk<any, any>(
 		})
 );
 
+const fetchAllTypes = createAsyncThunk<IFilterResponse, any>(
+	types.GET_ALL_TYPES,
+
+	// request fetch
+	async ({ token }: Data) =>
+		await axios.get(`${BASE_URL}/autocomplete/tipo`, {
+			headers: {
+				Authorization: `Token ${token}`,
+			},
+		})
+);
+
 /**
  * EXPORTS
  */
-export { fetchAllgroups };
+export { fetchAllgroups, fetchAllTypes };
