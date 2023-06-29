@@ -19,6 +19,7 @@ const fetchingAllDataForFiltering = async ({
 	dispatch,
 	setGroups,
 	setTypes,
+	setStatus,
 }: FetchingAllDataForFilteringProps) => {
 	try {
 		setLoading(true);
@@ -33,10 +34,16 @@ const fetchingAllDataForFiltering = async ({
 			ActionsFilter.fetchAllTypes({ token })
 		);
 
+		// action que busca todos os status(aprovado, aguardando,novo, pendente  ) disponiveis
+		const responseFilterStatus: IFilterRequestProps = dispatch(
+			ActionsFilter.fetchAllStatus({ token })
+		);
+
 		// tratando todas a promessas
-		const [filterGroups, filterTypes] = await Promise.all([
+		const [filterGroups, filterTypes, filterStatus] = await Promise.all([
 			responseFilterGroups,
 			responseFilterTypes,
+			responseFilterStatus,
 		]);
 
 		// as actions (grupos) retornou dados da api iremos montar nossos dados da forma que necessitamos
@@ -68,6 +75,22 @@ const fetchingAllDataForFiltering = async ({
 			responseTypes.push(...newData);
 		}
 		setTypes(responseTypes);
+
+		// as actions (status) retornou dados da api iremos montar nossos dados da forma que necessitamos
+		const responseStatus: FilterDataGroupsProps[] = [];
+		if (filterStatus.payload.data.length > 0) {
+			const newDataStatus = filterStatus.payload.data?.map(
+				(data: FilterDataProps) => {
+					return {
+						value: data?.id,
+						label: data?.text,
+					};
+				}
+			);
+
+			responseStatus.push(...newDataStatus);
+		}
+		setStatus(responseStatus);
 
 		setLoading(false);
 		return responseFilterGroups;

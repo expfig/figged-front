@@ -36,7 +36,19 @@ const fetchAllTypes = createAsyncThunk<IFilterResponse, any>(
 		})
 );
 
+const fetchAllStatus = createAsyncThunk<IFilterResponse, any>(
+	types.GET_ALL_TYPES,
+
+	// request fetch
+	async ({ token }: Data) =>
+		await axios.get(`${BASE_URL}/autocomplete/status`, {
+			headers: {
+				Authorization: `Token ${token}`,
+			},
+		})
+);
+
 /**
  * EXPORTS
  */
-export { fetchAllgroups, fetchAllTypes };
+export { fetchAllgroups, fetchAllTypes, fetchAllStatus };

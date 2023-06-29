@@ -12,6 +12,7 @@ interface FetchingAllDataForFilteringProps {
 	dispatch: (value: Dispatch<any>) => any;
 	setGroups: (value: FilterDataGroupsProps[]) => void;
 	setTypes: (value: FilterDataGroupsProps[]) => void;
+	setStatus: (value: FilterDataGroupsProps[]) => void;
 }
 
 /**

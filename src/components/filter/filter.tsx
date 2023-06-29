@@ -17,7 +17,6 @@ import { Text } from "../text/text";
 
 // data fake
 import {
-	options,
 	colourOptions,
 	type ColourOption,
 	optionsNameMotorista,
@@ -36,8 +35,9 @@ import { type FilterDataGroupsProps } from "./interface";
 interface FilterProps {
 	groups: FilterDataGroupsProps[];
 	types: FilterDataGroupsProps[];
+	status: FilterDataGroupsProps[];
 }
-const Filter = ({ groups, types }: FilterProps) => {
+const Filter = ({ groups, types, status }: FilterProps) => {
 	const theme = useTheme();
 
 	const filterData = (inputValue: string) => {
@@ -124,7 +124,7 @@ const Filter = ({ groups, types }: FilterProps) => {
 							marginBottom: 12,
 						}),
 					}}
-					options={options}
+					options={status}
 					onChange={text => {}}
 				/>
 

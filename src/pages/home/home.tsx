@@ -38,15 +38,18 @@ const Home = () => {
 
 	const [groups, setGroups] = useState<FilterDataGroupsProps[]>([]);
 	const [types, setTypes] = useState<FilterDataGroupsProps[]>([]);
+	const [status, setStatus] = useState<FilterDataGroupsProps[]>([]);
+
 	const [loading, setLoading] = useState(false);
 
 	const handleFilter = useCallback(async () => {
 		fetchingAllDataForFiltering({
 			setLoading,
+			token,
 			dispatch,
 			setGroups,
 			setTypes,
-			token,
+			setStatus,
 		});
 	}, []);
 
@@ -75,7 +78,7 @@ const Home = () => {
 
 					{/** COMPONENTE DE FILTRO */}
 					<ContainerFiltered>
-						<Filter types={types} groups={groups} />
+						<Filter types={types} groups={groups} status={status} />
 					</ContainerFiltered>
 
 					{/** COMPONENTE DE TABELA */}
