@@ -46,7 +46,18 @@ interface FilterDataGroupsProps {
 	label: string;
 }
 
+interface FilterProps {
+	groups: FilterDataGroupsProps[];
+	types: FilterDataGroupsProps[];
+	status: FilterDataGroupsProps[];
+}
+
 /**
  * EXPORTS
  */
-export type { FilterDataProps, IFilterRequestProps, FilterDataGroupsProps };
+export type {
+	FilterDataProps,
+	IFilterRequestProps,
+	FilterDataGroupsProps,
+	FilterProps,
+};

@@ -2,6 +2,7 @@
 /**
  * IMPORTS
  */
+import { useState } from "react";
 
 import { useTheme } from "styled-components";
 
@@ -14,14 +15,12 @@ import AsyncSelect from "react-select/async";
 // components
 import { Button } from "../button";
 import { Text } from "../text/text";
+import { SelectAsyncPaginate } from "./components/async-paginate/async-paginate";
 
 // data fake
-import {
-	colourOptions,
-	type ColourOption,
-	optionsNameMotorista,
-	type DrivernameOption,
-} from "./data-fake";
+import { optionsNameMotorista, type DrivernameOption } from "./data-fake";
+
+import { type FilterProps } from "./interface";
 
 // styles
 import {
@@ -30,35 +29,17 @@ import {
 	WrapperTitle,
 	FooterBottom,
 } from "./styles";
-import { type FilterDataGroupsProps } from "./interface";
 
-interface FilterProps {
-	groups: FilterDataGroupsProps[];
-	types: FilterDataGroupsProps[];
-	status: FilterDataGroupsProps[];
-}
 const Filter = ({ groups, types, status }: FilterProps) => {
 	const theme = useTheme();
 
-	const filterData = (inputValue: string) => {
-		return colourOptions.filter(i =>
-			i.label.toLowerCase().includes(inputValue.toLowerCase())
-		);
-	};
+	const [currentCountry, setCurrentCountry] = useState(null);
+	const [nameDriver, setNameDriver] = useState(null);
 
 	const filterDriveName = (inputValue: string) => {
 		return optionsNameMotorista.filter(driveName =>
 			driveName.label.toLowerCase().includes(inputValue.toLowerCase())
 		);
-	};
-
-	const loadOptions = (
-		inputValue: string,
-		callback: (options: ColourOption[]) => void
-	) => {
-		setTimeout(() => {
-			callback(filterData(inputValue));
-		}, 1000);
 	};
 
 	const loadOptionsDriveName = (
@@ -68,6 +49,14 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 		setTimeout(() => {
 			callback(filterDriveName(inputValue));
 		}, 1000);
+	};
+
+	const onchangeSelect = (item: any) => {
+		setCurrentCountry(item);
+	};
+
+	const onchangeSelectDrivers = (item: any) => {
+		setNameDriver(item);
 	};
 
 	return (
@@ -129,31 +118,21 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 				/>
 
 				{/** * SELECT BOBINAS */}
-				<AsyncSelect
-					placeholder={"Digite o número da bobina"}
-					cacheOptions
-					loadOptions={loadOptions}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="coils"
+					placeholder="Selecione o número da bobina"
+					onChange={onchangeSelect}
+					value={currentCountry}
 				/>
 
 				{/** * SELECT MOTORISTA */}
-				<AsyncSelect
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="drivers"
 					placeholder={"Selecione o nome do motorista(a)"}
-					cacheOptions
-					loadOptions={loadOptionsDriveName}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
+					onChange={onchangeSelectDrivers}
+					value={nameDriver}
 				/>
 
 				{/** * SELECT PLACA DO VEÍCULO */}

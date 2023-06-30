@@ -10,6 +10,8 @@ const BASE_URL = "http://10.0.0.155:1111/figged";
 
 interface Data {
 	token: string;
+	regionName?: string;
+	page?: number;
 }
 
 const fetchAllgroups = createAsyncThunk<IFilterResponse, any>(
@@ -48,7 +50,19 @@ const fetchAllStatus = createAsyncThunk<IFilterResponse, any>(
 		})
 );
 
+const fetchAllDrivers = createAsyncThunk<IFilterResponse, any>(
+	types.GET_ALL_DRIVERS,
+
+	// request fetch
+	async ({ token, page }: Data) =>
+		await axios.get(`${BASE_URL}/autocomplete/motorista?page=${Number(page)}`, {
+			headers: {
+				Authorization: `Token ${token}`,
+			},
+		})
+);
+
 /**
  * EXPORTS
  */
-export { fetchAllgroups, fetchAllTypes, fetchAllStatus };
+export { fetchAllgroups, fetchAllTypes, fetchAllStatus, fetchAllDrivers };
