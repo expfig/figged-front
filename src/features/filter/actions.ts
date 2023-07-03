@@ -77,6 +77,18 @@ const fetchAllDrivers = createAsyncThunk<IFilterResponse, any>(
 		})
 );
 
+const fetchAllPlates = createAsyncThunk<IFilterResponse, any>(
+	types.GET_ALL_PLATES,
+
+	// request fetch plates
+	async ({ token, page }: Data) =>
+		await axios.get(`${BASE_URL}/autocomplete/placa?page=${Number(page)}`, {
+			headers: {
+				Authorization: `Token ${token}`,
+			},
+		})
+);
+
 /**
  * EXPORTS
  */
@@ -86,4 +98,5 @@ export {
 	fetchAllStatus,
 	fetchAllCoils,
 	fetchAllDrivers,
+	fetchAllPlates,
 };

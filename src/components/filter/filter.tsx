@@ -20,6 +20,7 @@ import { SelectAsyncPaginate } from "./components/async-paginate/async-paginate"
 // data fake
 import { optionsNameMotorista, type DrivernameOption } from "./data-fake";
 
+// typings
 import { type FilterProps } from "./interface";
 
 // styles
@@ -33,8 +34,9 @@ import {
 const Filter = ({ groups, types, status }: FilterProps) => {
 	const theme = useTheme();
 
-	const [currentCountry, setCurrentCountry] = useState(null);
+	const [coils, setCoils] = useState(null);
 	const [nameDriver, setNameDriver] = useState(null);
+	const [plates, setPlates] = useState(null);
 
 	const filterDriveName = (inputValue: string) => {
 		return optionsNameMotorista.filter(driveName =>
@@ -51,14 +53,17 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 		}, 1000);
 	};
 
-	const onchangeSelect = (item: any) => {
-		setCurrentCountry(item);
+	const handleOnchangeSelectCoils = (item: any) => {
+		setCoils(item);
 	};
 
-	const onchangeSelectDrivers = (item: any) => {
+	const handleOnchangeSelectDrivers = (item: any) => {
 		setNameDriver(item);
 	};
 
+	const handleOnchangeSelectPlates = (item: any) => {
+		setPlates(item);
+	};
 	return (
 		<ContainerFiltered>
 			<WrapperTitle>
@@ -122,8 +127,8 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 					regionName=""
 					nameTypeRequest="coils"
 					placeholder="Selecione o número da bobina"
-					onChange={onchangeSelect}
-					value={currentCountry}
+					onChange={handleOnchangeSelectCoils}
+					value={coils}
 				/>
 
 				{/** * SELECT MOTORISTA */}
@@ -131,22 +136,17 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 					regionName=""
 					nameTypeRequest="drivers"
 					placeholder={"Selecione o nome do motorista(a)"}
-					onChange={onchangeSelectDrivers}
+					onChange={handleOnchangeSelectDrivers}
 					value={nameDriver}
 				/>
 
 				{/** * SELECT PLACA DO VEÍCULO */}
-				<AsyncSelect
-					placeholder={"Digite a placa do veículo"}
-					cacheOptions
-					loadOptions={loadOptionsDriveName}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="plates"
+					placeholder={"Selecione uma placa"}
+					onChange={handleOnchangeSelectPlates}
+					value={plates}
 				/>
 
 				{/** * SELECT PLACA DO NÚMERO DA VIAGEM */}

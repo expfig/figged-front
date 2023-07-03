@@ -12,7 +12,10 @@ import { actions as ActionsFilter } from "../../../../features/filter";
 import { Text } from "../../../text";
 
 // typings
-import { type SelectAsyncPaginateProps } from "./interface";
+import {
+	type SelectAsyncPaginateProps,
+	type IFilterRequestProps,
+} from "./interface";
 
 const SelectAsyncPaginate = ({
 	value,
@@ -32,7 +35,7 @@ const SelectAsyncPaginate = ({
 
 		switch (nameTypeRequest) {
 			case "coils":
-				const responseFilterCoils: any = await dispatch(
+				const responseFilterCoils: IFilterRequestProps = await dispatch(
 					ActionsFilter.fetchAllCoils({ token, page: pages })
 				);
 				const responseCoils = responseFilterCoils.payload.data.data;
@@ -46,7 +49,7 @@ const SelectAsyncPaginate = ({
 					},
 				};
 			case "drivers":
-				const responseFilterGroups: any = await dispatch(
+				const responseFilterGroups: IFilterRequestProps = await dispatch(
 					ActionsFilter.fetchAllDrivers({ token, page: pages })
 				);
 				const responseMotorista = responseFilterGroups.payload.data.data;
@@ -60,9 +63,15 @@ const SelectAsyncPaginate = ({
 					},
 				};
 			case "plates":
+				const responseFilterPlates: IFilterRequestProps = await dispatch(
+					ActionsFilter.fetchAllPlates({ token, page: pages })
+				);
+				const responsePlates = responseFilterPlates.payload.data.data;
+
+				setPages(pages + 1);
 				return {
-					options: [],
-					hasMore: [].length >= 1,
+					options: responsePlates,
+					hasMore: responsePlates.length >= 1,
 					additional: {
 						page: searchQuery ? 2 : Number(page) + 1,
 					},
