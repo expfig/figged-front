@@ -32,9 +32,15 @@ const SelectAsyncPaginate = ({
 
 		switch (nameTypeRequest) {
 			case "coils":
+				const responseFilterCoils: any = await dispatch(
+					ActionsFilter.fetchAllCoils({ token, page: pages })
+				);
+				const responseCoils = responseFilterCoils.payload.data.data;
+
+				setPages(pages + 1);
 				return {
-					options: [],
-					hasMore: [].length >= 1,
+					options: responseCoils,
+					hasMore: responseCoils.length >= 1,
 					additional: {
 						page: searchQuery ? 2 : Number(page) + 1,
 					},

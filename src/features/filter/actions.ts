@@ -17,7 +17,7 @@ interface Data {
 const fetchAllgroups = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_GROUPS,
 
-	// request fetch
+	// request fetch groups
 	async ({ token }: Data) =>
 		await axios.get(`${BASE_URL}/autocomplete/grupos`, {
 			headers: {
@@ -29,7 +29,7 @@ const fetchAllgroups = createAsyncThunk<IFilterResponse, any>(
 const fetchAllTypes = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_TYPES,
 
-	// request fetch
+	// request fetch tipos
 	async ({ token }: Data) =>
 		await axios.get(`${BASE_URL}/autocomplete/tipo`, {
 			headers: {
@@ -41,7 +41,7 @@ const fetchAllTypes = createAsyncThunk<IFilterResponse, any>(
 const fetchAllStatus = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_TYPES,
 
-	// request fetch
+	// request fetch status
 	async ({ token }: Data) =>
 		await axios.get(`${BASE_URL}/autocomplete/status`, {
 			headers: {
@@ -50,10 +50,25 @@ const fetchAllStatus = createAsyncThunk<IFilterResponse, any>(
 		})
 );
 
+const fetchAllCoils = createAsyncThunk<IFilterResponse, any>(
+	types.GET_ALL_COILS,
+
+	// request fetch coils
+	async ({ token, page }: Data) =>
+		await axios.get(
+			`${BASE_URL}/autocomplete/numero_bobina?page=${Number(page)}`,
+			{
+				headers: {
+					Authorization: `Token ${token}`,
+				},
+			}
+		)
+);
+
 const fetchAllDrivers = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_DRIVERS,
 
-	// request fetch
+	// request fetch drivers
 	async ({ token, page }: Data) =>
 		await axios.get(`${BASE_URL}/autocomplete/motorista?page=${Number(page)}`, {
 			headers: {
@@ -65,4 +80,10 @@ const fetchAllDrivers = createAsyncThunk<IFilterResponse, any>(
 /**
  * EXPORTS
  */
-export { fetchAllgroups, fetchAllTypes, fetchAllStatus, fetchAllDrivers };
+export {
+	fetchAllgroups,
+	fetchAllTypes,
+	fetchAllStatus,
+	fetchAllCoils,
+	fetchAllDrivers,
+};
