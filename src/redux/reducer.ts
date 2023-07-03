@@ -2,7 +2,10 @@
  * IMPORTS
  */
 import { combineReducers } from "redux";
+
+// features
 import { user } from "../features/user";
+import { filter } from "../features/filter";
 
 import { persistConfig, persistReducer } from "./persist";
 
@@ -11,6 +14,7 @@ import { persistConfig, persistReducer } from "./persist";
  */
 const reducer = combineReducers({
 	[user.name]: user.reducer,
+	[filter.name]: filter.reducer,
 }) as any;
 
 /**

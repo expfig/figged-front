@@ -11,30 +11,30 @@ import {
 import { trackRequest } from "../../redux/utils/trackrequest";
 
 // reducers
-import { buildLogin } from "./reducers";
+import { buildFilter } from "./reducers";
 
 // actions
-import { login } from "./actions";
+import { fetchAllgroups } from "./actions";
 
 // states
 import { initialState } from "./initialstate";
 
 // typings
-import { type IUserState, NAME } from "./interface";
+import { type IFilterstate, NAME } from "./interface";
 
 /**
  * I am an user slice.
  */
-const slice: Slice<IUserState> = createSlice({
+const slice: Slice<IFilterstate> = createSlice({
 	name: NAME,
 	initialState,
 	reducers: {},
-	extraReducers: (builder: ActionReducerMapBuilder<IUserState>) => {
+	extraReducers: (builder: ActionReducerMapBuilder<IFilterstate>) => {
 		// build reducers
-		buildLogin(builder);
+		buildFilter(builder);
 
 		// track requests
-		trackRequest(builder, login);
+		trackRequest(builder, fetchAllgroups);
 	},
 });
 
