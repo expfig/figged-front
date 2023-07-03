@@ -81,17 +81,17 @@ const SelectAsyncPaginate = ({
 
 			case "trip_number":
 				const responseFilterTripNumber: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllPlates({ token, page: pages })
+					ActionsFilter.fetchAllTripNumber({ token, page: pages })
 				);
+				const responseTripNumber = responseFilterTripNumber.payload.data.data;
 
 				setPages(pages + 1);
 				return {
-					options: [],
-					hasMore: [].length >= 1,
+					options: responseTripNumber,
+					hasMore: responseTripNumber.length >= 1,
 					additional: {
 						page: searchQuery ? 2 : Number(page) + 1,
 					},
-					response: responseFilterTripNumber.payload.data.data,
 				};
 		}
 	};
@@ -108,11 +108,11 @@ const SelectAsyncPaginate = ({
 				<FiLoader size={34} color={"#0d6efd"} />
 				<Text
 					marginTop={18}
-					text="Carregando..."
+					text="Carregando"
 					align="center"
 					letterHeight={24}
 					letterSpacing={0.5}
-					color={"#7a7171"}
+					color={"#cdcdcd"}
 					size={16}
 					weight="400"
 				/>

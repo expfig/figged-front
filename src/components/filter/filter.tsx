@@ -28,24 +28,24 @@ import {
 const Filter = ({ groups, types, status }: FilterProps) => {
 	const theme = useTheme();
 
-	const [coils, setCoils] = useState<string>("");
-	const [nameDriver, setNameDriver] = useState<string>("");
-	const [plates, setPlates] = useState<string>("");
-	const [tripNumber, setTripNumber] = useState<string>("");
+	const [coils, setCoils] = useState(null);
+	const [nameDriver, setNameDriver] = useState(null);
+	const [plates, setPlates] = useState(null);
+	const [tripNumber, setTripNumber] = useState(null);
 
-	const handleOnchangeSelectCoils = (item: string) => {
+	const handleOnchangeSelectCoils = (item: any) => {
 		setCoils(item);
 	};
 
-	const handleOnchangeSelectDrivers = (item: string) => {
+	const handleOnchangeSelectDrivers = (item: any) => {
 		setNameDriver(item);
 	};
 
-	const handleOnchangeSelectPlates = (item: string) => {
+	const handleOnchangeSelectPlates = (item: any) => {
 		setPlates(item);
 	};
 
-	const handleOnchangeTripNumber = (item: string) => {
+	const handleOnchangeTripNumber = (item: any) => {
 		setTripNumber(item);
 	};
 	return (
