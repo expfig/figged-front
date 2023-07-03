@@ -89,6 +89,21 @@ const fetchAllPlates = createAsyncThunk<IFilterResponse, any>(
 		})
 );
 
+const fetchAllTripNumber = createAsyncThunk<IFilterResponse, any>(
+	types.GET_ALL_TRIP_NUMBER,
+
+	// request fetch trip number
+	async ({ token, page }: Data) =>
+		await axios.get(
+			`${BASE_URL}/autocomplete/numero_viagem?page=${Number(page)}`,
+			{
+				headers: {
+					Authorization: `Token ${token}`,
+				},
+			}
+		)
+);
+
 /**
  * EXPORTS
  */
@@ -99,4 +114,5 @@ export {
 	fetchAllCoils,
 	fetchAllDrivers,
 	fetchAllPlates,
+	fetchAllTripNumber,
 };

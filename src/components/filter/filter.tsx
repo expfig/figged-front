@@ -9,16 +9,10 @@ import { useTheme } from "styled-components";
 // react-select
 import Select from "react-select";
 
-// Use o componente Async para carregar opções de uma fonte remota enquanto o usuário digita.
-import AsyncSelect from "react-select/async";
-
 // components
 import { Button } from "../button";
 import { Text } from "../text/text";
 import { SelectAsyncPaginate } from "./components/async-paginate/async-paginate";
-
-// data fake
-import { optionsNameMotorista, type DrivernameOption } from "./data-fake";
 
 // typings
 import { type FilterProps } from "./interface";
@@ -34,35 +28,25 @@ import {
 const Filter = ({ groups, types, status }: FilterProps) => {
 	const theme = useTheme();
 
-	const [coils, setCoils] = useState(null);
-	const [nameDriver, setNameDriver] = useState(null);
-	const [plates, setPlates] = useState(null);
+	const [coils, setCoils] = useState<string>("");
+	const [nameDriver, setNameDriver] = useState<string>("");
+	const [plates, setPlates] = useState<string>("");
+	const [tripNumber, setTripNumber] = useState<string>("");
 
-	const filterDriveName = (inputValue: string) => {
-		return optionsNameMotorista.filter(driveName =>
-			driveName.label.toLowerCase().includes(inputValue.toLowerCase())
-		);
-	};
-
-	const loadOptionsDriveName = (
-		inputValue: string,
-		callback: (options: DrivernameOption[]) => void
-	) => {
-		setTimeout(() => {
-			callback(filterDriveName(inputValue));
-		}, 1000);
-	};
-
-	const handleOnchangeSelectCoils = (item: any) => {
+	const handleOnchangeSelectCoils = (item: string) => {
 		setCoils(item);
 	};
 
-	const handleOnchangeSelectDrivers = (item: any) => {
+	const handleOnchangeSelectDrivers = (item: string) => {
 		setNameDriver(item);
 	};
 
-	const handleOnchangeSelectPlates = (item: any) => {
+	const handleOnchangeSelectPlates = (item: string) => {
 		setPlates(item);
+	};
+
+	const handleOnchangeTripNumber = (item: string) => {
+		setTripNumber(item);
 	};
 	return (
 		<ContainerFiltered>
@@ -150,16 +134,12 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 				/>
 
 				{/** * SELECT PLACA DO NÚMERO DA VIAGEM */}
-				<AsyncSelect
-					placeholder={"Digite número da viagem"}
-					cacheOptions
-					loadOptions={loadOptionsDriveName}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-						}),
-					}}
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="trip_number"
+					placeholder={"Selecione número da viagem"}
+					onChange={handleOnchangeTripNumber}
+					value={tripNumber}
 				/>
 				<FooterBottom>
 					<Button

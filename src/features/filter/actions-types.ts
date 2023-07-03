@@ -27,4 +27,5 @@ export const types = {
 	GET_ALL_COILS: `${NAME}/get-all-coils`,
 	GET_ALL_DRIVERS: `${NAME}/get-all-drivers`,
 	GET_ALL_PLATES: `${NAME}/get-all-plates`,
+	GET_ALL_TRIP_NUMBER: `${NAME}/get-all-trip-number`,
 };

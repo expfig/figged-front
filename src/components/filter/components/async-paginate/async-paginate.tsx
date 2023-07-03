@@ -48,6 +48,7 @@ const SelectAsyncPaginate = ({
 						page: searchQuery ? 2 : Number(page) + 1,
 					},
 				};
+
 			case "drivers":
 				const responseFilterGroups: IFilterRequestProps = await dispatch(
 					ActionsFilter.fetchAllDrivers({ token, page: pages })
@@ -62,6 +63,7 @@ const SelectAsyncPaginate = ({
 						page: searchQuery ? 2 : Number(page) + 1,
 					},
 				};
+
 			case "plates":
 				const responseFilterPlates: IFilterRequestProps = await dispatch(
 					ActionsFilter.fetchAllPlates({ token, page: pages })
@@ -75,6 +77,21 @@ const SelectAsyncPaginate = ({
 					additional: {
 						page: searchQuery ? 2 : Number(page) + 1,
 					},
+				};
+
+			case "trip_number":
+				const responseFilterTripNumber: IFilterRequestProps = await dispatch(
+					ActionsFilter.fetchAllPlates({ token, page: pages })
+				);
+
+				setPages(pages + 1);
+				return {
+					options: [],
+					hasMore: [].length >= 1,
+					additional: {
+						page: searchQuery ? 2 : Number(page) + 1,
+					},
+					response: responseFilterTripNumber.payload.data.data,
 				};
 		}
 	};
@@ -91,11 +108,11 @@ const SelectAsyncPaginate = ({
 				<FiLoader size={34} color={"#0d6efd"} />
 				<Text
 					marginTop={18}
-					text="Carregando"
+					text="Carregando..."
 					align="center"
 					letterHeight={24}
 					letterSpacing={0.5}
-					color={"#cdcdcd"}
+					color={"#7a7171"}
 					size={16}
 					weight="400"
 				/>
