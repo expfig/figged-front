@@ -12,10 +12,12 @@ interface FilterDataProps {
 interface IFilterRequestProps {
 	type: string;
 	payload: {
-		data: Array<{
-			id: string | number;
-			text: string;
-		}>;
+		data: {
+			data: Array<{
+				id: string | number;
+				text: string;
+			}>;
+		};
 		status: string;
 		statusText: string;
 		headers: string;

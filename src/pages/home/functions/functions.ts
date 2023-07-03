@@ -28,7 +28,6 @@ const fetchingAllDataForFiltering = async ({
 		const responseFilterGroups: IFilterRequestProps = dispatch(
 			ActionsFilter.fetchAllgroups({ token })
 		);
-
 		// action que busca todos os tipos(comprovante, bobina) disponiveis
 		const responseFilterTypes: IFilterRequestProps = dispatch(
 			ActionsFilter.fetchAllTypes({ token })
@@ -48,8 +47,8 @@ const fetchingAllDataForFiltering = async ({
 
 		// as actions (grupos) retornou dados da api iremos montar nossos dados da forma que necessitamos
 		const responseGroups: FilterDataGroupsProps[] = [];
-		if (filterGroups.payload.data.length > 0) {
-			const newData = filterGroups.payload.data?.map(
+		if (filterGroups.payload.data.data.length > 0) {
+			const newData = filterGroups.payload.data?.data.map(
 				(data: FilterDataProps) => {
 					return {
 						value: data?.id,
@@ -65,21 +64,23 @@ const fetchingAllDataForFiltering = async ({
 		const responseTypes: FilterDataGroupsProps[] = [];
 
 		// as actions (tipos) retornou dados da api iremos montar nossos dados da forma que necessitamos
-		if (filterTypes.payload.data.length > 0) {
-			const newData = filterTypes.payload.data?.map((data: FilterDataProps) => {
-				return {
-					value: data?.id,
-					label: data?.text,
-				};
-			});
+		if (filterTypes.payload.data.data.length > 0) {
+			const newData = filterTypes.payload.data?.data.map(
+				(data: FilterDataProps) => {
+					return {
+						value: data?.id,
+						label: data?.text,
+					};
+				}
+			);
 			responseTypes.push(...newData);
 		}
 		setTypes(responseTypes);
 
 		// as actions (status) retornou dados da api iremos montar nossos dados da forma que necessitamos
 		const responseStatus: FilterDataGroupsProps[] = [];
-		if (filterStatus.payload.data.length > 0) {
-			const newDataStatus = filterStatus.payload.data?.map(
+		if (filterStatus.payload.data.data.length > 0) {
+			const newDataStatus = filterStatus.payload.data?.data.map(
 				(data: FilterDataProps) => {
 					return {
 						value: data?.id,

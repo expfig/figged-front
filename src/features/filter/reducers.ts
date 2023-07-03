@@ -14,7 +14,7 @@ import { type IFilterstate } from "./interface";
  */
 const filter = (state: any, action: any) => {
 	// set state
-	state.filter = action?.payload?.data;
+	state.filter = action?.payload?.data.data;
 };
 
 /**
