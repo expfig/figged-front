@@ -6,7 +6,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { types, type IFilterResponse } from "./actions-types";
 
-const BASE_URL = "http://10.0.0.155:1111/figged";
+const BASE_URL = "http://grupofigueiredo.com.br:1111/figged";
 
 interface Data {
 	token: string;
