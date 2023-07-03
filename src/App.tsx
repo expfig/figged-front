@@ -5,20 +5,23 @@ import { ThemeProvider } from "styled-components";
 import AppRoutes from "./routes/routes";
 
 // redux
-import store from "./redux/store";
+import { Persister, store } from "./redux/store";
 
 // styles
 import GlobalStyle from "./global/styles/global";
 import theme from "./global/styles/theme";
+import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
 	return (
-		<ThemeProvider theme={theme}>
-			<GlobalStyle />
+		<PersistGate loading={null} persistor={Persister}>
 			<Provider store={store}>
-				<AppRoutes />
+				<ThemeProvider theme={theme}>
+					<GlobalStyle />
+					<AppRoutes />
+				</ThemeProvider>
 			</Provider>
-		</ThemeProvider>
+		</PersistGate>
 	);
 };
 
