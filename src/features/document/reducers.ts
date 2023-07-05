@@ -14,7 +14,7 @@ import { type IDocumentState } from "./interface";
  */
 const document = (state: any, action: any) => {
 	// set state
-	state.document = action?.payload?.data.data;
+	state.document = action?.payload?.data;
 };
 
 /**
