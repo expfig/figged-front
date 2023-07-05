@@ -47,8 +47,18 @@ interface FilterDataGroupsProps {
 	value: string | number;
 	label: string;
 }
+interface IDataPagesProps {
+	url: string;
+	label: string;
+	active: boolean;
+}
 
 /**
  * EXPORTS
  */
-export type { FilterDataProps, IFilterRequestProps, FilterDataGroupsProps };
+export type {
+	FilterDataProps,
+	IFilterRequestProps,
+	FilterDataGroupsProps,
+	IDataPagesProps,
+};
