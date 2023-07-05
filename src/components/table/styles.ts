@@ -13,6 +13,16 @@ const Container = styled.div`
 	margin-top: 1rem;
 `;
 
+const WrapperLoading = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 2.12rem;
+`;
+
 const TableHtml = styled.table`
 	width: 100%;
 	border-collapse: collapse;
@@ -140,21 +150,54 @@ const FooterTable = styled.div`
 	background-color: transparent;
 `;
 
-const TextSpanLeft = styled.span`
-	font-size: 1rem;
-	color: ${({ theme }) => theme.colors.black_200};
-	margin-right: 0.75rem;
-	cursor: pointer;
+const WrapperTextNoData = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 34px;
 `;
 
-const TextSpanRight = styled.span`
-	font-size: 1rem;
-	color: ${({ theme }) => theme.colors.black_200};
+const ButtonPreview = styled.button`
+	width: 6rem;
+	height: 2rem;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: ${({ theme }) => theme.colors.blue_100};
+	margin-right: 4px;
+	padding-right: 8px;
+	padding-left: 8px;
+`;
+
+const TextSpanLeft = styled.span`
+	font-size: 0.9rem;
+	color: ${({ theme }) => theme.colors.natural};
 	margin-left: 0.75rem;
 	cursor: pointer;
 `;
 
-const WrapperTextFooter = styled.div<WrapperTextFooterProps>`
+const ButtonNext = styled.button`
+	width: 6rem;
+	height: 2rem;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: ${({ theme }) => theme.colors.blue_100};
+	margin-left: 4px;
+	padding: 0 2px;
+`;
+
+const TextSpanRight = styled.span`
+	font-size: 0.9rem;
+	color: ${({ theme }) => theme.colors.natural};
+	margin-left: 0.75rem;
+	cursor: pointer;
+`;
+
+const WrapperTextFooter = styled.button<WrapperTextFooterProps>`
 	width: 2.8rem;
 	height: 2rem;
 	margin: 2px;
@@ -164,17 +207,30 @@ const WrapperTextFooter = styled.div<WrapperTextFooterProps>`
 	justify-content: center;
 	background-color: ${({ theme, background }) =>
 		background ? theme.colors.blue_100 : theme.colors.natural};
+
+	:hover {
+		opacity: 0.8;
+		background-color: #b5bac7;
+		color: #fff;
+	}
 `;
 
 const TextNumberPage = styled.p<TextNumberPageProps>`
 	font-size: 0.8rem;
-	color: ${({ theme, color }) => color ?? theme.colors.natural};
+	color: ${({ theme, active }) =>
+		active ? theme.colors.natural : theme.colors.gray_700};
+
+	:hover {
+		color: #fff;
+	}
 `;
+
 /**
  * EXPORTS
  */
 export {
 	Container,
+	WrapperLoading,
 	TableHtml,
 	Thead,
 	Tr,
@@ -182,7 +238,10 @@ export {
 	Tbody,
 	Td,
 	FooterTable,
+	WrapperTextNoData,
+	ButtonPreview,
 	TextSpanLeft,
+	ButtonNext,
 	TextSpanRight,
 	WrapperTextFooter,
 	TextNumberPage,

@@ -1,6 +1,7 @@
 /**
  * IMPORTS
  */
+import { useNavigate } from "react-router-dom";
 import {
 	Container,
 	WrapperTitle,
@@ -14,11 +15,19 @@ import {
 } from "./styles";
 
 const Header = () => {
+	const navigate = useNavigate();
+
+	const handleReloadPage = () => {
+		navigate("/");
+		window.location.reload();
+	};
 	return (
 		<>
 			<Container>
 				<WrapperTitle>
-					<Title to={"/"}>Figged</Title>
+					<Title to={"/"} onClick={handleReloadPage}>
+						Figged
+					</Title>
 				</WrapperTitle>
 
 				<WrapperTitleRighr>

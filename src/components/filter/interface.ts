@@ -50,6 +50,16 @@ interface FilterProps {
 	groups: FilterDataGroupsProps[];
 	types: FilterDataGroupsProps[];
 	status: FilterDataGroupsProps[];
+
+	// functions
+	onChangeTextGroup: (value: any) => void;
+	onChangeTextType: (value: any) => void;
+	onChangeTextStatus: (value: any) => void;
+	onChangeTextNameDriver: (value: any) => void;
+	onChangeTextPlateId: (value: any) => void;
+
+	onClickButtonFilter: () => void;
+	onClickCleanFilter: () => void;
 }
 
 /**

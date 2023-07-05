@@ -2,7 +2,6 @@
  * IMPORTS
  */
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { Header } from "../components/header";
 import { Home } from "../pages/home/home";
 import { AprovationListing } from "../pages/aprovation-listing";
@@ -21,7 +20,6 @@ function AppRoutes() {
 					<Route path="/aprovacao/:idBobina" element={<Aprovation />} />
 				</Routes>
 			</HashRouter>
-			<ToastContainer />
 		</>
 	);
 }
