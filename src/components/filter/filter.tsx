@@ -25,7 +25,19 @@ import {
 	FooterBottom,
 } from "./styles";
 
-const Filter = ({ groups, types, status }: FilterProps) => {
+const Filter = ({
+	groups,
+	types,
+	status,
+	// functions
+	onChangeTextGroup,
+	onChangeTextType,
+	onChangeTextStatus,
+	onChangeTextNameDriver,
+	onChangeTextPlateId,
+	onClickButtonFilter,
+	onClickCleanFilter,
+}: FilterProps) => {
 	const theme = useTheme();
 
 	const [coils, setCoils] = useState(null);
@@ -38,10 +50,12 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 	};
 
 	const handleOnchangeSelectDrivers = (item: any) => {
+		onChangeTextNameDriver(item);
 		setNameDriver(item);
 	};
 
 	const handleOnchangeSelectPlates = (item: any) => {
+		onChangeTextPlateId(item);
 		setPlates(item);
 	};
 
@@ -75,7 +89,7 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 						}),
 					}}
 					options={groups}
-					onChange={text => {}}
+					onChange={onChangeTextGroup}
 				/>
 
 				{/** * SELECT TIPO */}
@@ -89,7 +103,7 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 						}),
 					}}
 					options={types}
-					onChange={text => {}}
+					onChange={onChangeTextType}
 				/>
 
 				{/** * SELECT TIPO */}
@@ -103,7 +117,7 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 						}),
 					}}
 					options={status}
-					onChange={text => {}}
+					onChange={onChangeTextStatus}
 				/>
 
 				{/** * SELECT BOBINAS */}
@@ -143,13 +157,14 @@ const Filter = ({ groups, types, status }: FilterProps) => {
 				/>
 				<FooterBottom>
 					<Button
+						onClick={onClickCleanFilter}
 						title="Limpar"
 						backgroundColor={theme.colors.red_300}
 						loading={false}
 					/>
 
 					<Button
-						onClick={() => {}}
+						onClick={onClickButtonFilter}
 						title="Realizar Filtro"
 						backgroundColor={theme.colors.blue_100}
 						color={theme.colors.natural}
