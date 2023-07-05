@@ -7,7 +7,7 @@
  */
 
 interface DocumentDataProps {
-	id: number;
+	id: number | null;
 	status: string;
 	user: string;
 	file_url: string;
