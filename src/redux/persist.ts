@@ -12,6 +12,7 @@ import storage from "redux-persist/lib/storage/session";
 // features
 import { user } from "../features/user";
 import { filter } from "../features/filter";
+import { approval } from "../features/approval";
 
 /**
  * Eu configuro um armazenamento redux persistente.
@@ -19,7 +20,7 @@ import { filter } from "../features/filter";
 const persistConfig: PersistConfig<unknown> = {
 	key: "figged-frontend",
 	storage,
-	whitelist: [user.name, filter.name],
+	whitelist: [user.name, filter.name, approval.name],
 };
 
 /**

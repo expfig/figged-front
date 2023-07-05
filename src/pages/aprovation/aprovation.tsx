@@ -105,7 +105,12 @@ const Aprovation = () => {
 						}}
 					/>
 				</WrapperImage>
-				<Table />
+				<Table
+					data={[]}
+					pages={[]}
+					onClickPreview={() => {}}
+					onClickNext={() => {}}
+				/>
 			</ContainerMain>
 		</>
 	);
