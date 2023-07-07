@@ -31,6 +31,9 @@ import {
 import { handleGetAllDocuments } from "./functions/functions-aprovation";
 import { handleReturnText } from "./functions/functions-handle-return-text";
 import { handleOnClickPagination } from "./functions/functions-handle-on-click-pagination";
+import { handleDocomentApprovalOne } from "./functions/functions-document-aprovation";
+
+// utils
 import { handleGetCurrentData } from "../../utils/get-current-data";
 
 // styles
@@ -41,7 +44,6 @@ import {
 	WrapperImageNotFoundData,
 	ImageNotFoundData,
 } from "./styles";
-import { handleDocomentApprovalOne } from "./functions/functions-document-aprovation";
 
 const Aprovation = () => {
 	const theme = useTheme();
