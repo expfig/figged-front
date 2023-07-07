@@ -20,7 +20,7 @@ const fetchAllDocuments = createAsyncThunk<IDocumentDataResponse, any>(
 	types.GET_ALL_DOCUMENTS,
 
 	// request document
-	async ({ idAprovacao, token }: DataProps) =>
+	async ({ token, idAprovacao }: DataProps) =>
 		await axios.get(`${BASE_URL}/documentos/${idAprovacao}`, {
 			headers: {
 				Authorization: `Token ${token}`,
