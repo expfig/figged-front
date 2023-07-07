@@ -35,7 +35,6 @@ const ImageCustom = ({
 	onClickDisapproved,
 	imageUri,
 	username,
-	approvalDate,
 }: ImageProps) => {
 	const theme = useTheme();
 	const { idBobina } = useParams();
@@ -137,10 +136,10 @@ const ImageCustom = ({
 					width={"44%"}
 					weight={600}
 					title="Reprovar"
+					loading={false}
 					backgroundColor={
 						type === "aprovado" ? theme.colors.red_300 : theme.colors.red_500
 					}
-					loading={false}
 				/>
 
 				<Button
@@ -149,12 +148,12 @@ const ImageCustom = ({
 					width={"44%"}
 					weight={600}
 					title="Aprovar"
+					loading={false}
 					backgroundColor={
 						type === "aprovado"
 							? theme.colors.green_200
 							: theme.colors.green_100
 					}
-					loading={false}
 				/>
 			</FooterImage>
 		</Container>
