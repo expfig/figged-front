@@ -23,7 +23,23 @@ interface IFunctionAprovationProps {
 	setPagesData: React.Dispatch<React.SetStateAction<IDataPagesProps[]>>;
 }
 
+interface IDocomentApprovalOneProps {
+	setLoadingAprovation: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
+	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+	token: string;
+	dispatch: (value: Dispatch<any>) => any;
+	handleGetCurrentData: () => void;
+	idImage: string;
+	onHandleGetAllDocuments: () => Promise<any>;
+}
+
 /**
  * EXPORTS
  */
-export type { IFunctionAprovationProps, IDataPagesProps };
+export type {
+	IFunctionAprovationProps,
+	IDataPagesProps,
+	IDocomentApprovalOneProps,
+};
