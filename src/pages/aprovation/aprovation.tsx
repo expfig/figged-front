@@ -70,6 +70,7 @@ const Aprovation = () => {
 
 	const [countPage, setCountPage] = useState(1);
 	const [idImage, setImageID] = useState<any>();
+
 	// função que vai aprovar e reprovar uma bobina ou um comprovante
 	const handleAprovarionDocumentOrCoil = async () => {
 		try {
@@ -80,6 +81,7 @@ const Aprovation = () => {
 				sec_users_id: "sgt",
 				data_atualizacao_usuario: handleGetCurrentData(),
 			};
+
 			const responseApprovedDocument = await dispatch(
 				ActionsDocument.patchOneDocument({
 					token,
@@ -87,6 +89,7 @@ const Aprovation = () => {
 					dataOdUpdate: patchData,
 				})
 			);
+
 			if (responseApprovedDocument.payload.data) {
 				toast.success("Documento aprovado com sucesso.", {
 					position: "top-right",

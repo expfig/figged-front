@@ -4,7 +4,7 @@
 import { type IDocumentState, NAME } from "./interface";
 
 /**
- * Eu sou o data que irar atualizar o documento
+ * Eu sou as props que irar atualizar o documento
  */
 export interface IDataOfUpdateProps {
 	status: string;

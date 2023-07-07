@@ -31,7 +31,7 @@ const fetchAllDocuments = createAsyncThunk<IDocumentDataResponse, any>(
 const patchOneDocument = createAsyncThunk<IDocumentDataResponse, any>(
 	types.GET_ALL_DOCUMENTS,
 
-	// request document
+	// request updated document
 	async ({ token, idDocument, dataOdUpdate }: DataProps) =>
 		await axios.patch(
 			`${BASE_URL}/documento/${Number(idDocument)}`,
