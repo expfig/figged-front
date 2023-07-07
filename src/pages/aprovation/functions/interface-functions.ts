@@ -35,6 +35,19 @@ interface IDocomentApprovalOneProps {
 	onHandleGetAllDocuments: () => Promise<any>;
 }
 
+interface IDocomentReproachOneProps {
+	setLoadingAprovation: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsModalReproach: React.Dispatch<React.SetStateAction<boolean>>;
+	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+	token: string;
+	dispatch: (value: Dispatch<any>) => any;
+	handleGetCurrentData: () => void;
+	idImage: string;
+	messageApproval: string;
+	onHandleGetAllDocuments: () => Promise<any>;
+}
+
 /**
  * EXPORTS
  */
@@ -42,4 +55,5 @@ export type {
 	IFunctionAprovationProps,
 	IDataPagesProps,
 	IDocomentApprovalOneProps,
+	IDocomentReproachOneProps,
 };

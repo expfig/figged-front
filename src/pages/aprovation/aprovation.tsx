@@ -32,6 +32,7 @@ import { handleGetAllDocuments } from "./functions/functions-aprovation";
 import { handleReturnText } from "./functions/functions-handle-return-text";
 import { handleOnClickPagination } from "./functions/functions-handle-on-click-pagination";
 import { handleDocomentApprovalOne } from "./functions/functions-document-aprovation";
+import { handleDocumentReproachOne } from "./functions/functions-document-reproach";
 
 // utils
 import { handleGetCurrentData } from "../../utils/get-current-data";
@@ -71,6 +72,7 @@ const Aprovation = () => {
 
 	const [countPage, setCountPage] = useState(1);
 	const [idImage, setImageID] = useState<any>();
+	const [messageApproval, setMessageApproval] = useState("");
 
 	// função que busca o document de um morista especifico
 	const onHandleGetAllDocuments = async () => {
@@ -140,7 +142,31 @@ const Aprovation = () => {
 							onOpenAndClosedClick={() => {
 								setIsModalReproach(!isModalReproach);
 							}}
-							onAprovationDocumentAndCoil={() => {}}
+							// reprovar documento
+							onAprovationDocumentAndCoil={() => {
+								handleDocumentReproachOne({
+									setLoadingAprovation,
+									setIsModalReproach,
+									setImageID,
+									setLoading,
+									token,
+									dispatch,
+									handleGetCurrentData,
+									idImage,
+									messageApproval,
+									onHandleGetAllDocuments,
+								});
+							}}
+							// selecionar opção
+							onSelectOption={text => {
+								setMessageApproval(text);
+								return text;
+							}}
+							// caso usuário não selecione uma das opção acima
+							onChangeTextArea={text => {
+								setMessageApproval(text.target.value);
+								return "";
+							}}
 						/>
 					)}
 					<ContainerMain>
@@ -176,6 +202,7 @@ const Aprovation = () => {
 												setIsModal(!isModal);
 											}}
 											onClickDisapproved={() => {
+												setImageID(doc.id);
 												setIsModalReproach(!isModalReproach);
 											}}
 										/>
