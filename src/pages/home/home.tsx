@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
 import { toast } from "react-toastify";
+
 // redux
 import { useDispatch } from "react-redux";
 
@@ -187,7 +188,7 @@ const Home = () => {
 							}}
 							status={status}
 							onChangeTextStatus={text => {
-								setStatusFilter(text?.value);
+								setStatusFilter(text?.label);
 							}}
 							types={types}
 							onChangeTextType={(option: any) => {
