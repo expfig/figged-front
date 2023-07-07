@@ -9,7 +9,10 @@ interface WrapperHeaderProps {
 
 // props do componente ImageCustom
 interface ImageProps {
-	type: "aprovado" | "pedente" | "reprovado";
+	type: "aprovado" | "pedente" | "reprovado" | "aguardando" | any;
+	imageUri: string;
+	username?: string | any;
+	approvalDate?: string | any;
 	onClickDisapproved: () => void;
 	onClickApproved: () => void;
 }
