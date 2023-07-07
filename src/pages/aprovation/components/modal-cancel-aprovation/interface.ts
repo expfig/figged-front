@@ -6,6 +6,8 @@ interface ModalAprovationProps {
 	isModalOpen: boolean;
 	onAprovationDocumentAndCoil: () => void;
 	onOpenAndClosedClick: () => void;
+	onSelectOption: (value: any) => string;
+	onChangeTextArea: (value: any) => string;
 }
 
 // interface do styles-WrapperButton

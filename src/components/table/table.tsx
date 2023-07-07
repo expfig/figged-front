@@ -10,11 +10,12 @@ import { Link } from "react-router-dom";
 
 import { FiLoader, FiArrowRight, FiArrowLeft } from "react-icons/fi";
 
-// data-fake
-import { hanfleReturnText } from "../../utils/return-text";
-
 // typings
 import { type IDataTableProps, type IDataPagesProps } from "./interface";
+
+// utils
+import { handleTrasformStringInUpercaseAndToLowerCase } from "../../utils/transform-upercase";
+import { hanfleReturnText } from "../../utils/return-text";
 
 // styles
 import {
@@ -49,6 +50,7 @@ const Table = ({
 	useEffect(() => {
 		setPages(pages);
 	}, [pages]);
+
 	return (
 		<Container>
 			<>
@@ -71,20 +73,30 @@ const Table = ({
 
 							<Tbody>
 								{data.map(props => (
-									<Tr key={String(props.id)}>
-										<Td>{props.id}</Td>
-										<Td>{props.created_at_formatted}</Td>
-										<Td>{props.status}</Td>
-										<Td>{hanfleReturnText(props.trip_number)}</Td>
-										<Td>{hanfleReturnText(props.coil_number)}</Td>
+									<Tr key={String(props?.id)}>
+										<Td>{props?.id}</Td>
+										<Td>{props?.created_at_formatted}</Td>
 										<Td>
-											<Link to={`aprovacao/${props.id}`}>
-												{props.driver_name}
+											{handleTrasformStringInUpercaseAndToLowerCase({
+												dataString: hanfleReturnText(props?.status),
+												to: "toUpperCase",
+											})}
+										</Td>
+										<Td>{hanfleReturnText(props?.trip_number)}</Td>
+										<Td>{hanfleReturnText(props?.coil_number)}</Td>
+										<Td>
+											<Link to={`/aprovacao/${props.id}/${props.driver_id}`}>
+												{hanfleReturnText(props?.driver_name)}
 											</Link>
 										</Td>
-										<Td>{hanfleReturnText(props.placa)}</Td>
-										<Td>{props.group_name}</Td>
-										<Td>{props.type}</Td>
+										<Td>{hanfleReturnText(props?.placa)}</Td>
+										<Td>{props?.group_name}</Td>
+										<Td>
+											{handleTrasformStringInUpercaseAndToLowerCase({
+												dataString: props?.type,
+												to: "toUpperCase",
+											})}
+										</Td>
 									</Tr>
 								))}
 							</Tbody>

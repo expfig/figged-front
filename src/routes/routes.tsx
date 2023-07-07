@@ -17,7 +17,10 @@ function AppRoutes() {
 					<Route path="/" element={<Home />} />
 					<Route path="/aprovation-listing" element={<AprovationListing />} />
 					<Route path="/aprovacao-pedentes" element={<ApprovalPedendtes />} />
-					<Route path="/aprovacao/:idBobina" element={<Aprovation />} />
+					<Route
+						path="/aprovacao/:idAprovacao/:idDriveName?"
+						element={<Aprovation />}
+					/>
 				</Routes>
 			</HashRouter>
 		</>

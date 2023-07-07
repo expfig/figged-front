@@ -26,6 +26,7 @@ const ModalAprovation = ({
 	isModalOpen,
 	onOpenAndClosedClick,
 	onAprovationDocumentAndCoil,
+	isLoading = false,
 }: ModalAprovationProps) => {
 	const theme = useTheme();
 
@@ -55,7 +56,9 @@ const ModalAprovation = ({
 
 			<WrapperTextDescriptionModal>
 				<SubTitle>
-					Você tem certeza que deseja aprovar o documento/foto selecionada?
+					{isLoading
+						? "Aprovando documento..."
+						: "Você tem certeza que deseja aprovar o documento/foto selecionada?"}
 				</SubTitle>
 			</WrapperTextDescriptionModal>
 
@@ -66,7 +69,8 @@ const ModalAprovation = ({
 					weight={600}
 					title="Cancelar"
 					backgroundColor={theme.colors.red_500}
-					loading={false}
+					color={theme.colors.natural}
+					loading={isLoading}
 				/>
 
 				<Button
@@ -75,7 +79,8 @@ const ModalAprovation = ({
 					weight={600}
 					title="Sim, tenho certeza!"
 					backgroundColor={theme.colors.green_200}
-					loading={false}
+					color={theme.colors.natural}
+					loading={isLoading}
 				/>
 			</WrapperButtonModal>
 		</Modal>

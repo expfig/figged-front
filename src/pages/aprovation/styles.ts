@@ -18,7 +18,21 @@ const WrapperTitle = styled.div`
 		}
 	}
 `;
+const WrapperImageNotFoundData = styled.div`
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 34px;
+	cursor: pointer;
+`;
 
+const ImageNotFoundData = styled.img`
+	width: 100px;
+	height: 100px;
+`;
 const WrapperImage = styled.div`
 	width: 100%;
 	display: flex;
@@ -31,4 +45,10 @@ const WrapperImage = styled.div`
 /**
  * EXPORTS
  */
-export { ContainerMain, WrapperImage, WrapperTitle };
+export {
+	ContainerMain,
+	WrapperImage,
+	WrapperTitle,
+	WrapperImageNotFoundData,
+	ImageNotFoundData,
+};

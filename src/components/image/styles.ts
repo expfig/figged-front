@@ -75,9 +75,7 @@ const WrapperTextUser = styled.div`
 const FooterImage = styled.div`
 	width: 100%;
 	height: 5.72rem;
-	margin-top: 4px;
 	border-radius: 0.25rem;
-	border-bottom: 1px solid ${({ theme }) => theme.colors.gray_200};
 	display: flex;
 	flex-direction: row;
 	align-items: center;

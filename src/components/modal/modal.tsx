@@ -16,6 +16,7 @@ const Modal = ({ children, isOpen, onRequestCloseClick }: ModalProps) => {
 	return (
 		<>
 			<ContainerMdal
+				ariaHideApp={false}
 				isOpen={isOpen}
 				shouldCloseOnEsc={isOpen}
 				onRequestClose={onRequestCloseClick}
