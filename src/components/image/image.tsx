@@ -132,27 +132,29 @@ const ImageCustom = ({
 			<FooterImage>
 				<Button
 					onClick={onClickDisapproved}
-					disabled={type === "aprovado"}
+					disabled={type === "aprovado" || username}
 					width={"44%"}
 					weight={600}
 					title="Reprovar"
 					loading={false}
 					backgroundColor={
-						type === "aprovado" ? theme.colors.red_300 : theme.colors.red_500
+						username || type === "aprovado"
+							? theme.colors.red_300
+							: theme.colors.red_500
 					}
 				/>
 
 				<Button
 					onClick={onClickApproved}
-					disabled={type === "aprovado"}
+					disabled={type === "aprovado" || username}
 					width={"44%"}
 					weight={600}
 					title="Aprovar"
 					loading={false}
 					backgroundColor={
-						type === "aprovado"
-							? theme.colors.green_200
-							: theme.colors.green_100
+						username || type === "aprovado"
+							? theme.colors.green_150
+							: theme.colors.green_200
 					}
 				/>
 			</FooterImage>

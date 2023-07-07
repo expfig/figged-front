@@ -4,6 +4,7 @@
 
 interface ModalAprovationProps {
 	isModalOpen: boolean;
+	isLoading: boolean;
 	onAprovationDocumentAndCoil: () => void;
 	onOpenAndClosedClick: () => void;
 }

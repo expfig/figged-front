@@ -7,9 +7,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import { useParams } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 // axios
 import { useDispatch } from "react-redux";
-
+import { actions as ActionsDocument } from "../../features/document";
 // components
 import { ImageCustom } from "../../components/image";
 import { Text } from "../../components/text";
@@ -31,6 +33,7 @@ import {
 import { handleGetAllDocuments } from "./functions/functions-aprovation";
 import { handleReturnText } from "./functions/functions-handle-return-text";
 import { handleOnClickPagination } from "./functions/functions-handle-on-click-pagination";
+import { handleGetCurrentData } from "../../utils/get-current-data";
 
 // styles
 import {
@@ -51,6 +54,8 @@ const Aprovation = () => {
 
 	const [loading, setLoading] = useState(false);
 
+	const [loadingAprovation, setLoadingAprovation] = useState(false);
+
 	const [isModal, setIsModal] = useState(false);
 	const [isModalReproach, setIsModalReproach] = useState(false);
 
@@ -64,12 +69,51 @@ const Aprovation = () => {
 	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
 
 	const [countPage, setCountPage] = useState(1);
-
+	const [idImage, setImageID] = useState<any>();
 	// função que vai aprovar e reprovar uma bobina ou um comprovante
-	const handleAprovarionDocumentOrCoil = () => {
+	const handleAprovarionDocumentOrCoil = async () => {
 		try {
-			alert("aprovou!");
+			setLoadingAprovation(true);
+			const patchData = {
+				status: "aprovado",
+				status_reprovado_mensagem: null,
+				sec_users_id: "sgt",
+				data_atualizacao_usuario: handleGetCurrentData(),
+			};
+			const responseApprovedDocument = await dispatch(
+				ActionsDocument.patchOneDocument({
+					token,
+					idDocument: idImage,
+					dataOdUpdate: patchData,
+				})
+			);
+			if (responseApprovedDocument.payload.data) {
+				toast.success("Documento aprovado com sucesso.", {
+					position: "top-right",
+					autoClose: 1500,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
+				setIsModal(false);
+				setImageID(null);
+				setLoading(false);
+
+				await onHandleGetAllDocuments();
+				setLoadingAprovation(false);
+			}
 		} catch (error) {
+			toast.success("Documento não foi aprovado.", {
+				position: "top-right",
+				autoClose: 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
 			return error;
 		}
 	};
@@ -117,6 +161,7 @@ const Aprovation = () => {
 					{isModal && (
 						<ModalAprovation
 							isModalOpen={isModal}
+							isLoading={loadingAprovation}
 							onOpenAndClosedClick={() => {
 								setIsModal(!isModal);
 							}}
@@ -165,6 +210,7 @@ const Aprovation = () => {
 											approvalDate={doc?.formatted_updated_at}
 											imageUri={doc?.file_url}
 											onClickApproved={() => {
+												setImageID(doc.id);
 												setIsModal(!isModal);
 											}}
 											onClickDisapproved={() => {
