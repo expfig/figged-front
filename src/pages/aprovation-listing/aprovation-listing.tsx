@@ -39,6 +39,7 @@ const AprovationListing = () => {
 			<WrapperContent>
 				{data.map(dates => (
 					<ImageCustom
+						imageUri=""
 						key={dates.id}
 						type="aprovado"
 						onClickApproved={() => {
