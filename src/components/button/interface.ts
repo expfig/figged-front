@@ -11,6 +11,7 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	loading?: boolean;
 	dataTestid?: string;
 	onClick?: (event?: React.MouseEvent<HTMLElement>) => void;
+	disabled?: boolean;
 }
 
 /**

@@ -28,4 +28,4 @@ const WrapperTable = styled.div`
 /**
  * EXPORTS
  */
-export { ContainerMain, ContainerFiltered, WrapperTable, WrapperTitle };
+export { ContainerMain, WrapperTitle, ContainerFiltered, WrapperTable };

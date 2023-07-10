@@ -13,6 +13,10 @@ import { Button } from "../button/button";
 // typings
 import { type ImageProps } from "./interface";
 
+// utils
+import { handleTrasformStringInUpercaseAndToLowerCase } from "../../utils/transform-upercase";
+import { handleTrasformStringInCapitalize } from "../../utils/transform-capitalize";
+
 // styles
 import {
 	Container,
@@ -29,6 +33,8 @@ const ImageCustom = ({
 	type,
 	onClickApproved,
 	onClickDisapproved,
+	imageUri,
+	username,
 }: ImageProps) => {
 	const theme = useTheme();
 	const { idBobina } = useParams();
@@ -62,7 +68,10 @@ const ImageCustom = ({
 			{/** HEADER */}
 			<WrapperHeader type={type}>
 				<Text
-					text={type === "pedente" ? "Novo" : "Aprovado"}
+					text={handleTrasformStringInUpercaseAndToLowerCase({
+						dataString: type,
+						to: "toUpperCase",
+					})}
 					align="center"
 					letterHeight={24}
 					letterSpacing={0.5}
@@ -76,7 +85,10 @@ const ImageCustom = ({
 			<WrapperImage>
 				<Image
 					alt="bobinas"
-					src="https://www.campoere.com/image/midia/1-60622f283b1d0.jpg&w=470&h=246&crop-to-fit&q=90"
+					src={
+						imageUri ??
+						"https://www.campoere.com/image/midia/1-60622f283b1d0.jpg&w=470&h=246&crop-to-fit&q=90"
+					}
 					onClick={event => {
 						onImageClick(event);
 					}}
@@ -99,7 +111,11 @@ const ImageCustom = ({
 							width={"30%"}
 						/>
 						<Text
-							text="Não definido"
+							text={
+								handleTrasformStringInCapitalize({
+									dataString: username,
+								}) ?? "Não definido"
+							}
 							align="left"
 							letterHeight={28}
 							letterSpacing={0.5}
@@ -116,28 +132,30 @@ const ImageCustom = ({
 			<FooterImage>
 				<Button
 					onClick={onClickDisapproved}
-					disabled={type === "aprovado"}
+					disabled={type === "aprovado" || username}
 					width={"44%"}
 					weight={600}
 					title="Reprovar"
-					backgroundColor={
-						type === "aprovado" ? theme.colors.red_300 : theme.colors.red_500
-					}
 					loading={false}
+					backgroundColor={
+						username || type === "aprovado"
+							? theme.colors.red_300
+							: theme.colors.red_500
+					}
 				/>
 
 				<Button
 					onClick={onClickApproved}
-					disabled={type === "aprovado"}
+					disabled={type === "aprovado" || username}
 					width={"44%"}
 					weight={600}
 					title="Aprovar"
-					backgroundColor={
-						type === "aprovado"
-							? theme.colors.green_200
-							: theme.colors.green_100
-					}
 					loading={false}
+					backgroundColor={
+						username || type === "aprovado"
+							? theme.colors.green_150
+							: theme.colors.green_200
+					}
 				/>
 			</FooterImage>
 		</Container>

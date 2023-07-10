@@ -1,24 +1,29 @@
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // routes
 import AppRoutes from "./routes/routes";
 
 // redux
-import store from "./redux/store";
+import { Persister, store } from "./redux/store";
 
 // styles
 import GlobalStyle from "./global/styles/global";
 import theme from "./global/styles/theme";
+import { PersistGate } from "redux-persist/integration/react";
 
 const App = () => {
 	return (
-		<ThemeProvider theme={theme}>
-			<GlobalStyle />
+		<PersistGate loading={null} persistor={Persister}>
+			<ToastContainer />
 			<Provider store={store}>
-				<AppRoutes />
+				<ThemeProvider theme={theme}>
+					<GlobalStyle />
+					<AppRoutes />
+				</ThemeProvider>
 			</Provider>
-		</ThemeProvider>
+		</PersistGate>
 	);
 };
 

@@ -15,6 +15,12 @@ const Container = styled.button<IButtonProps>`
 	padding: 10px;
 	border-radius: 4px;
 	margin-bottom: 8px;
+
+	cursor: ${({ disabled }) => disabled && "not-allowed !important;"};
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const Title = styled.p<IButtonProps>`

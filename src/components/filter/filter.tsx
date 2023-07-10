@@ -1,25 +1,21 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /**
  * IMPORTS
  */
+import { useState } from "react";
 
 import { useTheme } from "styled-components";
 
+// react-select
 import Select from "react-select";
 
-// Use o componente Async para carregar opções de uma fonte remota enquanto o usuário digita.
-import AsyncSelect from "react-select/async";
-
 // components
+import { Button } from "../button";
 import { Text } from "../text/text";
+import { SelectAsyncPaginate } from "./components/async-paginate/async-paginate";
 
-// data fake
-import {
-	options,
-	colourOptions,
-	type ColourOption,
-	optionsNameMotorista,
-	type DrivernameOption,
-} from "./data-fake";
+// typings
+import { type FilterProps } from "./interface";
 
 // styles
 import {
@@ -28,39 +24,43 @@ import {
 	WrapperTitle,
 	FooterBottom,
 } from "./styles";
-import { Button } from "../button";
 
-const Filter = () => {
+const Filter = ({
+	groups,
+	types,
+	status,
+	// functions
+	onChangeTextGroup,
+	onChangeTextType,
+	onChangeTextStatus,
+	onChangeTextNameDriver,
+	onChangeTextPlateId,
+	onClickButtonFilter,
+	onClickCleanFilter,
+}: FilterProps) => {
 	const theme = useTheme();
 
-	const filterColors = (inputValue: string) => {
-		return colourOptions.filter(i =>
-			i.label.toLowerCase().includes(inputValue.toLowerCase())
-		);
+	const [coils, setCoils] = useState(null);
+	const [nameDriver, setNameDriver] = useState(null);
+	const [plates, setPlates] = useState(null);
+	const [tripNumber, setTripNumber] = useState(null);
+
+	const handleOnchangeSelectCoils = (item: any) => {
+		setCoils(item);
 	};
 
-	const filterDriveName = (inputValue: string) => {
-		return optionsNameMotorista.filter(driveName =>
-			driveName.label.toLowerCase().includes(inputValue.toLowerCase())
-		);
+	const handleOnchangeSelectDrivers = (item: any) => {
+		onChangeTextNameDriver(item);
+		setNameDriver(item);
 	};
 
-	const loadOptions = (
-		inputValue: string,
-		callback: (options: ColourOption[]) => void
-	) => {
-		setTimeout(() => {
-			callback(filterColors(inputValue));
-		}, 1000);
+	const handleOnchangeSelectPlates = (item: any) => {
+		onChangeTextPlateId(item);
+		setPlates(item);
 	};
 
-	const loadOptionsDriveName = (
-		inputValue: string,
-		callback: (options: DrivernameOption[]) => void
-	) => {
-		setTimeout(() => {
-			callback(filterDriveName(inputValue));
-		}, 1000);
+	const handleOnchangeTripNumber = (item: any) => {
+		setTripNumber(item);
 	};
 	return (
 		<ContainerFiltered>
@@ -88,8 +88,8 @@ const Filter = () => {
 							marginBottom: 12,
 						}),
 					}}
-					options={options}
-					onChange={text => {}}
+					options={groups}
+					onChange={onChangeTextGroup}
 				/>
 
 				{/** * SELECT TIPO */}
@@ -102,8 +102,8 @@ const Filter = () => {
 							marginBottom: 12,
 						}),
 					}}
-					options={options}
-					onChange={text => {}}
+					options={types}
+					onChange={onChangeTextType}
 				/>
 
 				{/** * SELECT TIPO */}
@@ -116,72 +116,55 @@ const Filter = () => {
 							marginBottom: 12,
 						}),
 					}}
-					options={options}
-					onChange={text => {}}
+					options={status}
+					onChange={onChangeTextStatus}
 				/>
 
 				{/** * SELECT BOBINAS */}
-				<AsyncSelect
-					placeholder={"Digite o número da bobina"}
-					cacheOptions
-					loadOptions={loadOptions}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="coils"
+					placeholder="Selecione o número da bobina"
+					onChange={handleOnchangeSelectCoils}
+					value={coils}
 				/>
 
 				{/** * SELECT MOTORISTA */}
-				<AsyncSelect
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="drivers"
 					placeholder={"Selecione o nome do motorista(a)"}
-					cacheOptions
-					loadOptions={loadOptionsDriveName}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
+					onChange={handleOnchangeSelectDrivers}
+					value={nameDriver}
 				/>
 
 				{/** * SELECT PLACA DO VEÍCULO */}
-				<AsyncSelect
-					placeholder={"Digite a placa do veículo"}
-					cacheOptions
-					loadOptions={loadOptionsDriveName}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-							marginBottom: 12,
-						}),
-					}}
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="plates"
+					placeholder={"Selecione uma placa"}
+					onChange={handleOnchangeSelectPlates}
+					value={plates}
 				/>
 
 				{/** * SELECT PLACA DO NÚMERO DA VIAGEM */}
-				<AsyncSelect
-					placeholder={"Digite número da viagem"}
-					cacheOptions
-					loadOptions={loadOptionsDriveName}
-					styles={{
-						control: (baseStyles, state) => ({
-							...baseStyles,
-							borderColor: state.isFocused ? "grey" : theme.colors.gray_200,
-						}),
-					}}
+				<SelectAsyncPaginate
+					regionName=""
+					nameTypeRequest="trip_number"
+					placeholder={"Selecione número da viagem"}
+					onChange={handleOnchangeTripNumber}
+					value={tripNumber}
 				/>
 				<FooterBottom>
 					<Button
+						onClick={onClickCleanFilter}
 						title="Limpar"
 						backgroundColor={theme.colors.red_300}
 						loading={false}
 					/>
 
 					<Button
+						onClick={onClickButtonFilter}
 						title="Realizar Filtro"
 						backgroundColor={theme.colors.blue_100}
 						color={theme.colors.natural}

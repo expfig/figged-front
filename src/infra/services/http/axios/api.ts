@@ -8,7 +8,7 @@ import Axios, { type AxiosRequestConfig } from "axios";
 import { configAxios } from "../../../../config/axios/confog-axios";
 
 // instància do axios
-const createAxiosInstance = async (accessTokenBase64: string) => {
+const createAxiosInstance = async (accessTokenBase64?: string) => {
 	// criando a configuração do axios
 	const instance = Axios.create(configAxios);
 

@@ -18,6 +18,7 @@ const Button = ({
 	weight,
 	loading,
 	dataTestid,
+	disabled,
 	...rest
 }: IButtonProps) => {
 	return (
@@ -27,9 +28,10 @@ const Button = ({
 			width={width}
 			height={height}
 			backgroundColor={backgroundColor}
+			disabled={disabled}
 		>
 			{loading ? (
-				<AiOutlineLoading3Quarters size={22} color={color} />
+				<AiOutlineLoading3Quarters size={22} color={color ?? "#fff"} />
 			) : (
 				<Title color={color ?? "#fff"} weight={weight}>
 					{title}

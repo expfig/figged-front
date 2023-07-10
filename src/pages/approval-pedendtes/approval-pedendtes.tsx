@@ -38,6 +38,7 @@ const ApprovalPedendtes = () => {
 			<WrapperContent>
 				{data.map(dates => (
 					<ImageCustom
+						imageUri=""
 						key={dates.id}
 						type="pedente"
 						onClickApproved={() => {

@@ -1,0 +1,66 @@
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { render } from "@testing-library/react";
+import theme from "../../../global/styles/theme";
+
+// component
+import { Header } from "../header";
+
+const Providers: React.FC = ({ children }: any) => {
+	return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+};
+
+describe("Teste do componente (Header)", () => {
+	it("Deve ser possível renderizar o componente (Header)", () => {
+		render(
+			<BrowserRouter>
+				<Header />
+			</BrowserRouter>,
+			{
+				wrapper: Providers,
+			}
+		);
+	});
+
+	it("Deve ser possível visualizar os titúlos de navegação do o componente (Header)", () => {
+		const { getByText } = render(
+			<BrowserRouter>
+				<Header />
+			</BrowserRouter>,
+			{
+				wrapper: Providers,
+			}
+		);
+
+		const ElementTitle = getByText("Figged");
+		const ElementTitleAprovationPending = getByText("Aprovação Pendentes");
+		const ElementTitleAllAproval = getByText("Todas Aprovação");
+
+		expect(ElementTitle.textContent).toBe("Figged");
+
+		expect(ElementTitleAprovationPending.textContent).toBe(
+			"Aprovação Pendentes"
+		);
+
+		expect(ElementTitleAllAproval.textContent).toBe("Todas Aprovação");
+	});
+
+	it("Deve ser possível visualizar os titúlos de navegação do o componente (Header) dentro do (WrapperBorderCustom)", () => {
+		const { getByText } = render(
+			<BrowserRouter>
+				<Header />
+			</BrowserRouter>,
+			{
+				wrapper: Providers,
+			}
+		);
+
+		const ElementTitleListOfApprovals = getByText("Lista de Aprovações");
+		const ElementTitleToUpdate = getByText("Atualizar");
+
+		expect(ElementTitleListOfApprovals.textContent).toBe("Lista de Aprovações");
+
+		expect(ElementTitleToUpdate.textContent).toBe("Atualizar");
+	});
+});

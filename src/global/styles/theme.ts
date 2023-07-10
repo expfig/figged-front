@@ -3,6 +3,7 @@
  */
 const colors = {
 	black_200: "#212121",
+	blue_80: "#0d6efd",
 	blue_100: "#0F52BA",
 	gray_200: "#CDCDCD",
 	gray_350: "#D8D8D8",
@@ -14,6 +15,7 @@ const colors = {
 	gray_800: "#778192",
 	gray_850: "#393939",
 	green_100: "#32CD32",
+	green_150: "#3FB67F",
 	green_200: "#198754",
 	green_350: "#5BC044",
 	green_400: "#7cb342",
@@ -21,7 +23,7 @@ const colors = {
 	natural_200: "#fcfcfc",
 	purple_400: "#7840B0",
 	red_300: "#EE5B5B",
-	red_500: "#c62828",
+	red_500: "#DC3545",
 	slate_500: "#25262D",
 	slate_700: "#051C3B",
 	slate_600: "#2F3A4A",
