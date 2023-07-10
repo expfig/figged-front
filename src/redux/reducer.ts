@@ -7,6 +7,7 @@ import { combineReducers } from "redux";
 import { user } from "../features/user";
 import { filter } from "../features/filter";
 import { approval } from "../features/approval";
+import { document } from "../features/document";
 
 import { persistConfig, persistReducer } from "./persist";
 
@@ -17,6 +18,7 @@ const reducer = combineReducers({
 	[user.name]: user.reducer,
 	[filter.name]: filter.reducer,
 	[approval.name]: approval.reducer,
+	[document.name]: document.reducer,
 }) as any;
 
 /**

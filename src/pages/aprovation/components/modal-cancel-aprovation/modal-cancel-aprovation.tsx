@@ -37,6 +37,8 @@ const ModalCancelAprovation = ({
 	isModalOpen,
 	onOpenAndClosedClick,
 	onAprovationDocumentAndCoil,
+	onSelectOption,
+	onChangeTextArea,
 }: ModalAprovationProps) => {
 	const theme = useTheme();
 
@@ -89,6 +91,7 @@ const ModalCancelAprovation = ({
 						options={options}
 						onChange={text => {
 							setDisapprovalReason(text?.value ? text?.value : "");
+							onSelectOption(text?.value ? text?.value : "");
 						}}
 					/>
 				</WrapperSelect>
@@ -97,7 +100,7 @@ const ModalCancelAprovation = ({
 					<WrapperTextArea>
 						<Label>Mensagem:</Label>
 						<TextArea
-							onChange={() => {}}
+							onChange={onChangeTextArea}
 							onFocus={() => {
 								setOnFocused(true);
 							}}

@@ -6,7 +6,7 @@ const hanfleReturnText = (text: string) => {
 	if (text) {
 		return text;
 	}
-	return "não informado";
+	return "N/A";
 };
 /**
  * EXPORTS

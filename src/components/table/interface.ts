@@ -16,6 +16,7 @@ interface IApprovalRequest {
 	coil_number: string;
 	trip_number: string;
 	type: string;
+	driver_id: number;
 	driver_name: string;
 	placa: string;
 	group_name: string;

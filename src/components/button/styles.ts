@@ -16,6 +16,8 @@ const Container = styled.button<IButtonProps>`
 	border-radius: 4px;
 	margin-bottom: 8px;
 
+	cursor: ${({ disabled }) => disabled && "not-allowed !important;"};
+
 	@media screen and (max-width: 768px) {
 		width: 100%;
 	}
