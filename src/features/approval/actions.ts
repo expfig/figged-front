@@ -56,7 +56,7 @@ const fetchAllApprovalsWithApprovedStatus = createAsyncThunk<
 	// request fetch groups
 	async ({ token, page, status = "" }: Data) =>
 		await axios.get(
-			`${BASE_URL}/aprovacoes?page=${Number(page)}&status=${status}`,
+			`${BASE_URL}/documentos?page=${Number(page)}&status=${status}`,
 			{
 				headers: {
 					Authorization: `Token ${token}`,
