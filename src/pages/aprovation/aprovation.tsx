@@ -181,7 +181,7 @@ const Aprovation = () => {
 								align="left"
 								letterHeight={24}
 								letterSpacing={0.5}
-								color={theme.colors.black_200}
+								color={theme.colors.black_100}
 								size={24}
 								weight="600"
 								marginBottom={16}
@@ -221,7 +221,7 @@ const Aprovation = () => {
 										align="center"
 										letterHeight={18}
 										letterSpacing={0.5}
-										color={theme.colors.black_200}
+										color={theme.colors.black_100}
 										size={24}
 										weight="600"
 									/>
