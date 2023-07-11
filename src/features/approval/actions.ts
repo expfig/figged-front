@@ -5,22 +5,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // import { createAxiosInstance } from "../../infra/services/http/axios/api";
 import axios from "axios";
 
-import { types, type IApprovalResponse } from "./actions-types";
+import { types, type IApprovalResponse, type Data } from "./actions-types";
 import { handleTransFormTextInString } from "../../utils/transform-string";
 import { handleTransFormTextInNumber } from "../../utils/transform-number";
 
 const BASE_URL = "http://10.0.0.155:1111/figged";
-
-interface Data {
-	token: string;
-	page?: number;
-	groupId?: number;
-	tipo?: string;
-	status?: string;
-	coilNumber?: number;
-	driverId?: number;
-	truckId?: number;
-}
 
 const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 	types.GET_ALL_APPROVAL,
@@ -58,7 +47,25 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 		)
 );
 
+const fetchAllApprovalsWithApprovedStatus = createAsyncThunk<
+	IApprovalResponse,
+	any
+>(
+	types.GET_ALL_APPROVALS_WITH_APPROVED_STATUS,
+
+	// request fetch groups
+	async ({ token, page, status = "" }: Data) =>
+		await axios.get(
+			`${BASE_URL}/documentos?page=${Number(page)}&status=${status}`,
+			{
+				headers: {
+					Authorization: `Token ${token}`,
+				},
+			}
+		)
+);
+
 /**
  * EXPORTS
  */
-export { fetchAllApprovals };
+export { fetchAllApprovals, fetchAllApprovalsWithApprovedStatus };
