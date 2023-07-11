@@ -56,11 +56,11 @@ describe("Teste do componente (Header)", () => {
 			}
 		);
 
+		const ElementTitleToUpdate = getByText("Home");
 		const ElementTitleListOfApprovals = getByText("Lista de Aprovações");
-		const ElementTitleToUpdate = getByText("Atualizar");
+
+		expect(ElementTitleToUpdate.textContent).toBe("Home");
 
 		expect(ElementTitleListOfApprovals.textContent).toBe("Lista de Aprovações");
-
-		expect(ElementTitleToUpdate.textContent).toBe("Atualizar");
 	});
 });
