@@ -1,7 +1,6 @@
 /**
  * IMPORTS
  */
-import { useNavigate } from "react-router-dom";
 import {
 	Container,
 	WrapperTitle,
@@ -15,19 +14,11 @@ import {
 } from "./styles";
 
 const Header = () => {
-	const navigate = useNavigate();
-
-	const handleReloadPage = () => {
-		navigate("/");
-		window.location.reload();
-	};
 	return (
 		<>
 			<Container>
 				<WrapperTitle>
-					<Title to={"/"} onClick={handleReloadPage}>
-						Figged
-					</Title>
+					<Title to={"/"}>Figged</Title>
 				</WrapperTitle>
 
 				<WrapperTitleRighr>
@@ -39,11 +30,11 @@ const Header = () => {
 			<WrapperBorderCustom>
 				<BorderCustom>
 					<WrapperTitleBorder>
+						<SubTitleTwo to={"/"}>Home</SubTitleTwo>
+						<span style={{ color: "#666666" }}>/</span>
 						<SubTitleTwo to={"aprovation-listing"}>
 							Lista de Aprovações
 						</SubTitleTwo>
-						<span>/</span>
-						<SubTitleTwo to={"aprovacao"}>Atualizar</SubTitleTwo>
 					</WrapperTitleBorder>
 				</BorderCustom>
 			</WrapperBorderCustom>

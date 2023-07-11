@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
 	width: 100%;
+	flex: 1;
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
@@ -14,6 +15,7 @@ const Container = styled.div`
 
 const WrapperContent = styled.div`
 	width: 100%;
+	flex: 1;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -33,7 +35,27 @@ const WrapperTitle = styled.div`
 	}
 `;
 
+const WrapperContentNotFound = styled.div`
+	width: 100%;
+	height: 70vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+`;
+
+const ImageNotFoundData = styled.img`
+	width: 100px;
+	height: 100px;
+`;
+
 /**
  * EXPORTS
  */
-export { Container, WrapperContent, WrapperTitle };
+export {
+	Container,
+	WrapperContent,
+	WrapperTitle,
+	WrapperContentNotFound,
+	ImageNotFoundData,
+};

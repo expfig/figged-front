@@ -19,6 +19,17 @@ export interface IApprovalRequest {
 	created_at_formatted: string;
 }
 
+export interface Data {
+	token: string;
+	page?: number;
+	groupId?: number;
+	tipo?: string;
+	status?: string;
+	coilNumber?: number;
+	driverId?: number;
+	truckId?: number;
+}
+
 /**
  * Approval response interface.
  */
@@ -29,4 +40,5 @@ export type IApprovalResponse = IApprovalstate;
  */
 export const types = {
 	GET_ALL_APPROVAL: `${NAME}/get-all-approval`,
+	GET_ALL_APPROVALS_WITH_APPROVED_STATUS: `${NAME}/fetch-all-approvals-with-approved-status`,
 };

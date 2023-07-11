@@ -15,6 +15,9 @@ const Container = styled.div`
 	display: column;
 	align-items: center;
 	justify-content: space-around;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 
 	// quando a tela atingir 768px
 	@media screen and (max-width: 768px) {
@@ -26,12 +29,16 @@ const Container = styled.div`
 
 const WrapperHeader = styled.div<WrapperHeaderProps>`
 	width: 100%;
-	height: 40px;
+	height: 36px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: ${({ theme, type }) =>
-		type === "aprovado" ? theme.colors.green_200 : theme.colors.blue_80};
+		(type === "rejeitado" && theme.colors.red_300) ||
+		(type === "aprovado" && theme.colors.green_200) ||
+		(type === "novo" && theme.colors.blue_80) ||
+		(type === "aguardando" && theme.colors.blue_80)};
+	opacity: 0.8;
 	border-top-right-radius: 0.25rem;
 	border-top-left-radius: 0.25rem;
 `;
@@ -39,6 +46,7 @@ const WrapperHeader = styled.div<WrapperHeaderProps>`
 const WrapperImage = styled.div`
 	width: 100%;
 	height: 17.5rem;
+	cursor: pointer;
 `;
 
 const Image = styled.img`

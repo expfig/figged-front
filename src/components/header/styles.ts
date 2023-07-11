@@ -93,7 +93,7 @@ const SubTitleTwo = styled(Link)`
 `;
 
 const WrapperTitleBorder = styled.div`
-	width: 230px;
+	width: 210px;
 	height: 3.75rem;
 	display: flex;
 	align-items: center;

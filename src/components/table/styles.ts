@@ -71,7 +71,7 @@ const Th = styled.th`
 	font-size: 1rem;
 	font-weight: 600;
 	letter-spacing: 0.5px;
-	color: ${({ theme }) => theme.colors.black_200};
+	color: ${({ theme }) => theme.colors.black_100};
 	opacity: 1;
 	padding: 8px 1rem;
 	vertical-align: top;
