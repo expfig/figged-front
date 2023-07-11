@@ -168,11 +168,11 @@ const Home = () => {
 					<WrapperTitle>
 						<Text
 							marginTop={18}
-							text="Lista de Documentos:"
+							text="Documentos:"
 							align="left"
 							letterHeight={24}
 							letterSpacing={0.5}
-							color={theme.colors.black_200}
+							color={theme.colors.black_100}
 							size={24}
 							weight="600"
 							marginBottom={30}
