@@ -62,7 +62,6 @@ const ImageCustom = ({
 		viewer.show();
 		const hide = () => viewer.destroy();
 	};
-
 	return (
 		<Container>
 			{/** HEADER */}
@@ -76,7 +75,7 @@ const ImageCustom = ({
 					letterHeight={24}
 					letterSpacing={0.5}
 					color={theme.colors.natural}
-					size={24}
+					size={18}
 					weight="600"
 				/>
 			</WrapperHeader>

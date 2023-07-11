@@ -8,7 +8,7 @@ import { type IButtonProps } from "./interface";
 
 const Container = styled.button<IButtonProps>`
 	width: ${({ width }) => width ?? "100%"};
-	height: 2.5rem;
+	height: 2.2.5rem;
 	border: 1px;
 	background-color: ${({ backgroundColor, theme }) =>
 		backgroundColor ?? theme.colors.natural};
