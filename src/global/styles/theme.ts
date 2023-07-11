@@ -3,6 +3,7 @@
  */
 const colors = {
 	black_200: "#212121",
+	black_100: "#534E4E",
 	blue_80: "#0d6efd",
 	blue_100: "#0F52BA",
 	gray_200: "#CDCDCD",
