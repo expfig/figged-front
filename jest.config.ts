@@ -12,7 +12,7 @@ export default {
 	clearMocks: true,
 
 	// Indica se as informações de cobertura devem ser coletadas durante a execução do teste
-	collectCoverage: true,
+	collectCoverage: false,
 
 	// Uma matriz de padrões glob indicando um conjunto de arquivos para os quais as informações de cobertura devem ser coletadas
 	collectCoverageFrom: ["src/**/*.{js,jsx,tsx}"],
