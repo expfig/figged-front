@@ -10,12 +10,16 @@ import { type LoadingProps } from "./interface";
 // styles
 import { ContainerLoading, WrapperIcon } from "./styles";
 
-const Loading = ({ color = "#0d6efd", size = 34 }: LoadingProps) => {
+const Loading = ({
+	dataTestId,
+	color = "#0d6efd",
+	size = 34,
+}: LoadingProps) => {
 	const theme = useTheme();
 	return (
-		<ContainerLoading>
+		<ContainerLoading data-testid={dataTestId ?? "component-loading"}>
 			<WrapperIcon>
-				<FiLoader size={size} color={color} />
+				<FiLoader data-testid="icon-fi-loader" size={size} color={color} />
 				<p style={{ marginTop: 12 }}>
 					<strong style={{ color: theme.colors.black_100 }}>
 						Carregando, por favor, aguade.
