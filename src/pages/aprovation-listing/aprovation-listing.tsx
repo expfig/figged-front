@@ -27,6 +27,7 @@ import {
 	WrapperContentNotFound,
 	WrapperTitle,
 } from "./styles";
+import { PaginationFooter } from "../../components/pagination-footer";
 
 const AprovationListing = () => {
 	const theme = useTheme();
@@ -107,6 +108,7 @@ const AprovationListing = () => {
 					</WrapperContent>
 				</Container>
 			)}
+			<PaginationFooter />
 		</>
 	);
 };

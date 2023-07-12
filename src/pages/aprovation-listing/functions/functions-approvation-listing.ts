@@ -42,7 +42,7 @@ const handleGetDocumentApprovel = async ({
 				progress: undefined,
 			});
 
-			setDataApprovalDocuments(responseApprovedDocument.payload.data.data);
+			setDataApprovalDocuments(responseApprovedDocument.payload.data.data.data);
 			setIsLoading(false);
 		}
 	} catch (error: any) {
