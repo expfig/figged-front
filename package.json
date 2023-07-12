@@ -52,6 +52,11 @@
 		"eject": "react-scripts eject",
 		"prepare": "husky install"
 	},
+	"husky": {
+		"hooks": {
+		  "applypatch-msg": "echo \"[Husky] applypatch-msg\""
+		}
+	},
 	"lint-staged": {
 		"*.{tsx,ts}": "eslint --cache --fix",
 		"*.--write": "prettier --write"

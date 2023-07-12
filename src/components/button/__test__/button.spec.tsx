@@ -91,8 +91,9 @@ describe("Button Component Test", () => {
 
 		// encontrou o elemento e vamos selecionar o onClick dele
 		await userfireEvent.setup().click(buttonElement);
+		await userfireEvent.setup().click(buttonElement);
 
 		// Espero que uma função fictícia seja chamada.
-		expect(onClickTestingMock).toHaveBeenCalledTimes(1);
+		expect(onClickTestingMock).toHaveBeenCalledTimes(2);
 	});
 });
