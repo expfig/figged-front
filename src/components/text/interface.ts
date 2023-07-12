@@ -2,7 +2,7 @@
  * IMPORTS
  */
 interface ITextProps {
-	id?: string | undefined;
+	dataTestId?: string | undefined;
 	color?: string;
 	size?: number;
 	width?: number | string;
