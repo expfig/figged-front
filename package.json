@@ -44,8 +44,9 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "jest",
-		"test:dev": "jest --watchAll=true",
+		"test": "jest --colors",
+		"test:dev": "jest --colors --watchAll=true",
+		"test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx,tsx}",
 		"lint": "eslint . --fix --max-warnings=0",
 		"format": "prettier . --write",
 		"eject": "react-scripts eject",

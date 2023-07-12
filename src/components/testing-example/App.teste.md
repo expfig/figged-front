@@ -26,5 +26,5 @@
 
 //   expect(element).toHaveAttribute("class", "teste");
 // })
-const app = "";
-export default app;
+// const app = "";
+// export default app;
