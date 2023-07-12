@@ -36,7 +36,7 @@ describe("Text from Test Component", () => {
 			}
 		);
 
-		const elementTextComponent = getByTestId("text-componentd");
+		const elementTextComponent = getByTestId("text-component");
 
 		expect(elementTextComponent).toBeTruthy();
 	});
