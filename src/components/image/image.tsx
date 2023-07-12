@@ -15,7 +15,7 @@ import { type ImageProps } from "./interface";
 
 // utils
 import { handleTrasformStringInUpercaseAndToLowerCase } from "../../utils/transform-upercase";
-import { handleTrasformStringInCapitalize } from "../../utils/transform-capitalize";
+import { handleReturnComcatenatedStrings } from "./functions/functions-ihandle-return-comcatenated-strings";
 
 // styles
 import {
@@ -35,6 +35,7 @@ const ImageCustom = ({
 	onClickDisapproved,
 	imageUri,
 	username,
+	approvalDate = "",
 }: ImageProps) => {
 	const theme = useTheme();
 	const { idBobina } = useParams();
@@ -54,14 +55,14 @@ const ImageCustom = ({
 				rotateLeft: 4,
 				rotateRight: 4,
 			},
-			title: () =>
-				`Documento da Bobina ${JSON.stringify(idBobina)}(Aguardando)`,
+			title: () => `Documento da Bobina ${String(idBobina)}(Aguardando)`,
 			hide: () => hide,
 		};
 		const viewer = new Viewer(event.target, config);
 		viewer.show();
 		const hide = () => viewer.destroy();
 	};
+
 	return (
 		<Container>
 			{/** HEADER */}
@@ -110,11 +111,10 @@ const ImageCustom = ({
 							width={"30%"}
 						/>
 						<Text
-							text={
-								handleTrasformStringInCapitalize({
-									dataString: username,
-								}) ?? "Não definido"
-							}
+							text={handleReturnComcatenatedStrings({
+								userWhoApproved: username,
+								data: approvalDate,
+							})}
 							align="left"
 							letterHeight={28}
 							letterSpacing={0.5}

@@ -193,7 +193,7 @@ const Aprovation = () => {
 									{documents.data.map((doc: any, index) => (
 										<ImageCustom
 											key={String(index)}
-											type={documents.aprovacao.status}
+											type={doc.status}
 											username={doc.user}
 											approvalDate={doc?.formatted_updated_at}
 											imageUri={doc?.file_url}
