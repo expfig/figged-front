@@ -9,13 +9,20 @@ interface ModalProps {
 	children: React.ReactNode;
 	isOpen: boolean;
 	onRequestCloseClick: () => void;
+	dataTestId?: string;
 }
-const Modal = ({ children, isOpen, onRequestCloseClick }: ModalProps) => {
+const Modal = ({
+	children,
+	isOpen,
+	onRequestCloseClick,
+	dataTestId,
+}: ModalProps) => {
 	// const theme = useTheme();
 
 	return (
 		<>
 			<ContainerMdal
+				id={dataTestId}
 				ariaHideApp={false}
 				isOpen={isOpen}
 				shouldCloseOnEsc={isOpen}
