@@ -39,7 +39,9 @@ const PaginationFooter = ({
 		<Container>
 			<>
 				{isLoadingPagination ? (
-					<p>carrregando..</p>
+					<WrapperTextNoData>
+						<p>carrregando...</p>
+					</WrapperTextNoData>
 				) : (
 					<>
 						{pages.length ? (
