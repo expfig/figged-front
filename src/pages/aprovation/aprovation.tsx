@@ -233,11 +233,13 @@ const Aprovation = () => {
 						<Table
 							data={dataTable}
 							pages={pagesData}
-							onClickNext={(pageCount: any) => {
+							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
+								return pageCount;
 							}}
-							onClickPreview={(pageCount: any) => {
+							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
+								return pageCount;
 							}}
 						/>
 					</ContainerMain>
