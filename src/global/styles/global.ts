@@ -24,6 +24,18 @@ export default createGlobalStyle`
    box-sizing: border-box;
    height: -webkit-fill-available;
    -ms-overflow-style: scrollbar;
+   ::-webkit-scrollbar {
+    height: 1px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.slate_700};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background:  ${({ theme }) => theme.colors.gray_400};
+    border-radius: 4px;
+  }
  }
 
  body {
