@@ -106,7 +106,8 @@ const Table = ({
 								<FooterTable>
 									<ButtonPreview
 										onClick={() => {
-											onClickPreview();
+											// @ts-expect-error
+											onClickPreview(undefined);
 										}}
 									>
 										<FiArrowLeft size={18} color={theme.colors.natural} />
@@ -118,7 +119,8 @@ const Table = ({
 											key={page?.label}
 											background={page?.active}
 											onClick={() => {
-												onClickNext(page?.label);
+												onClickNext(Number(page?.label));
+												return page.label;
 											}}
 										>
 											<TextNumberPage active={page?.active}>
@@ -129,7 +131,8 @@ const Table = ({
 
 									<ButtonNext
 										onClick={() => {
-											onClickNext();
+											// @ts-expect-error
+											onClickNext(undefined);
 										}}
 									>
 										<TextSpanRight>Próximo</TextSpanRight>
