@@ -9,6 +9,7 @@ import { actions as ActionApproval } from "../../../features/approval";
 
 // typings
 import { type IFunctionDocumentsProps } from "./interface-functions";
+import { type IDataPagesProps } from "../interface";
 
 /**
  * FUNÇÃO QUE BUSCAR TODOS DOCUMENTOS QUE FORAM APROVADOS
@@ -17,16 +18,21 @@ const handleGetDocumentApprovel = async ({
 	setIsLoading,
 	dispatch,
 	token,
+	page,
+	status,
+	setDataPages,
+	setLastpage,
 	setDataApprovalDocuments,
 }: IFunctionDocumentsProps) => {
 	try {
 		setIsLoading(true);
 
-		// response da reprovação
+		// response de documentos
 		const responseApprovedDocument = await dispatch(
 			ActionApproval.fetchAllApprovalsWithApprovedStatus({
 				token,
-				status: "aprovado",
+				page,
+				status,
 			})
 		);
 
@@ -42,6 +48,15 @@ const handleGetDocumentApprovel = async ({
 				progress: undefined,
 			});
 
+			const responseFiltered =
+				responseApprovedDocument.payload.data.data.links.filter(
+					(link: IDataPagesProps) =>
+						link.label !== "&laquo; Anterior" &&
+						link.label !== "..." &&
+						link.label !== "Próxima &raquo;"
+				);
+			setLastpage(responseApprovedDocument.payload.data.data.last_page);
+			setDataPages(responseFiltered);
 			setDataApprovalDocuments(responseApprovedDocument.payload.data.data.data);
 			setIsLoading(false);
 		}
