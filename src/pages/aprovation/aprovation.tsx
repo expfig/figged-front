@@ -232,6 +232,8 @@ const Aprovation = () => {
 						{/** COMPONENTE DE TABELA */}
 						<Table
 							data={dataTable}
+							firstPage={1}
+							lastPage={999}
 							pages={pagesData}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
