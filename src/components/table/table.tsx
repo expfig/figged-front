@@ -8,7 +8,7 @@ import { useTheme } from "styled-components";
 
 import { Link } from "react-router-dom";
 import { Text } from "../text";
-import { FiLoader, FiArrowRight, FiArrowLeft } from "react-icons/fi";
+import { FiLoader } from "react-icons/fi";
 
 // typings
 import { type IDataTableProps, type IDataPagesProps } from "./interface";
@@ -30,32 +30,35 @@ import {
 	FooterTable,
 	ImageNotFoundData,
 	WrapperImageNotFoundData,
-	ButtonPreview,
-	TextSpanLeft,
-	ButtonNext,
-	TextSpanRight,
-	WrapperTextFooter,
-	TextNumberPage,
+	// ButtonPreview,
+	// TextSpanLeft,
+	// ButtonNext,
+	// TextSpanRight,
+	// WrapperTextFooter,
+	// TextNumberPage,
 } from "./styles";
+import { PaginationFooter } from "../pagination-footer";
 
 const Table = ({
 	data,
 	pages,
 	onClickPreview,
 	onClickNext,
+	firstPage,
+	lastPage,
 }: IDataTableProps) => {
 	const theme = useTheme();
 
-	const [pagess, setPages] = useState<IDataPagesProps[]>([]);
+	const [pageData, setPageData] = useState<IDataPagesProps[]>([]);
 
 	useEffect(() => {
-		setPages(pages);
+		setPageData(pages);
 	}, [pages]);
 
 	return (
 		<Container>
 			<>
-				{pagess.length ? (
+				{pageData.length ? (
 					<>
 						<TableHtml>
 							<Thead>
@@ -102,43 +105,22 @@ const Table = ({
 								))}
 							</Tbody>
 						</TableHtml>
+
 						<>
 							{data.length ? (
 								<FooterTable>
-									<ButtonPreview
-										onClick={() => {
-											// @ts-expect-error
-											onClickPreview(undefined);
+									<PaginationFooter
+										pageData={pageData}
+										firstPage={firstPage}
+										lastpage={lastPage}
+										isLoadingPagination={false}
+										onClickNext={(paramsPage: number) => {
+											onClickNext(paramsPage);
 										}}
-									>
-										<FiArrowLeft size={18} color={theme.colors.natural} />
-										<TextSpanLeft>Anterior</TextSpanLeft>
-									</ButtonPreview>
-
-									{pagess?.map((page: IDataPagesProps) => (
-										<WrapperTextFooter
-											key={page?.label}
-											background={page?.active}
-											onClick={() => {
-												onClickNext(Number(page?.label));
-												return page.label;
-											}}
-										>
-											<TextNumberPage active={page?.active}>
-												{page?.label}
-											</TextNumberPage>
-										</WrapperTextFooter>
-									))}
-
-									<ButtonNext
-										onClick={() => {
-											// @ts-expect-error
-											onClickNext(undefined);
+										onClickPreview={(paramsPage: number) => {
+											onClickPreview(paramsPage);
 										}}
-									>
-										<TextSpanRight>Próximo</TextSpanRight>
-										<FiArrowRight size={18} color={theme.colors.natural} />
-									</ButtonNext>
+									/>
 								</FooterTable>
 							) : (
 								<WrapperImageNotFoundData>
