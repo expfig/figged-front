@@ -25,9 +25,10 @@ export interface Data {
 	groupId?: number;
 	tipo?: string;
 	status?: string;
-	coilNumber?: number;
+	coilNumber?: string | any;
 	driverId?: number;
 	truckId?: number;
+	tripNumber: string | any;
 }
 
 /**

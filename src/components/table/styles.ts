@@ -150,12 +150,21 @@ const FooterTable = styled.div`
 	background-color: transparent;
 `;
 
-const WrapperTextNoData = styled.div`
+const WrapperImageNotFoundData = styled.div`
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
+	margin-bottom: 34px;
 	padding-bottom: 34px;
+`;
+
+const ImageNotFoundData = styled.img`
+	width: 80px;
+	height: 80px;
 `;
 
 const ButtonPreview = styled.button`
@@ -238,7 +247,8 @@ export {
 	Tbody,
 	Td,
 	FooterTable,
-	WrapperTextNoData,
+	WrapperImageNotFoundData,
+	ImageNotFoundData,
 	ButtonPreview,
 	TextSpanLeft,
 	ButtonNext,

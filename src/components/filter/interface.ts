@@ -57,6 +57,8 @@ interface FilterProps {
 	onChangeTextStatus: (value: any) => void;
 	onChangeTextNameDriver: (value: any) => void;
 	onChangeTextPlateId: (value: any) => void;
+	onChangeTextCoillNumber: (value: any) => void;
+	onChangeTextTripNumber: (value: any) => void;
 
 	onClickButtonFilter: () => void;
 	onClickCleanFilter: () => void;
