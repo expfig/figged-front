@@ -2,7 +2,7 @@
  * IMPORTS
  */
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
 // redux
@@ -12,12 +12,17 @@ import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { Text } from "../../components/text";
 import { Loading } from "../../components/loading";
 import { ImageCustom } from "../../components/image";
+import { PaginationFooter } from "../../components/pagination-footer";
 
 // functions
 import { handleGetDocumentApprovel } from "./functions/functions-approvation-listing";
+import { handleScrollTop } from "./functions/function-scroll-top";
 
 // typings
-import { type IDocumentsApprovedProps } from "./interface";
+import {
+	type IDataPagesProps,
+	type IDocumentsApprovedProps,
+} from "./interface";
 
 // styles
 import {
@@ -27,6 +32,7 @@ import {
 	WrapperContentNotFound,
 	WrapperTitle,
 } from "./styles";
+import "./aprovation-listing.css";
 
 const AprovationListing = () => {
 	const theme = useTheme();
@@ -34,28 +40,59 @@ const AprovationListing = () => {
 
 	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
 
+	const [isLoading, setIsLoading] = useState(false);
+	const [pageCount, setPageCount] = useState(1);
+	const [lastpage, setLastpage] = useState(0);
+
 	const [dataApprovalDocuments, setDataApprovalDocuments] = useState<
 		IDocumentsApprovedProps[]
 	>([]);
-	const [isLoading, setIsLoading] = useState(false);
+
+	const [pagesData, setDataPages] = useState<IDataPagesProps[]>([]);
 
 	const handleApprovationListing = async () => {
 		handleGetDocumentApprovel({
 			setIsLoading,
 			dispatch,
 			token,
+			page: pageCount,
 			status: "aprovado",
+			setDataPages,
+			setLastpage,
 			setDataApprovalDocuments,
 		});
 	};
 
+	const btn = document.querySelector("#back-to-top");
+
+	// função levar usuário pra poxima paganina ou para a anterior
+	const handleOnclickPageNextOrPreview = useCallback(
+		(netxOrPreview: string, pageNumber: number) => {
+			if (netxOrPreview === "next") {
+				if (pageNumber) {
+					setPageCount(pageNumber);
+				} else {
+					setPageCount(pageCount + 1);
+				}
+			} else {
+				if (pageNumber) {
+					setPageCount(pageNumber);
+				} else {
+					setPageCount(pageCount - 1);
+				}
+			}
+		},
+		[pageCount]
+	);
+
 	useEffect(() => {
 		handleApprovationListing();
-	}, []);
+	}, [pageCount]);
+
 	return (
-		<>
+		<div id="back-to-top">
 			{isLoading ? (
-				<Loading />
+				<Loading size={45} />
 			) : (
 				<Container>
 					<WrapperTitle>
@@ -107,7 +144,22 @@ const AprovationListing = () => {
 					</WrapperContent>
 				</Container>
 			)}
-		</>
+
+			<PaginationFooter
+				pageData={pagesData}
+				firstPage={pageCount}
+				lastpage={lastpage}
+				isLoadingPagination={isLoading}
+				onClickNext={(paramsPage: number) => {
+					handleOnclickPageNextOrPreview("next", Number(paramsPage));
+					handleScrollTop(btn);
+				}}
+				onClickPreview={(paramsPage: number) => {
+					handleOnclickPageNextOrPreview("preview", Number(paramsPage));
+					handleScrollTop(btn);
+				}}
+			/>
+		</div>
 	);
 };
 

@@ -11,7 +11,13 @@ interface IDocumentsApprovedProps {
 	file_url: string;
 }
 
+interface IDataPagesProps {
+	url: string;
+	label: string;
+	active: boolean;
+}
+
 /**
  * EXPORTS
  */
-export type { IDocumentsApprovedProps };
+export type { IDocumentsApprovedProps, IDataPagesProps };
