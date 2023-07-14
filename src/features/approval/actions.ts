@@ -24,6 +24,7 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 		coilNumber,
 		driverId,
 		truckId,
+		tripNumber,
 	}: Data) =>
 		await axios.get(
 			`${BASE_URL}/aprovacoes?page=${Number(
@@ -34,11 +35,13 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 				tipo
 			)}&status=${handleTransFormTextInString(
 				status
-			)}&coil_number=${handleTransFormTextInNumber(
+			)}&coil_number=${handleTransFormTextInString(
 				coilNumber
 			)}&driver_id=${handleTransFormTextInNumber(
 				driverId
-			)}&truck_id=${handleTransFormTextInNumber(truckId)}`,
+			)}&truck_id=${handleTransFormTextInNumber(
+				truckId
+			)}&trip_number=${handleTransFormTextInString(tripNumber)}`,
 			{
 				headers: {
 					Authorization: `Token ${token}`,

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
 import { Link } from "react-router-dom";
-
+import { Text } from "../text";
 import { FiLoader, FiArrowRight, FiArrowLeft } from "react-icons/fi";
 
 // typings
@@ -28,7 +28,8 @@ import {
 	Tbody,
 	Td,
 	FooterTable,
-	WrapperTextNoData,
+	ImageNotFoundData,
+	WrapperImageNotFoundData,
 	ButtonPreview,
 	TextSpanLeft,
 	ButtonNext,
@@ -140,9 +141,22 @@ const Table = ({
 									</ButtonNext>
 								</FooterTable>
 							) : (
-								<WrapperTextNoData>
-									<p>Nenhuma informação encontrada....</p>
-								</WrapperTextNoData>
+								<WrapperImageNotFoundData>
+									<ImageNotFoundData
+										src="https://img.myloview.com.br/posters/icone-da-pagina-do-arquivo-do-documento-do-prazo-do-horario-400-112384520.jpg"
+										alt="not-found"
+									/>
+									<Text
+										width={"100%"}
+										text={`Nenhum registro encontrado...`}
+										align="center"
+										letterHeight={18}
+										letterSpacing={0.5}
+										color={theme.colors.black_100}
+										size={18}
+										weight="600"
+									/>
+								</WrapperImageNotFoundData>
 							)}
 						</>
 					</>
