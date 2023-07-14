@@ -159,6 +159,7 @@ const Home = () => {
 		handleFetchDataForTheFilter();
 		handleFetchDataApprovals();
 	}, [countPage]);
+
 	return (
 		<>
 			{loading ? (
@@ -214,10 +215,11 @@ const Home = () => {
 						<Table
 							data={approvalData}
 							pages={pagesData}
-							onClickNext={(pageCount: any) => {
+							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
+								return 1;
 							}}
-							onClickPreview={(pageCount: any) => {
+							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
 							}}
 						/>

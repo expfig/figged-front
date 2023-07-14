@@ -27,8 +27,8 @@ interface IApprovalRequest {
 interface IDataTableProps {
 	data: IApprovalRequest[];
 	pages: any[];
-	onClickPreview: (page: number) => void;
-	onClickNext: (page: number) => number;
+	onClickPreview: (page?: number | string) => void;
+	onClickNext: (page?: number | string) => void;
 }
 
 interface IDataPagesProps {

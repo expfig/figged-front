@@ -193,7 +193,7 @@ const Aprovation = () => {
 									{documents.data.map((doc: any, index) => (
 										<ImageCustom
 											key={String(index)}
-											type={documents.aprovacao.status}
+											type={doc.status}
 											username={doc.user}
 											approvalDate={doc?.formatted_updated_at}
 											imageUri={doc?.file_url}
@@ -233,11 +233,13 @@ const Aprovation = () => {
 						<Table
 							data={dataTable}
 							pages={pagesData}
-							onClickNext={(pageCount: any) => {
+							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
+								return pageCount;
 							}}
-							onClickPreview={(pageCount: any) => {
+							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
+								return pageCount;
 							}}
 						/>
 					</ContainerMain>
