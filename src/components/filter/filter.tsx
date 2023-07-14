@@ -37,6 +37,8 @@ const Filter = ({
 	onChangeTextPlateId,
 	onClickButtonFilter,
 	onClickCleanFilter,
+	onChangeTextCoillNumber,
+	onChangeTextTripNumber,
 }: FilterProps) => {
 	const theme = useTheme();
 
@@ -46,6 +48,7 @@ const Filter = ({
 	const [tripNumber, setTripNumber] = useState(null);
 
 	const handleOnchangeSelectCoils = (item: any) => {
+		onChangeTextCoillNumber(item);
 		setCoils(item);
 	};
 
@@ -60,6 +63,7 @@ const Filter = ({
 	};
 
 	const handleOnchangeTripNumber = (item: any) => {
+		onChangeTextTripNumber(item);
 		setTripNumber(item);
 	};
 	return (
@@ -155,6 +159,7 @@ const Filter = ({
 					onChange={handleOnchangeTripNumber}
 					value={tripNumber}
 				/>
+
 				<FooterBottom>
 					<Button
 						onClick={onClickCleanFilter}

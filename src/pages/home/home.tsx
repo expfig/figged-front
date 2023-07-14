@@ -2,10 +2,10 @@
 /**
  * IMPORTS
  */
+import "./home.css";
 
 import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
-
 import { toast } from "react-toastify";
 
 // redux
@@ -24,6 +24,7 @@ import { type IDataPagesProps, type FilterDataGroupsProps } from "./interface";
 
 // functions
 import { fetchingAllDataForFiltering } from "./functions/functions";
+import { handleScrollTop } from "./functions/function-scrooll";
 
 // styles
 import {
@@ -56,9 +57,11 @@ const Home = () => {
 	const [typeFilter, setTypeFilter] = useState(null);
 	const [driverIdFilter, setDriveIdFilter] = useState(null);
 	const [platesIdFilter, setPlatesIdFilter] = useState(null);
+	const [coilNumber, setCoillNumber] = useState(null);
+	const [tripNumber, setTripNumber] = useState(null);
 
 	const handleFetchDataForTheFilter = useCallback(async () => {
-		fetchingAllDataForFiltering({
+		await fetchingAllDataForFiltering({
 			setLoading,
 			token,
 			dispatch,
@@ -74,19 +77,20 @@ const Home = () => {
 			const response = await dispatch(
 				ActionsApproval.fetchAllApprovals({
 					token,
-					page: countPage,
-					groupId: groupFilter,
-					tipo: typeFilter,
-					status: statusFilter,
-					coilNumber: null,
-					driverId: driverIdFilter,
-					truckId: platesIdFilter,
+					page: countPage ?? null,
+					groupId: groupFilter ?? null,
+					tipo: typeFilter ?? null,
+					status: statusFilter ?? null,
+					coilNumber: coilNumber ?? null,
+					driverId: driverIdFilter ?? null,
+					truckId: platesIdFilter ?? null,
+					tripNumber: tripNumber ?? null,
 				})
 			);
 
 			setApprovalData(response?.payload?.data?.data?.data);
 
-			const responseFiltered = response?.payload?.data?.data?.links.filter(
+			const responseFiltered = response?.payload?.data?.data?.links?.filter(
 				(link: IDataPagesProps) =>
 					link.label !== "&laquo; Anterior" &&
 					link.label !== "..." &&
@@ -94,7 +98,11 @@ const Home = () => {
 			);
 
 			setPagesData(responseFiltered);
+
 			setLoading(false);
+
+			handleCleanDataFilter();
+
 			toast.success("Busca realizada com sucesso!", {
 				position: "top-right",
 				autoClose: 5000,
@@ -121,14 +129,21 @@ const Home = () => {
 		statusFilter,
 		driverIdFilter,
 		platesIdFilter,
+		coilNumber,
+		tripNumber,
 	]);
+
+	const btn = document.querySelector("#back-to-top");
 
 	const handleCleanDataFilter = () => {
 		setLoading(true);
 		setGroupFilter(null);
 		setTypeFilter(null);
 		setStatusFilter(null);
+		setPlatesIdFilter(null);
 		setDriveIdFilter(null);
+		setCoillNumber(null);
+		setTripNumber(null);
 
 		setTimeout(() => {
 			setLoading(false);
@@ -161,7 +176,7 @@ const Home = () => {
 	}, [countPage]);
 
 	return (
-		<>
+		<div id="back-to-top">
 			{loading ? (
 				<Loading color={theme.colors.blue_100} size={34} />
 			) : (
@@ -201,8 +216,16 @@ const Home = () => {
 							onChangeTextPlateId={(option: any) => {
 								setPlatesIdFilter(option.id);
 							}}
+							onChangeTextCoillNumber={(option: any) => {
+								setCoillNumber(option?.text);
+							}}
+							onChangeTextTripNumber={(option: any) => {
+								setTripNumber(option?.text);
+							}}
 							onClickButtonFilter={() => {
+								setCountPage(1);
 								handleFetchDataApprovals();
+								handleScrollTop(btn);
 							}}
 							onClickCleanFilter={() => {
 								handleCleanDataFilter();
@@ -226,7 +249,7 @@ const Home = () => {
 					</WrapperTable>
 				</ContainerMain>
 			)}
-		</>
+		</div>
 	);
 };
 

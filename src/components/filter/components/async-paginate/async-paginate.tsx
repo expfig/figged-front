@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { FiLoader } from "react-icons/fi";
+import { Oval } from "react-loader-spinner";
 import { AsyncPaginate } from "react-select-async-paginate";
 
 // redux
@@ -104,19 +104,38 @@ const SelectAsyncPaginate = ({
 
 	const ComponetTextProps = () => {
 		return (
-			<>
-				<FiLoader size={34} color={"#0d6efd"} />
+			<div
+				style={{
+					width: "100%",
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<Oval
+					height={34}
+					width={34}
+					color={"#0d6efd"}
+					wrapperClass=""
+					visible={true}
+					ariaLabel="oval-loading"
+					secondaryColor="#051C3B"
+					strokeWidth={2}
+					strokeWidthSecondary={2}
+				/>
+
 				<Text
 					marginTop={18}
-					text="Carregando"
+					text="Carregando..."
 					align="center"
 					letterHeight={24}
 					letterSpacing={0.5}
-					color={"#cdcdcd"}
+					color={"#767171"}
 					size={16}
 					weight="400"
 				/>
-			</>
+			</div>
 		);
 	};
 
@@ -129,8 +148,8 @@ const SelectAsyncPaginate = ({
 				// @ts-expect-error
 				loadOptions={loadOptions}
 				onChange={onChangeAsync}
-				getOptionValue={(option: any) => option.text} // Resolve dados de opção em uma string para comparar opções e especificar atributos de valor
-				getOptionLabel={(option: any) => option.text} // Resolve os dados de opção para uma string a ser exibida como rótulo por componentes
+				getOptionValue={(option: any) => String(option.text).trim()} // Resolve dados de opção em uma string para comparar opções e especificar atributos de valor
+				getOptionLabel={(option: any) => String(option.text).trim()} // Resolve os dados de opção para uma string a ser exibida como rótulo por componentes
 				isSearchable={false} // usuário interagir com o input
 				loadingMessage={ComponetTextProps}
 				additional={{
