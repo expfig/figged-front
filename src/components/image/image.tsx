@@ -15,7 +15,7 @@ import { type ImageProps } from "./interface";
 
 // utils
 import { handleTrasformStringInUpercaseAndToLowerCase } from "../../utils/transform-upercase";
-import { handleReturnComcatenatedStrings } from "./functions/functions-ihandle-return-comcatenated-strings";
+import { handleTrasformStringInCapitalize } from "../../utils/transform-capitalize";
 
 // styles
 import {
@@ -26,6 +26,9 @@ import {
 	WrapperUserMain,
 	WrapperUser,
 	WrapperTextUser,
+	WrapperRow,
+	TitleUserOrDate,
+	SubTitleUserOrDate,
 	FooterImage,
 } from "./styles";
 
@@ -99,30 +102,18 @@ const ImageCustom = ({
 			<WrapperUserMain>
 				<WrapperUser>
 					<WrapperTextUser>
-						<Text
-							text="Úsuario:"
-							align="left"
-							letterHeight={24}
-							letterSpacing={0.5}
-							color={theme.colors.black_200}
-							size={18}
-							weight="600"
-							marginLeft={12}
-							width={"30%"}
-						/>
-						<Text
-							text={handleReturnComcatenatedStrings({
-								userWhoApproved: username,
-								data: approvalDate,
-							})}
-							align="left"
-							letterHeight={28}
-							letterSpacing={0.5}
-							color={theme.colors.black_200}
-							size={16}
-							weight="400"
-							marginLeft={6}
-						/>
+						<WrapperRow>
+							<TitleUserOrDate>Usuário:</TitleUserOrDate>
+							<SubTitleUserOrDate>
+								{handleTrasformStringInCapitalize({ dataString: username })}
+							</SubTitleUserOrDate>
+						</WrapperRow>
+						<WrapperRow>
+							<TitleUserOrDate>
+								Data <span>aprovação</span>:
+							</TitleUserOrDate>
+							<SubTitleUserOrDate>{approvalDate}</SubTitleUserOrDate>
+						</WrapperRow>
 					</WrapperTextUser>
 				</WrapperUser>
 			</WrapperUserMain>
