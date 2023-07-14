@@ -42,25 +42,21 @@ const WrapperHeader = styled.div<WrapperHeaderProps>`
 	border-top-right-radius: 0.25rem;
 	border-top-left-radius: 0.25rem;
 `;
-
 const WrapperImage = styled.div`
 	width: 100%;
 	height: 17.5rem;
 	cursor: pointer;
 `;
-
 const Image = styled.img`
 	width: 100%;
 	height: 100%;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 `;
-
 const WrapperUserMain = styled.div`
 	width: 100%;
 	padding: 0 1rem;
 `;
-
 const WrapperUser = styled.div`
 	width: 100%;
 	height: 45px;
@@ -70,16 +66,39 @@ const WrapperUser = styled.div`
 	justify-content: center;
 	border-radius: 0.25rem;
 	border: 1px solid ${({ theme }) => theme.colors.gray_200};
+	padding: 0 0.8rem;
 `;
-
 const WrapperTextUser = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+`;
+const WrapperRow = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: flex-start;
 `;
+const TitleUserOrDate = styled.strong`
+	font-size: 16px;
+	font-weight: 600;
+	color: ${({ theme }) => theme.colors.black_200};
 
+	// quando a tela atingir 1070px
+	@media screen and (max-width: 1070px) {
+		:first-child span {
+			display: none;
+		}
+	}
+`;
+const SubTitleUserOrDate = styled.p`
+	font-size: 14px;
+	color: ${({ theme }) => theme.colors.black_100};
+	margin-left: 8px;
+`;
 const FooterImage = styled.div`
 	width: 100%;
 	height: 5.72rem;
@@ -109,5 +128,8 @@ export {
 	WrapperUserMain,
 	WrapperUser,
 	WrapperTextUser,
+	WrapperRow,
+	TitleUserOrDate,
+	SubTitleUserOrDate,
 	FooterImage,
 };
