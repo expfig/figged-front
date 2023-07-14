@@ -105,14 +105,18 @@ const ImageCustom = ({
 						<WrapperRow>
 							<TitleUserOrDate>Usuário:</TitleUserOrDate>
 							<SubTitleUserOrDate>
-								{handleTrasformStringInCapitalize({ dataString: username })}
+								{handleTrasformStringInCapitalize({
+									dataString: username ?? "Indefinido",
+								})}
 							</SubTitleUserOrDate>
 						</WrapperRow>
 						<WrapperRow>
 							<TitleUserOrDate>
 								Data <span>aprovação</span>:
 							</TitleUserOrDate>
-							<SubTitleUserOrDate>{approvalDate}</SubTitleUserOrDate>
+							<SubTitleUserOrDate>
+								{approvalDate ?? "Indefinido"}
+							</SubTitleUserOrDate>
 						</WrapperRow>
 					</WrapperTextUser>
 				</WrapperUser>
