@@ -49,6 +49,7 @@ const Home = () => {
 	const [approvalData, setApprovalData] = useState([]);
 	const [pagesData, setPagesData] = useState([]);
 	const [countPage, setCountPage] = useState(1);
+	const [lastPage, setLastPage] = useState(1);
 	const [loading, setLoading] = useState(false);
 
 	// dados para o filtro
@@ -97,8 +98,8 @@ const Home = () => {
 					link.label !== "Próxima &raquo;"
 			);
 
+			setLastPage(response.payload.data.data.last_page);
 			setPagesData(responseFiltered);
-
 			setLoading(false);
 
 			handleCleanDataFilter();
@@ -238,12 +239,15 @@ const Home = () => {
 						<Table
 							data={approvalData}
 							pages={pagesData}
+							firstPage={countPage}
+							lastPage={lastPage}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
-								return 1;
+								return pageCount;
 							}}
 							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
+								return pageCount;
 							}}
 						/>
 					</WrapperTable>
