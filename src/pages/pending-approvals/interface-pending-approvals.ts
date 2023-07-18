@@ -11,7 +11,13 @@ interface IDocumentsPedingProps {
 	file_url: string;
 }
 
+interface IDataPagesProps {
+	url: string;
+	label: string;
+	active: boolean;
+}
+
 /**
  * EXPORTS
  */
-export type { IDocumentsPedingProps };
+export type { IDocumentsPedingProps, IDataPagesProps };

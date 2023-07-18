@@ -15,6 +15,9 @@ const Container = styled.button<IButtonProps>`
 	padding: 10px;
 	border-radius: 4px;
 	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 	cursor: ${({ disabled }) => disabled && "not-allowed !important;"};
 
