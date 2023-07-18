@@ -26,6 +26,7 @@ const handleGetAllDocuments = async ({
 	idDriveName,
 	setDocuments,
 	setDataTable,
+	setLastPage,
 	setPagesData,
 }: IFunctionAprovationProps) => {
 	try {
@@ -43,6 +44,7 @@ const handleGetAllDocuments = async ({
 		);
 		setDocuments(documentDataResponse.payload.data);
 		setDataTable(driverApprovalDataResponse.payload.data.data.data);
+		setLastPage(driverApprovalDataResponse.payload.data.data.last_page);
 
 		const responseFiltered =
 			driverApprovalDataResponse?.payload?.data?.data?.links.filter(

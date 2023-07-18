@@ -71,6 +71,7 @@ const Aprovation = () => {
 	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
 
 	const [countPage, setCountPage] = useState(1);
+	const [lastPage, setLastPage] = useState(0);
 	const [idImage, setImageID] = useState<any>();
 	const [messageApproval, setMessageApproval] = useState("");
 
@@ -86,6 +87,7 @@ const Aprovation = () => {
 				idDriveName,
 				setDocuments,
 				setDataTable,
+				setLastPage,
 				setPagesData,
 			});
 		}
@@ -232,9 +234,9 @@ const Aprovation = () => {
 						{/** COMPONENTE DE TABELA */}
 						<Table
 							data={dataTable}
-							firstPage={1}
-							lastPage={999}
 							pages={pagesData}
+							firstPage={countPage}
+							lastPage={lastPage}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
 								return pageCount;
