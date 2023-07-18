@@ -66,7 +66,7 @@ const handleGetAllDocuments = async ({
 		});
 		setLoading(false);
 	} catch (error) {
-		toast.success("Ops, algo deu errado entre contato com suporte!", {
+		toast.error("Ops, algo deu errado entre contato com suporte!", {
 			position: "top-right",
 			autoClose: 5000,
 			hideProgressBar: false,

@@ -1,8 +1,8 @@
 /**
  * IMPORTS
  */
-import { FiLoader } from "react-icons/fi";
 import { useTheme } from "styled-components";
+import { Oval } from "react-loader-spinner";
 
 // typings
 import { type LoadingProps } from "./interface";
@@ -19,7 +19,17 @@ const Loading = ({
 	return (
 		<ContainerLoading data-testid={dataTestId ?? "component-loading"}>
 			<WrapperIcon>
-				<FiLoader data-testid="icon-fi-loader" size={size} color={color} />
+				<Oval
+					ariaLabel="oval-loading"
+					width={size}
+					height={size}
+					visible={true}
+					color={color}
+					wrapperClass=""
+					secondaryColor="#3c3535"
+					strokeWidth={2}
+					strokeWidthSecondary={2}
+				/>
 				<p style={{ marginTop: 12 }}>
 					<strong style={{ color: theme.colors.black_100 }}>
 						Carregando, por favor, aguade.

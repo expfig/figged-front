@@ -7,8 +7,11 @@ import { ThemeProvider } from "styled-components";
 
 import { render, screen } from "@testing-library/react";
 
-import theme from "../../../global/styles/theme";
+// components
 import { Loading } from "../loading";
+
+// styles
+import theme from "../../../global/styles/theme";
 
 const Providers: React.FC = ({ children }: any) => {
 	return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
@@ -30,8 +33,10 @@ describe("Component Loading Test", () => {
 			wrapper: Providers,
 		});
 
-		const elementLoadingIcon = getByTestId("icon-fi-loader");
+		// procurando pelo icone
+		const elementLoadingIcon = getByTestId("oval-loading");
 
+		// procurando pelo texto xxxx
 		const elementLoadingText = screen.getByText(
 			"Carregando, por favor, aguade."
 		);
