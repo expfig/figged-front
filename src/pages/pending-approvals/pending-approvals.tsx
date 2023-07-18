@@ -1,10 +1,6 @@
 /**
  * IMPORTS
  */
-
-/**
- * IMPORTS
- */
 import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
@@ -16,11 +12,18 @@ import { Text } from "../../components/text";
 import { Loading } from "../../components/loading";
 import { ImageCustom } from "../../components/image";
 import { PaginationFooter } from "../../components/pagination-footer";
+import { ModalAprovation } from "../../components/modal-approval";
+import { ModalFailApproval } from "../../components/modal-fail-approval";
+
+// utils
+import { handleGetCurrentData } from "../../utils/get-current-data";
 
 // functions
 import { handleGetDocumentPending } from "./functions/functions-pending-approvals";
 import { handleOnClickPagination } from "./functions/functions-handle-on-click-pagination";
 import { handleScrollTop } from "./functions/function-scroll-top";
+import { handleDocumentApprovalOne } from "./functions/functions-document-aprovation";
+import { handleDocumentReproachOne } from "./functions/functions-document-reproach";
 
 // typings
 import {
@@ -47,6 +50,15 @@ const ApprovalPending = () => {
 	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
+	const [loadingAprovationOrReproach, setLoadingAprovationOrReproach] =
+		useState(false);
+
+	const [isOpenModalAprovation, setIsOpenModalAprotion] = useState(false);
+	const [isModalReproach, setIsModalReproach] = useState(false);
+
+	const [idImage, setImageID] = useState<number | any>(0);
+	const [messageApproval, setMessageApproval] = useState("");
+
 	const [countPage, setCountPage] = useState(1);
 
 	const [lastpage, setLastPage] = useState(0);
@@ -55,7 +67,7 @@ const ApprovalPending = () => {
 		IDocumentsPedingProps[]
 	>([]);
 
-	const handleGetPendingListing = async () => {
+	const handlePendingApprovalSeeking = async () => {
 		handleGetDocumentPending({
 			setIsLoading,
 			dispatch,
@@ -84,7 +96,7 @@ const ApprovalPending = () => {
 	);
 
 	useEffect(() => {
-		handleGetPendingListing();
+		handlePendingApprovalSeeking();
 	}, [countPage]);
 
 	return (
@@ -93,6 +105,59 @@ const ApprovalPending = () => {
 				<Loading />
 			) : (
 				<>
+					<ModalAprovation
+						isLoading={loadingAprovationOrReproach}
+						isModalOpen={isOpenModalAprovation}
+						onAprovationDocumentAndCoil={() => {
+							handleDocumentApprovalOne({
+								token,
+								idImage,
+								dispatch,
+								setLoadingAprovationOrReproach,
+								setImageID,
+								setIsLoading,
+								setIsOpenModalAprotion,
+								handleGetCurrentData,
+								handlePendingApprovalSeeking,
+							});
+						}}
+						onOpenAndClosedClick={() => {
+							setIsOpenModalAprotion(false);
+						}}
+					/>
+
+					<ModalFailApproval
+						isModalOpen={isModalReproach}
+						isLoading={loadingAprovationOrReproach}
+						onOpenAndClosedClick={() => {
+							setIsModalReproach(!isModalReproach);
+						}}
+						// reprovar documento
+						onAprovationDocumentAndCoil={() => {
+							handleDocumentReproachOne({
+								token,
+								dispatch,
+								idImage,
+								messageApproval,
+								setLoadingAprovationOrReproach,
+								setIsModalReproach,
+								setImageID,
+								setIsLoading,
+								handleGetCurrentData,
+								handlePendingApprovalSeeking,
+							});
+						}}
+						// selecionar opção
+						onSelectOption={text => {
+							setMessageApproval(text);
+							return text;
+						}}
+						// caso usuário não selecione uma das opção acima
+						onChangeTextArea={text => {
+							setMessageApproval(text.target.value);
+							return "";
+						}}
+					/>
 					<Container>
 						<WrapperTitle>
 							<Text
@@ -116,8 +181,14 @@ const ApprovalPending = () => {
 										username={documents?.user}
 										approvalDate={documents?.formatted_updated_at}
 										imageUri={documents?.file_url}
-										onClickApproved={() => {}}
-										onClickDisapproved={() => {}}
+										onClickApproved={() => {
+											setImageID(documents.id);
+											setIsOpenModalAprotion(true);
+										}}
+										onClickDisapproved={() => {
+											setImageID(documents.id);
+											setIsModalReproach(true);
+										}}
 									/>
 								))
 							) : (

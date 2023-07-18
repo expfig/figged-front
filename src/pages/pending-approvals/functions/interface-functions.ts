@@ -23,8 +23,38 @@ interface IFunctionDocumentsProps {
 	setLastPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
+interface IDocumentApprovalOneProps {
+	idImage: string;
+	token: string;
+	dispatch: (value: Dispatch<any>) => any;
+	setLoadingAprovationOrReproach: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsOpenModalAprotion: React.Dispatch<React.SetStateAction<boolean>>;
+	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
+	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+	handleGetCurrentData: () => void;
+	handlePendingApprovalSeeking: () => Promise<void>;
+}
+
+interface IDocumentReproachOneProps {
+	setLoadingAprovationOrReproach: React.Dispatch<React.SetStateAction<boolean>>;
+	setIsModalReproach: React.Dispatch<React.SetStateAction<boolean>>;
+	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
+	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+	token: string;
+	dispatch: (value: Dispatch<any>) => any;
+	handleGetCurrentData: () => void;
+	idImage: string;
+	messageApproval: string;
+	handlePendingApprovalSeeking: () => Promise<void>;
+}
+
 /***
  * EXPORTS
  */
 
-export type { IFunctionDocumentsProps, IFunctionDataPagesProps };
+export type {
+	IFunctionDocumentsProps,
+	IFunctionDataPagesProps,
+	IDocumentApprovalOneProps,
+	IDocumentReproachOneProps,
+};
