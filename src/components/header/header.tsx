@@ -22,8 +22,8 @@ const Header = () => {
 				</WrapperTitle>
 
 				<WrapperTitleRighr>
-					<TitleTwo to={"aprovacao-pedentes"}>Aprovação Pendentes</TitleTwo>
-					<TitleTwo to={"aprovation-listing"}>Todas Aprovação</TitleTwo>
+					<TitleTwo to={"aprovacao-pedentes"}>Aprovações Pendentes</TitleTwo>
+					<TitleTwo to={"aprovation-listing"}>Todas Aprovações</TitleTwo>
 				</WrapperTitleRighr>
 			</Container>
 

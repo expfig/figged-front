@@ -34,16 +34,16 @@ describe("Teste do componente (Header)", () => {
 		);
 
 		const ElementTitle = getByText("Figged");
-		const ElementTitleAprovationPending = getByText("Aprovação Pendentes");
-		const ElementTitleAllAproval = getByText("Todas Aprovação");
+		const ElementTitleAprovationPending = getByText("Aprovações Pendentes");
+		const ElementTitleAllAproval = getByText("Todas Aprovações");
 
 		expect(ElementTitle.textContent).toBe("Figged");
 
 		expect(ElementTitleAprovationPending.textContent).toBe(
-			"Aprovação Pendentes"
+			"Aprovações Pendentes"
 		);
 
-		expect(ElementTitleAllAproval.textContent).toBe("Todas Aprovação");
+		expect(ElementTitleAllAproval.textContent).toBe("Todas Aprovações");
 	});
 
 	it("Deve ser possível visualizar os titúlos de navegação do o componente (Header) dentro do (WrapperBorderCustom)", () => {

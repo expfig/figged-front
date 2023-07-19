@@ -37,7 +37,7 @@ const Title = styled(Link)`
 `;
 
 const WrapperTitleRighr = styled.div`
-	width: 320px;
+	width: 340px;
 	height: 5rem;
 	display: flex;
 	align-items: center;
