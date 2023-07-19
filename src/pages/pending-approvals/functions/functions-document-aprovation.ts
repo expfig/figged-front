@@ -25,6 +25,7 @@ const handleDocumentApprovalOne = async ({
 }: IDocumentApprovalOneProps) => {
 	try {
 		setLoadingAprovationOrReproach(true);
+		setIsLoading(true);
 
 		const patchData = {
 			status: "aprovado",

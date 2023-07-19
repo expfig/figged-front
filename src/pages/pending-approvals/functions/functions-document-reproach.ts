@@ -23,9 +23,11 @@ const handleDocumentReproachOne = async ({
 	setIsLoading,
 	handlePendingApprovalSeeking,
 	messageApproval,
+	setMessageApproval,
 }: IDocumentReproachOneProps) => {
 	try {
 		setLoadingAprovationOrReproach(true);
+		setIsLoading(true);
 
 		if (!messageApproval) {
 			return toast.error("Não foi informado o motivo para a reprovação.", {
@@ -55,7 +57,7 @@ const handleDocumentReproachOne = async ({
 
 			// caso der suceso vamos executar abaixo
 			if (responseFailApprovedDocument.payload.data) {
-				toast.success("Documento aprovado com sucesso.", {
+				toast.success("Documento reprovado com sucesso.", {
 					position: "top-right",
 					autoClose: 1500,
 					hideProgressBar: false,
@@ -68,6 +70,7 @@ const handleDocumentReproachOne = async ({
 				setImageID(null);
 
 				await handlePendingApprovalSeeking();
+				setMessageApproval("");
 			}
 		}
 	} catch (error) {
@@ -80,6 +83,7 @@ const handleDocumentReproachOne = async ({
 			draggable: true,
 			progress: undefined,
 		});
+		setMessageApproval("");
 		return error;
 	} finally {
 		setIsModalReproach(false);

@@ -134,6 +134,7 @@ const ApprovalPending = () => {
 								dispatch,
 								idImage,
 								messageApproval,
+								setMessageApproval,
 								setLoadingAprovationOrReproach,
 								setIsModalReproach,
 								setImageID,
