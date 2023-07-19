@@ -47,6 +47,7 @@ const AprovationListing = () => {
 
 	const [pagesData, setDataPages] = useState<IDataPagesProps[]>([]);
 
+	// buscando todos documentos aprovados
 	const handleApprovationListing = async () => {
 		handleGetDocumentApprovel({
 			page: pageCount,

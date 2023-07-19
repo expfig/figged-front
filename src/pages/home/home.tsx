@@ -7,7 +7,7 @@ import { useTheme } from "styled-components";
 import { toast } from "react-toastify";
 
 // redux
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 
 import { actions as ActionsApproval } from "../../features/approval";
 
@@ -40,7 +40,7 @@ const Home = () => {
 	const theme = useTheme();
 
 	// use dispatch
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const [groups, setGroups] = useState<IFilterDataGroupsProps[]>([]);
 	const [types, setTypes] = useState<IFilterDataGroupsProps[]>([]);
@@ -62,6 +62,7 @@ const Home = () => {
 	const [coilNumber, setCoillNumber] = useState(null);
 	const [tripNumber, setTripNumber] = useState(null);
 
+	// buscando dados para colocar no componente filtro
 	const handleFetchDataForTheFilter = useCallback(async () => {
 		await fetchingAllDataForFiltering({
 			setLoading,
@@ -72,6 +73,7 @@ const Home = () => {
 		});
 	}, []);
 
+	// buscando dados das aprovações para usuário realizar (aprovação ou reprovação) de documentos
 	const handleFetchDataApprovals = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -99,7 +101,6 @@ const Home = () => {
 
 			setLastPage(response.payload.data.data.last_page);
 			setPagesData(responseFiltered);
-			setLoading(false);
 
 			handleCleanDataFilter();
 
@@ -121,6 +122,8 @@ const Home = () => {
 				draggable: false,
 			});
 			return error;
+		} finally {
+			setLoading(false);
 		}
 	}, [
 		countPage,
@@ -133,8 +136,10 @@ const Home = () => {
 		tripNumber,
 	]);
 
+	// selecionando o elemento pelo id
 	const btn = document.querySelector("#back-to-top");
 
+	// limpando o  estado dos dados do filtro realizado
 	const handleCleanDataFilter = () => {
 		setLoading(true);
 		setGroupFilter(null);
@@ -144,10 +149,6 @@ const Home = () => {
 		setDriveIdFilter(null);
 		setCoillNumber(null);
 		setTripNumber(null);
-
-		setTimeout(() => {
-			setLoading(false);
-		}, 2000);
 	};
 
 	// função levar usuário pra poxima paganina ou para a anterior

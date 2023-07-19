@@ -20,7 +20,6 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 
 	// request fetch groups
 	async ({
-		token,
 		page,
 		groupId,
 		tipo,
@@ -47,18 +46,18 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 		)
 );
 
-const fetchAllApprovalsWithApprovedStatus = createAsyncThunk<
+const fetchAllApprovalsWithApprovedAndPendingStatus = createAsyncThunk<
 	IApprovalResponse,
 	any
 >(
 	types.GET_ALL_APPROVALS_WITH_APPROVED_STATUS,
 
 	// request fetch groups
-	async ({ token, page, status = "" }: Data) =>
+	async ({ page, status = "" }: Data) =>
 		await instanceAxios.get(`/documentos?page=${Number(page)}&status=${status}`)
 );
 
 /**
  * EXPORTS
  */
-export { fetchAllApprovals, fetchAllApprovalsWithApprovedStatus };
+export { fetchAllApprovals, fetchAllApprovalsWithApprovedAndPendingStatus };
