@@ -29,6 +29,8 @@ const PaginationFooter = ({
 	isLoadingPagination,
 	onClickNext,
 	onClickPreview,
+	dataTestIdNext,
+	dataTestIdPreview,
 }: IPaginationFooterProps) => {
 	const theme = useTheme();
 
@@ -50,7 +52,10 @@ const PaginationFooter = ({
 						{pages.length ? (
 							<FooterTable>
 								{pages.length > 1 && (
-									<ButtonPreview onClick={onClickPreview}>
+									<ButtonPreview
+										data-testid={dataTestIdPreview}
+										onClick={onClickPreview}
+									>
 										<FiArrowLeft size={18} color={theme.colors.natural} />
 										<TextSpanLeft>Anterior</TextSpanLeft>
 									</ButtonPreview>
@@ -73,7 +78,10 @@ const PaginationFooter = ({
 								{firstPage === lastpage ? (
 									<></>
 								) : (
-									<ButtonNext onClick={onClickNext}>
+									<ButtonNext
+										data-testid={dataTestIdNext}
+										onClick={onClickNext}
+									>
 										<TextSpanRight>Próximo</TextSpanRight>
 										<FiArrowRight size={18} color={theme.colors.natural} />
 									</ButtonNext>

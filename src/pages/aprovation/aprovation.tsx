@@ -237,6 +237,7 @@ const Aprovation = () => {
 							pages={pagesData}
 							firstPage={countPage}
 							lastPage={lastPage}
+							isLoading={false}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
 								return pageCount;

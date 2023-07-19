@@ -31,6 +31,7 @@ const colors = {
 	yellow_400: "#c59017",
 	yellow_500: "#EAC600",
 	orange_100: "#FFA500",
+	brown_300: "#3c3535",
 };
 
 /**
