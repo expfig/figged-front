@@ -70,7 +70,7 @@ const ModalAprovation = ({
 					title="Cancelar"
 					backgroundColor={theme.colors.red_500}
 					color={theme.colors.natural}
-					loading={isLoading}
+					loading={false}
 				/>
 
 				<Button

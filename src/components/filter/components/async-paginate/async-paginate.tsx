@@ -17,6 +17,9 @@ import {
 	type IFilterRequestProps,
 } from "./interface";
 
+// styles
+import theme from "../../../../global/styles/theme";
+
 const SelectAsyncPaginate = ({
 	value,
 	onChange,
@@ -31,12 +34,10 @@ const SelectAsyncPaginate = ({
 		searchQuery: any,
 		{ page }: any // PAGINA ATUAL
 	) => {
-		const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
-
 		switch (nameTypeRequest) {
 			case "coils":
 				const responseFilterCoils: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllCoils({ token, page: pages })
+					ActionsFilter.fetchAllCoils({ page: pages })
 				);
 				const responseCoils = responseFilterCoils.payload.data.data;
 
@@ -51,7 +52,7 @@ const SelectAsyncPaginate = ({
 
 			case "drivers":
 				const responseFilterGroups: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllDrivers({ token, page: pages })
+					ActionsFilter.fetchAllDrivers({ page: pages })
 				);
 				const responseMotorista = responseFilterGroups.payload.data.data;
 
@@ -66,7 +67,7 @@ const SelectAsyncPaginate = ({
 
 			case "plates":
 				const responseFilterPlates: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllPlates({ token, page: pages })
+					ActionsFilter.fetchAllPlates({ page: pages })
 				);
 				const responsePlates = responseFilterPlates.payload.data.data;
 
@@ -81,7 +82,7 @@ const SelectAsyncPaginate = ({
 
 			case "trip_number":
 				const responseFilterTripNumber: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllTripNumber({ token, page: pages })
+					ActionsFilter.fetchAllTripNumber({ page: pages })
 				);
 				const responseTripNumber = responseFilterTripNumber.payload.data.data;
 
@@ -116,11 +117,11 @@ const SelectAsyncPaginate = ({
 				<Oval
 					height={34}
 					width={34}
-					color={"#0d6efd"}
+					color={theme.colors.blue_80}
 					wrapperClass=""
 					visible={true}
 					ariaLabel="oval-loading"
-					secondaryColor="#051C3B"
+					secondaryColor={theme.colors.brown_300}
 					strokeWidth={2}
 					strokeWidthSecondary={2}
 				/>

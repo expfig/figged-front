@@ -19,7 +19,7 @@ import {
 const handleGetDocumentPending = async ({
 	setIsLoading,
 	dispatch,
-	token,
+
 	setDataPeddingDocuments,
 	setLastPage,
 	setPagesData,
@@ -32,7 +32,6 @@ const handleGetDocumentPending = async ({
 		// response dos documentos novo
 		const responseApprovedDocument = await dispatch(
 			ActionApproval.fetchAllApprovalsWithApprovedStatus({
-				token,
 				page: countPage,
 				status,
 			})

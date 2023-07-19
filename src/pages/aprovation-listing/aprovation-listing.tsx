@@ -32,13 +32,10 @@ import {
 	WrapperContentNotFound,
 	WrapperTitle,
 } from "./styles";
-import "./aprovation-listing.css";
 
 const AprovationListing = () => {
 	const theme = useTheme();
 	const dispatch = useAppDispatch();
-
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [pageCount, setPageCount] = useState(1);
@@ -52,11 +49,10 @@ const AprovationListing = () => {
 
 	const handleApprovationListing = async () => {
 		handleGetDocumentApprovel({
-			setIsLoading,
-			dispatch,
-			token,
 			page: pageCount,
 			status: "aprovado",
+			setIsLoading,
+			dispatch,
 			setDataPages,
 			setLastpage,
 			setDataApprovalDocuments,

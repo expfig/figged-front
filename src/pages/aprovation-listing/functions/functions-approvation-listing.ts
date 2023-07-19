@@ -17,7 +17,6 @@ import { type IDataPagesProps } from "../interface";
 const handleGetDocumentApprovel = async ({
 	setIsLoading,
 	dispatch,
-	token,
 	page,
 	status,
 	setDataPages,
@@ -30,7 +29,6 @@ const handleGetDocumentApprovel = async ({
 		// response de documentos
 		const responseApprovedDocument = await dispatch(
 			ActionApproval.fetchAllApprovalsWithApprovedStatus({
-				token,
 				page,
 				status,
 			})

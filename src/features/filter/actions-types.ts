@@ -12,6 +12,12 @@ export interface IFilterRequest {
 	cpf: string;
 }
 
+export interface Data {
+	token: string;
+	regionName?: string;
+	page?: number;
+}
+
 /**
  * Filter response interface.
  */

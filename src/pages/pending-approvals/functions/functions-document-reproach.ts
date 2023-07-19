@@ -16,7 +16,7 @@ import { type IDocumentReproachOneProps } from "./interface-functions";
 const handleDocumentReproachOne = async ({
 	setLoadingAprovationOrReproach,
 	dispatch,
-	token,
+
 	handleGetCurrentData,
 	idImage,
 	setIsModalReproach,
@@ -49,7 +49,6 @@ const handleDocumentReproachOne = async ({
 			// response da reprovação
 			const responseFailApprovedDocument = await dispatch(
 				ActionsDocument.patchOneDocument({
-					token,
 					idDocument: idImage,
 					dataOdUpdate: patchData,
 				})
