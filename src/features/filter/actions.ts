@@ -2,106 +2,69 @@
  * IMPORTS
  */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { createAxiosInstance } from "../../infra/services/http/axios/api";
-import axios from "axios";
-import { types, type IFilterResponse } from "./actions-types";
 
-const BASE_URL = "http://grupofigueiredo.com.br:1111/figged";
+// infra
+import AxiosService from "../../infra/services/http/axios/api";
 
-interface Data {
-	token: string;
-	regionName?: string;
-	page?: number;
-}
+// typings
+import { types, type IFilterResponse, type Data } from "./actions-types";
+
+const instanceAxios = AxiosService.createAxiosInstance();
 
 const fetchAllgroups = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_GROUPS,
 
-	// request fetch groups
-	async ({ token }: Data) =>
-		await axios.get(`${BASE_URL}/autocomplete/grupos`, {
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
+	// request fetch groups (grupos)
+	async () => await instanceAxios.get(`/autocomplete/grupos`)
 );
 
 const fetchAllTypes = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_TYPES,
 
 	// request fetch tipos
-	async ({ token }: Data) =>
-		await axios.get(`${BASE_URL}/autocomplete/tipo`, {
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
+	async () => await instanceAxios.get(`/autocomplete/tipo`)
 );
 
 const fetchAllStatus = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_TYPES,
 
 	// request fetch status
-	async ({ token }: Data) =>
-		await axios.get(`${BASE_URL}/autocomplete/status`, {
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
+	async () => await instanceAxios.get(`/autocomplete/status`)
 );
 
 const fetchAllCoils = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_COILS,
 
-	// request fetch coils
+	// request fetch coils(bobinas)
 	async ({ token, page }: Data) =>
-		await axios.get(
-			`${BASE_URL}/autocomplete/numero_bobina?page=${Number(page)}`,
-			{
-				headers: {
-					Authorization: `Token ${token}`,
-				},
-			}
+		await instanceAxios.get(
+			`/autocomplete/numero_bobina?page=${Number(page)}`,
+			{}
 		)
 );
 
 const fetchAllDrivers = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_DRIVERS,
 
-	// request fetch drivers
+	// request fetch drivers(motoristas)
 	async ({ token, page }: Data) =>
-		await axios.get(`${BASE_URL}/autocomplete/motorista?page=${Number(page)}`, {
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
+		await instanceAxios.get(`/autocomplete/motorista?page=${Number(page)}`)
 );
 
 const fetchAllPlates = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_PLATES,
 
-	// request fetch plates
+	// request fetch plates(placas)
 	async ({ token, page }: Data) =>
-		await axios.get(`${BASE_URL}/autocomplete/placa?page=${Number(page)}`, {
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
+		await instanceAxios.get(`/autocomplete/placa?page=${Number(page)}`)
 );
 
 const fetchAllTripNumber = createAsyncThunk<IFilterResponse, any>(
 	types.GET_ALL_TRIP_NUMBER,
 
-	// request fetch trip number
+	// request fetch trip number (numero de viagem)
 	async ({ token, page }: Data) =>
-		await axios.get(
-			`${BASE_URL}/autocomplete/numero_viagem?page=${Number(page)}`,
-			{
-				headers: {
-					Authorization: `Token ${token}`,
-				},
-			}
-		)
+		await instanceAxios.get(`/autocomplete/numero_viagem?page=${Number(page)}`)
 );
 
 /**

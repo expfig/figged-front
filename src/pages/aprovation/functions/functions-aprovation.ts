@@ -20,7 +20,6 @@ import {
 const handleGetAllDocuments = async ({
 	setLoading,
 	dispatch,
-	token,
 	idAprovacao,
 	countPage,
 	idDriveName,
@@ -32,12 +31,11 @@ const handleGetAllDocuments = async ({
 	try {
 		setLoading(true);
 		const documentDataResponse = await dispatch(
-			ActionsDocument.fetchAllDocuments({ token, idAprovacao })
+			ActionsDocument.fetchAllDocuments({ idAprovacao })
 		);
 
 		const driverApprovalDataResponse = await dispatch(
 			ActionsApproval.fetchAllApprovals({
-				token,
 				page: countPage,
 				driverId: Number(idDriveName),
 			})

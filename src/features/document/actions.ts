@@ -2,15 +2,18 @@
  * IMPORTS
  */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { http } from '../../infra/http/http';
-import axios from "axios";
+
+// infra
+import AxiosService from "../../infra/services/http/axios/api";
+
+// typings
 import {
 	types,
 	type DataProps,
 	type IDocumentDataResponse,
 } from "./actions-types";
 
-const BASE_URL = "http://grupofigueiredo.com.br:1111/figged";
+const instanceAxios = AxiosService.createAxiosInstance();
 
 /**
  * Eu busco documentos de um usuário.
@@ -21,11 +24,7 @@ const fetchAllDocuments = createAsyncThunk<IDocumentDataResponse, any>(
 
 	// request document
 	async ({ token, idAprovacao }: DataProps) =>
-		await axios.get(`${BASE_URL}/documentos/${Number(idAprovacao)}`, {
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
+		await instanceAxios.get(`documentos/${Number(idAprovacao)}`, {})
 );
 
 const patchOneDocument = createAsyncThunk<IDocumentDataResponse, any>(
@@ -33,16 +32,10 @@ const patchOneDocument = createAsyncThunk<IDocumentDataResponse, any>(
 
 	// request updated document
 	async ({ token, idDocument, dataOdUpdate }: DataProps) =>
-		await axios.patch(
-			`${BASE_URL}/documento/${Number(idDocument)}`,
+		await instanceAxios.patch(
+			`/documento/${Number(idDocument)}`,
 			dataOdUpdate,
-			{
-				headers: {
-					Authorization: `Token ${token}`,
-					"Access-Control-Allow-Origin": "*",
-					"Content-Type": "application/json",
-				},
-			}
+			{}
 		)
 );
 

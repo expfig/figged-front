@@ -1,8 +1,9 @@
 /**
  * IMPORTS
  */
+
 // tipagem dados vindo da api
-interface FilterDataProps {
+interface IFilterDataProps {
 	id: string | number;
 	text: string;
 	cpf?: string;
@@ -43,10 +44,27 @@ interface IFilterRequestProps {
 }
 
 // tipagem do dados de groups que estar no estado do react
-interface FilterDataGroupsProps {
+interface IFilterDataGroupsProps {
 	value: string | number;
 	label: string;
 }
+
+// tipagem do dados dos dados aprovação
+interface IDataApprovalProps {
+	id: string | number;
+	status: string;
+	coil_number: string;
+	trip_number: string;
+	type: string;
+	driver_id: number;
+	driver_name: string;
+	placa: string;
+	group_name: string;
+	created_at: string;
+	created_at_formatted: string;
+}
+
+// tipagem das paginas que vem da api
 interface IDataPagesProps {
 	url: string;
 	label: string;
@@ -57,8 +75,9 @@ interface IDataPagesProps {
  * EXPORTS
  */
 export type {
-	FilterDataProps,
+	IFilterDataProps,
 	IFilterRequestProps,
-	FilterDataGroupsProps,
+	IFilterDataGroupsProps,
 	IDataPagesProps,
+	IDataApprovalProps,
 };

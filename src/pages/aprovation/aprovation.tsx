@@ -48,7 +48,6 @@ import {
 
 const Aprovation = () => {
 	const theme = useTheme();
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
 
 	const { idAprovacao, idDriveName } = useParams();
 
@@ -81,7 +80,6 @@ const Aprovation = () => {
 			await handleGetAllDocuments({
 				setLoading,
 				dispatch,
-				token,
 				idAprovacao,
 				countPage,
 				idDriveName,
@@ -129,7 +127,6 @@ const Aprovation = () => {
 									setIsModal,
 									setImageID,
 									setLoading,
-									token,
 									dispatch,
 									handleGetCurrentData,
 									idImage,
@@ -151,7 +148,6 @@ const Aprovation = () => {
 									setIsModalReproach,
 									setImageID,
 									setLoading,
-									token,
 									dispatch,
 									handleGetCurrentData,
 									idImage,

@@ -45,8 +45,6 @@ const ApprovalPending = () => {
 
 	const dispatch = useAppDispatch();
 
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
-
 	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +69,6 @@ const ApprovalPending = () => {
 		handleGetDocumentPending({
 			setIsLoading,
 			dispatch,
-			token,
 			status: "novo",
 			countPage,
 			setDataPeddingDocuments,
@@ -110,7 +107,6 @@ const ApprovalPending = () => {
 						isModalOpen={isOpenModalAprovation}
 						onAprovationDocumentAndCoil={() => {
 							handleDocumentApprovalOne({
-								token,
 								idImage,
 								dispatch,
 								setLoadingAprovationOrReproach,
@@ -135,7 +131,6 @@ const ApprovalPending = () => {
 						// reprovar documento
 						onAprovationDocumentAndCoil={() => {
 							handleDocumentReproachOne({
-								token,
 								dispatch,
 								idImage,
 								messageApproval,
@@ -166,7 +161,7 @@ const ApprovalPending = () => {
 								align="left"
 								letterHeight={24}
 								letterSpacing={0.5}
-								color={theme.colors.black_200}
+								color={theme.colors.black_100}
 								size={24}
 								weight="600"
 								marginBottom={16}
