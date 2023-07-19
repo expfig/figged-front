@@ -23,20 +23,20 @@ interface IApprovalRequest {
 	created_at: string;
 	created_at_formatted: string;
 }
-
-interface IDataTableProps {
-	data: IApprovalRequest[];
-	pages: any[];
-	firstPage: number;
-	lastPage: number;
-	onClickPreview: (page: number) => void;
-	onClickNext: (page: number) => number;
-}
-
 interface IDataPagesProps {
 	url: string;
 	label: string;
 	active: boolean;
+}
+
+interface IDataTableProps {
+	data: IApprovalRequest[];
+	pages: IDataPagesProps[];
+	firstPage: number;
+	lastPage: number;
+	isLoading: boolean;
+	onClickPreview: (page: number) => void;
+	onClickNext: (page: number) => number;
 }
 
 /**

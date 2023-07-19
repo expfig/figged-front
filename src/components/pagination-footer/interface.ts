@@ -44,6 +44,8 @@ interface IPaginationFooterProps {
 	isLoadingPagination: boolean;
 	onClickNext: (value?: number | any) => void;
 	onClickPreview: (value?: number | any) => void;
+	dataTestIdNext?: string;
+	dataTestIdPreview?: string;
 }
 
 /**

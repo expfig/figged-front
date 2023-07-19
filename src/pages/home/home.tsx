@@ -241,6 +241,7 @@ const Home = () => {
 							pages={pagesData}
 							firstPage={countPage}
 							lastPage={lastPage}
+							isLoading={loading}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
 								return pageCount;
