@@ -38,6 +38,7 @@ interface IDocumentReproachOneProps {
 	setIsModalReproach: React.Dispatch<React.SetStateAction<boolean>>;
 	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+	setMessageApproval: React.Dispatch<React.SetStateAction<string>>;
 	dispatch: (value: Dispatch<any>) => any;
 	handleGetCurrentData: () => void;
 	idImage: string;

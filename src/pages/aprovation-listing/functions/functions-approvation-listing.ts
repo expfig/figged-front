@@ -26,9 +26,9 @@ const handleGetDocumentApprovel = async ({
 	try {
 		setIsLoading(true);
 
-		// response de documentos
+		// response de documentos aprovados
 		const responseApprovedDocument = await dispatch(
-			ActionApproval.fetchAllApprovalsWithApprovedStatus({
+			ActionApproval.fetchAllApprovalsWithApprovedAndPendingStatus({
 				page,
 				status,
 			})
@@ -36,7 +36,7 @@ const handleGetDocumentApprovel = async ({
 
 		// caso der suceso vamos executar abaixo
 		if (responseApprovedDocument.payload.data) {
-			toast.success("Documentos encontrados com sucesso.", {
+			toast.success("Busca realizada com sucesso!", {
 				position: "top-right",
 				autoClose: 1500,
 				hideProgressBar: false,
@@ -53,24 +53,21 @@ const handleGetDocumentApprovel = async ({
 						link.label !== "..." &&
 						link.label !== "Próxima &raquo;"
 				);
+
 			setLastpage(responseApprovedDocument.payload.data.data.last_page);
 			setDataPages(responseFiltered);
 			setDataApprovalDocuments(responseApprovedDocument.payload.data.data.data);
-			setIsLoading(false);
 		}
 	} catch (error: any) {
-		toast.error(
-			"Error em encontrar os documento aprovados, tente mais tarde.",
-			{
-				position: "top-right",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			}
-		);
+		toast.error("Ops, algo deu errado entre contato com suporte!", {
+			position: "top-right",
+			autoClose: 1500,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
 		setDataApprovalDocuments([]);
 		return error.message;
 	} finally {
