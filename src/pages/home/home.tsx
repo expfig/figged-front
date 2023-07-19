@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /**
  * IMPORTS
  */
-import "./home.css";
 
 import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
@@ -20,7 +18,11 @@ import { Loading } from "../../components/loading";
 import { Filter } from "../../components/filter";
 
 // typings
-import { type IDataPagesProps, type FilterDataGroupsProps } from "./interface";
+import {
+	type IDataPagesProps,
+	type IFilterDataGroupsProps,
+	type IDataApprovalProps,
+} from "./interface";
 
 // functions
 import { fetchingAllDataForFiltering } from "./functions/functions";
@@ -37,22 +39,21 @@ import {
 const Home = () => {
 	const theme = useTheme();
 
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
-
 	// use dispatch
 	const dispatch = useDispatch();
 
-	const [groups, setGroups] = useState<FilterDataGroupsProps[]>([]);
-	const [types, setTypes] = useState<FilterDataGroupsProps[]>([]);
-	const [status, setStatus] = useState<FilterDataGroupsProps[]>([]);
+	const [groups, setGroups] = useState<IFilterDataGroupsProps[]>([]);
+	const [types, setTypes] = useState<IFilterDataGroupsProps[]>([]);
+	const [status, setStatus] = useState<IFilterDataGroupsProps[]>([]);
 
-	const [approvalData, setApprovalData] = useState([]);
-	const [pagesData, setPagesData] = useState([]);
+	const [approvalData, setApprovalData] = useState<IDataApprovalProps[]>([]);
+	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
+
 	const [countPage, setCountPage] = useState(1);
 	const [lastPage, setLastPage] = useState(1);
 	const [loading, setLoading] = useState(false);
 
-	// dados para o filtro
+	// estados para o filtro
 	const [groupFilter, setGroupFilter] = useState(null);
 	const [statusFilter, setStatusFilter] = useState(null);
 	const [typeFilter, setTypeFilter] = useState(null);
@@ -64,7 +65,6 @@ const Home = () => {
 	const handleFetchDataForTheFilter = useCallback(async () => {
 		await fetchingAllDataForFiltering({
 			setLoading,
-			token,
 			dispatch,
 			setGroups,
 			setTypes,
@@ -77,7 +77,6 @@ const Home = () => {
 			setLoading(true);
 			const response = await dispatch(
 				ActionsApproval.fetchAllApprovals({
-					token,
 					page: countPage ?? null,
 					groupId: groupFilter ?? null,
 					tipo: typeFilter ?? null,
@@ -244,10 +243,12 @@ const Home = () => {
 							isLoading={loading}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
+								handleScrollTop(btn);
 								return pageCount;
 							}}
 							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
+								handleScrollTop(btn);
 								return pageCount;
 							}}
 						/>

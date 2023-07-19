@@ -3,20 +3,22 @@
  */
 
 import Axios, { type AxiosRequestConfig } from "axios";
-
-// configuração baseURL axios
-import { configAxios } from "../../../../config/axios/confog-axios";
+import { configAxios } from "../../../../config/axios/config-axios";
 
 // instància do axios
-const createAxiosInstance = async (accessTokenBase64?: string) => {
-	// criando a configuração do axios
+const createAxiosInstance = () => {
+	// configuração do  axios
 	const instance = Axios.create(configAxios);
 
 	// setando token para todas as requisiç��es feita com axios
+	// setando token para todas as requisiç��es feita com axios
 	instance.interceptors.request.use((value: AxiosRequestConfig | any) => {
-		if (accessTokenBase64) {
-			value.headers = { Authorization: `Basic ${accessTokenBase64}` };
-		}
+		value.headers = {
+			Authorization: `Token ${"ec4c56361ddbb8c058be23575e8bb7cff585c2c9"}`,
+			"Access-Control-Allow-Origin": "*",
+			"Content-Type": "application/json",
+		};
+
 		return value;
 	});
 
@@ -54,7 +56,7 @@ const createAxiosInstance = async (accessTokenBase64?: string) => {
 				);
 			}
 
-			// usuário não tem permissão para acessar endpoit
+			// user não tem permissão para acessar endpoit
 			if (error?.response?.status === 403) {
 				throw new Error(error?.response?.data?.message);
 			}
@@ -64,8 +66,6 @@ const createAxiosInstance = async (accessTokenBase64?: string) => {
 				throw new Error(error?.response?.data?.message);
 			}
 
-			// indica que o servidor entende o tipo de conteúdo da entidade da requisição,
-			// e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes.
 			if (error?.response?.status === 422) {
 				throw new Error(error?.response?.data?.message);
 			}
@@ -84,4 +84,6 @@ const createAxiosInstance = async (accessTokenBase64?: string) => {
 /**
  * EXPORTS
  */
-export { createAxiosInstance };
+export default {
+	createAxiosInstance,
+};

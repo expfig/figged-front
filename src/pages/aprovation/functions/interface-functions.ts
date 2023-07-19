@@ -14,7 +14,6 @@ import {
 interface IFunctionAprovationProps {
 	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 	dispatch: (value: Dispatch<any>) => any;
-	token: string;
 	idAprovacao: number | string;
 	countPage: number;
 	idDriveName: number | string;
@@ -29,7 +28,6 @@ interface IDocomentApprovalOneProps {
 	setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
 	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
 	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-	token: string;
 	dispatch: (value: Dispatch<any>) => any;
 	handleGetCurrentData: () => void;
 	idImage: string;
@@ -41,7 +39,6 @@ interface IDocomentReproachOneProps {
 	setIsModalReproach: React.Dispatch<React.SetStateAction<boolean>>;
 	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
 	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-	token: string;
 	dispatch: (value: Dispatch<any>) => any;
 	handleGetCurrentData: () => void;
 	idImage: string;

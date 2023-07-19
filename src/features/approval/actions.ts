@@ -2,14 +2,18 @@
  * IMPORTS
  */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { createAxiosInstance } from "../../infra/services/http/axios/api";
-import axios from "axios";
 
+// infra
+import AxiosService from "../../infra/services/http/axios/api";
+
+// typings
 import { types, type IApprovalResponse, type Data } from "./actions-types";
+
+// functions
 import { handleTransFormTextInString } from "../../utils/transform-string";
 import { handleTransFormTextInNumber } from "../../utils/transform-number";
 
-const BASE_URL = "http://10.0.0.155:1111/figged";
+const instanceAxios = AxiosService.createAxiosInstance();
 
 const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 	types.GET_ALL_APPROVAL,
@@ -26,10 +30,8 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 		truckId,
 		tripNumber,
 	}: Data) =>
-		await axios.get(
-			`${BASE_URL}/aprovacoes?page=${Number(
-				page
-			)}&group_id=${handleTransFormTextInNumber(
+		await instanceAxios.get(
+			`aprovacoes?page=${Number(page)}&group_id=${handleTransFormTextInNumber(
 				groupId
 			)}&type=${handleTransFormTextInString(
 				tipo
@@ -41,12 +43,7 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 				driverId
 			)}&truck_id=${handleTransFormTextInNumber(
 				truckId
-			)}&trip_number=${handleTransFormTextInString(tripNumber)}`,
-			{
-				headers: {
-					Authorization: `Token ${token}`,
-				},
-			}
+			)}&trip_number=${handleTransFormTextInString(tripNumber)}`
 		)
 );
 
@@ -58,14 +55,7 @@ const fetchAllApprovalsWithApprovedStatus = createAsyncThunk<
 
 	// request fetch groups
 	async ({ token, page, status = "" }: Data) =>
-		await axios.get(
-			`${BASE_URL}/documentos?page=${Number(page)}&status=${status}`,
-			{
-				headers: {
-					Authorization: `Token ${token}`,
-				},
-			}
-		)
+		await instanceAxios.get(`/documentos?page=${Number(page)}&status=${status}`)
 );
 
 /**

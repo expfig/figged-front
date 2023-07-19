@@ -13,7 +13,6 @@ interface IFunctionDataPagesProps {
 interface IFunctionDocumentsProps {
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 	dispatch: (value: Dispatch<any>) => any;
-	token: string;
 	countPage: number;
 	status: string;
 	setDataPeddingDocuments: React.Dispatch<
@@ -25,7 +24,6 @@ interface IFunctionDocumentsProps {
 
 interface IDocumentApprovalOneProps {
 	idImage: string;
-	token: string;
 	dispatch: (value: Dispatch<any>) => any;
 	setLoadingAprovationOrReproach: React.Dispatch<React.SetStateAction<boolean>>;
 	setIsOpenModalAprotion: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,7 +38,6 @@ interface IDocumentReproachOneProps {
 	setIsModalReproach: React.Dispatch<React.SetStateAction<boolean>>;
 	setImageID: React.Dispatch<React.SetStateAction<number | null>>;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-	token: string;
 	dispatch: (value: Dispatch<any>) => any;
 	handleGetCurrentData: () => void;
 	idImage: string;
