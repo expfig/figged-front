@@ -16,7 +16,6 @@ import { type IDocumentApprovalOneProps } from "./interface-functions";
 const handleDocumentApprovalOne = async ({
 	setLoadingAprovationOrReproach,
 	dispatch,
-
 	handleGetCurrentData,
 	idImage,
 	setImageID,
@@ -53,12 +52,9 @@ const handleDocumentApprovalOne = async ({
 				draggable: true,
 				progress: undefined,
 			});
-			setIsOpenModalAprotion(false); // fechar modal da aprovação
 			setImageID(null); // limpando estado do id da image
-			setIsLoading(false);
 
 			await handlePendingApprovalSeeking();
-			setLoadingAprovationOrReproach(false);
 		}
 	} catch (error) {
 		toast.success("Documento não foi aprovado.", {
@@ -71,6 +67,10 @@ const handleDocumentApprovalOne = async ({
 			progress: undefined,
 		});
 		return error;
+	} finally {
+		setIsLoading(false);
+		setIsOpenModalAprotion(false); // fechar modal da aprovação
+		setLoadingAprovationOrReproach(false);
 	}
 };
 

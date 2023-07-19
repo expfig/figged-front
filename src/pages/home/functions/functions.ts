@@ -93,10 +93,11 @@ const fetchingAllDataForFiltering = async ({
 		}
 		setStatus(responseStatus);
 
-		setLoading(false);
 		return responseFilterGroups;
 	} catch (error) {
 		return error;
+	} finally {
+		setLoading(false);
 	}
 };
 /**

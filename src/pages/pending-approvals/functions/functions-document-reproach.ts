@@ -16,7 +16,6 @@ import { type IDocumentReproachOneProps } from "./interface-functions";
 const handleDocumentReproachOne = async ({
 	setLoadingAprovationOrReproach,
 	dispatch,
-
 	handleGetCurrentData,
 	idImage,
 	setIsModalReproach,
@@ -65,12 +64,10 @@ const handleDocumentReproachOne = async ({
 					draggable: true,
 					progress: undefined,
 				});
-				setIsModalReproach(false);
+
 				setImageID(null);
-				setIsLoading(false);
 
 				await handlePendingApprovalSeeking();
-				setLoadingAprovationOrReproach(false);
 			}
 		}
 	} catch (error) {
@@ -84,6 +81,10 @@ const handleDocumentReproachOne = async ({
 			progress: undefined,
 		});
 		return error;
+	} finally {
+		setIsModalReproach(false);
+		setIsLoading(false);
+		setLoadingAprovationOrReproach(false);
 	}
 };
 
