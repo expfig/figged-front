@@ -113,7 +113,7 @@ const Home = () => {
 				draggable: false,
 			});
 		} catch (error) {
-			toast.success("Ops, algo deu errado entre contato com suporte!", {
+			toast.error("Ops, algo deu errado entre contato com suporte!", {
 				position: "top-right",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -241,6 +241,7 @@ const Home = () => {
 							pages={pagesData}
 							firstPage={countPage}
 							lastPage={lastPage}
+							isLoading={loading}
 							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
 								return pageCount;

@@ -1,7 +1,13 @@
 /**
  * IMPORTS
  */
+import { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
+
+import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
+
+// typings
+import { type IDataPagesProps, type IPaginationFooterProps } from "./interface";
 
 // styles
 import {
@@ -15,18 +21,17 @@ import {
 	WrapperTextFooter,
 	TextNumberPage,
 } from "./styles";
-import { useEffect, useState } from "react";
-import { type IDataPagesProps } from "./interface";
-import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
 
 const PaginationFooter = ({
 	pageData,
 	firstPage,
 	lastpage,
+	isLoadingPagination,
 	onClickNext,
 	onClickPreview,
-	isLoadingPagination,
-}: any) => {
+	dataTestIdNext,
+	dataTestIdPreview,
+}: IPaginationFooterProps) => {
 	const theme = useTheme();
 
 	const [pages, setPages] = useState<IDataPagesProps[]>([]);
@@ -47,7 +52,10 @@ const PaginationFooter = ({
 						{pages.length ? (
 							<FooterTable>
 								{pages.length > 1 && (
-									<ButtonPreview onClick={onClickPreview}>
+									<ButtonPreview
+										data-testid={dataTestIdPreview}
+										onClick={onClickPreview}
+									>
 										<FiArrowLeft size={18} color={theme.colors.natural} />
 										<TextSpanLeft>Anterior</TextSpanLeft>
 									</ButtonPreview>
@@ -57,7 +65,9 @@ const PaginationFooter = ({
 									<WrapperTextFooter
 										key={page?.label}
 										background={page?.active}
-										onClick={() => onClickNext(page?.label)}
+										onClick={() => {
+											onClickNext(page?.label);
+										}}
 									>
 										<TextNumberPage active={page?.active}>
 											{page?.label}
@@ -68,7 +78,10 @@ const PaginationFooter = ({
 								{firstPage === lastpage ? (
 									<></>
 								) : (
-									<ButtonNext onClick={onClickNext}>
+									<ButtonNext
+										data-testid={dataTestIdNext}
+										onClick={onClickNext}
+									>
 										<TextSpanRight>Próximo</TextSpanRight>
 										<FiArrowRight size={18} color={theme.colors.natural} />
 									</ButtonNext>

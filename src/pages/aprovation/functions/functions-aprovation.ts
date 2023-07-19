@@ -26,6 +26,7 @@ const handleGetAllDocuments = async ({
 	idDriveName,
 	setDocuments,
 	setDataTable,
+	setLastPage,
 	setPagesData,
 }: IFunctionAprovationProps) => {
 	try {
@@ -43,6 +44,7 @@ const handleGetAllDocuments = async ({
 		);
 		setDocuments(documentDataResponse.payload.data);
 		setDataTable(driverApprovalDataResponse.payload.data.data.data);
+		setLastPage(driverApprovalDataResponse.payload.data.data.last_page);
 
 		const responseFiltered =
 			driverApprovalDataResponse?.payload?.data?.data?.links.filter(
@@ -64,7 +66,7 @@ const handleGetAllDocuments = async ({
 		});
 		setLoading(false);
 	} catch (error) {
-		toast.success("Ops, algo deu errado entre contato com suporte!", {
+		toast.error("Ops, algo deu errado entre contato com suporte!", {
 			position: "top-right",
 			autoClose: 5000,
 			hideProgressBar: false,

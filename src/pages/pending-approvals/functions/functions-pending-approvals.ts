@@ -8,7 +8,10 @@ import { toast } from "react-toastify";
 import { actions as ActionApproval } from "../../../features/approval";
 
 // typings
-import { type IFunctionDocumentsProps } from "./interface-functions";
+import {
+	type IFunctionDataPagesProps,
+	type IFunctionDocumentsProps,
+} from "./interface-functions";
 
 /**
  * FUNÇÃO QUE BUSCAR TODOS DOCUMENTOS QUE ESTÃO NOVOS
@@ -18,6 +21,10 @@ const handleGetDocumentPending = async ({
 	dispatch,
 	token,
 	setDataPeddingDocuments,
+	setLastPage,
+	setPagesData,
+	status,
+	countPage,
 }: IFunctionDocumentsProps) => {
 	try {
 		setIsLoading(true);
@@ -26,7 +33,8 @@ const handleGetDocumentPending = async ({
 		const responseApprovedDocument = await dispatch(
 			ActionApproval.fetchAllApprovalsWithApprovedStatus({
 				token,
-				status: "novo",
+				page: countPage,
+				status,
 			})
 		);
 
@@ -42,7 +50,18 @@ const handleGetDocumentPending = async ({
 				progress: undefined,
 			});
 
-			setDataPeddingDocuments(responseApprovedDocument.payload.data.data);
+			const responseFiltered =
+				responseApprovedDocument.payload.data.data.links.filter(
+					(link: IFunctionDataPagesProps) =>
+						link.label !== "&laquo; Anterior" &&
+						link.label !== "..." &&
+						link.label !== "Próxima &raquo;"
+				);
+
+			setLastPage(responseApprovedDocument.payload.data.data.last_page);
+			setPagesData(responseFiltered);
+
+			setDataPeddingDocuments(responseApprovedDocument.payload.data.data.data);
 			setIsLoading(false);
 		}
 	} catch (error: any) {

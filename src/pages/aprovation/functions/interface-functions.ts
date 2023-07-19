@@ -21,6 +21,7 @@ interface IFunctionAprovationProps {
 	setDocuments: React.Dispatch<React.SetStateAction<IDocumentDataResponse>>;
 	setDataTable: React.Dispatch<React.SetStateAction<IDataTable[]>>;
 	setPagesData: React.Dispatch<React.SetStateAction<IDataPagesProps[]>>;
+	setLastPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface IDocomentApprovalOneProps {

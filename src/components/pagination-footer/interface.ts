@@ -37,6 +37,17 @@ interface IDataPagesProps {
 	active: boolean;
 }
 
+interface IPaginationFooterProps {
+	pageData: IDataPagesProps[];
+	firstPage: number;
+	lastpage: number;
+	isLoadingPagination: boolean;
+	onClickNext: (value?: number | any) => void;
+	onClickPreview: (value?: number | any) => void;
+	dataTestIdNext?: string;
+	dataTestIdPreview?: string;
+}
+
 /**
  * EXPORTS
  */
@@ -46,4 +57,5 @@ export type {
 	IDataTableProps,
 	IApprovalRequest,
 	IDataPagesProps,
+	IPaginationFooterProps,
 };

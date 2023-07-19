@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
 import { Link } from "react-router-dom";
+
+import { Oval } from "react-loader-spinner";
+
 import { Text } from "../text";
-import { FiLoader } from "react-icons/fi";
 
 // typings
 import { type IDataTableProps, type IDataPagesProps } from "./interface";
@@ -46,6 +48,7 @@ const Table = ({
 	onClickNext,
 	firstPage,
 	lastPage,
+	isLoading = false,
 }: IDataTableProps) => {
 	const theme = useTheme();
 
@@ -58,7 +61,26 @@ const Table = ({
 	return (
 		<Container>
 			<>
-				{pageData.length ? (
+				{isLoading ? (
+					<WrapperLoading>
+						<Oval
+							height={22}
+							width={22}
+							color={theme.colors.blue_80}
+							wrapperClass=""
+							visible={true}
+							ariaLabel="oval-loading"
+							secondaryColor={theme.colors.brown_300}
+							strokeWidth={2}
+							strokeWidthSecondary={2}
+						/>
+						<p style={{ marginTop: 12 }}>
+							<strong style={{ fontSize: 14, color: theme.colors.black_100 }}>
+								Carregando, por favor, aguarde.
+							</strong>
+						</p>
+					</WrapperLoading>
+				) : (
 					<>
 						<TableHtml>
 							<Thead>
@@ -76,7 +98,7 @@ const Table = ({
 							</Thead>
 
 							<Tbody>
-								{data.map(props => (
+								{data?.map(props => (
 									<Tr key={String(props?.id)}>
 										<Td>{props?.id}</Td>
 										<Td>{props?.created_at_formatted}</Td>
@@ -89,7 +111,10 @@ const Table = ({
 										<Td>{hanfleReturnText(props?.trip_number)}</Td>
 										<Td>{hanfleReturnText(props?.coil_number)}</Td>
 										<Td>
-											<Link to={`/aprovacao/${props.id}/${props.driver_id}`}>
+											<Link
+												id="title-driver"
+												to={`/aprovacao/${props.id}/${props.driver_id}`}
+											>
 												{hanfleReturnText(props?.driver_name)}
 											</Link>
 										</Td>
@@ -107,9 +132,11 @@ const Table = ({
 						</TableHtml>
 
 						<>
-							{data.length ? (
+							{pageData?.length ? (
 								<FooterTable>
 									<PaginationFooter
+										dataTestIdNext="button-clickNext"
+										dataTestIdPreview="button-clickPreview"
 										pageData={pageData}
 										firstPage={firstPage}
 										lastpage={lastPage}
@@ -142,13 +169,6 @@ const Table = ({
 							)}
 						</>
 					</>
-				) : (
-					<WrapperLoading>
-						<FiLoader size={34} color={theme.colors.blue_100} />
-						<p style={{ marginTop: 12 }}>
-							<strong>Carregando, por favor, aguade.</strong>
-						</p>
-					</WrapperLoading>
 				)}
 			</>
 		</Container>
