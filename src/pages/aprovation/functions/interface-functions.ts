@@ -17,7 +17,9 @@ interface IFunctionAprovationProps {
 	idAprovacao: number | string;
 	countPage: number;
 	idDriveName: number | string;
-	setDocuments: React.Dispatch<React.SetStateAction<IDocumentDataResponse>>;
+	setDocuments: React.Dispatch<
+		React.SetStateAction<IDocumentDataResponse | any>
+	>;
 	setDataTable: React.Dispatch<React.SetStateAction<IDataTable[]>>;
 	setPagesData: React.Dispatch<React.SetStateAction<IDataPagesProps[]>>;
 	setLastPage: React.Dispatch<React.SetStateAction<number>>;

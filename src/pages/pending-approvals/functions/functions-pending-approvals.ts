@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { actions as ActionApproval } from "../../../features/approval";
 
 // typings
+import { type IReduxRequestProps } from "../../../dtos/request-redux";
 import {
 	type IFunctionDataPagesProps,
 	type IFunctionDocumentsProps,
@@ -29,7 +30,7 @@ const handleGetDocumentPending = async ({
 		setIsLoading(true);
 
 		// response dos documentos novo
-		const responsePendigDocument = await dispatch(
+		const responsePendigDocument: IReduxRequestProps = await dispatch(
 			ActionApproval.fetchAllApprovalsWithApprovedAndPendingStatus({
 				page: countPage,
 				status,
