@@ -6,6 +6,9 @@ import { useTheme } from "styled-components";
 
 import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
 
+// components
+import { Text } from "../text";
+
 // typings
 import { type IDataPagesProps, type IPaginationFooterProps } from "./interface";
 
@@ -45,7 +48,15 @@ const PaginationFooter = ({
 			<>
 				{isLoadingPagination ? (
 					<WrapperTextNoData>
-						<p>carrregando...</p>
+						<Text
+							text="Carregando páginas..."
+							align="center"
+							letterHeight={24}
+							letterSpacing={0.5}
+							color={"#767171"}
+							size={16}
+							weight="400"
+						/>
 					</WrapperTextNoData>
 				) : (
 					<>
