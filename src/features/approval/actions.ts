@@ -2,32 +2,24 @@
  * IMPORTS
  */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import { createAxiosInstance } from "../../infra/services/http/axios/api";
-import axios from "axios";
 
-import { types, type IApprovalResponse } from "./actions-types";
+// infra
+import AxiosService from "../../infra/services/http/axios/api";
+
+// typings
+import { types, type IApprovalResponse, type Data } from "./actions-types";
+
+// functions
 import { handleTransFormTextInString } from "../../utils/transform-string";
 import { handleTransFormTextInNumber } from "../../utils/transform-number";
 
-const BASE_URL = "http://10.0.0.155:1111/figged";
-
-interface Data {
-	token: string;
-	page?: number;
-	groupId?: number;
-	tipo?: string;
-	status?: string;
-	coilNumber?: number;
-	driverId?: number;
-	truckId?: number;
-}
+const instanceAxios = AxiosService.createAxiosInstance();
 
 const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 	types.GET_ALL_APPROVAL,
 
 	// request fetch groups
 	async ({
-		token,
 		page,
 		groupId,
 		tipo,
@@ -35,30 +27,37 @@ const fetchAllApprovals = createAsyncThunk<IApprovalResponse, any>(
 		coilNumber,
 		driverId,
 		truckId,
+		tripNumber,
 	}: Data) =>
-		await axios.get(
-			`${BASE_URL}/aprovacoes?page=${Number(
-				page
-			)}&group_id=${handleTransFormTextInNumber(
+		await instanceAxios.get(
+			`aprovacoes?page=${Number(page)}&group_id=${handleTransFormTextInNumber(
 				groupId
 			)}&type=${handleTransFormTextInString(
 				tipo
 			)}&status=${handleTransFormTextInString(
 				status
-			)}&coil_number=${handleTransFormTextInNumber(
+			)}&coil_number=${handleTransFormTextInString(
 				coilNumber
 			)}&driver_id=${handleTransFormTextInNumber(
 				driverId
-			)}&truck_id=${handleTransFormTextInNumber(truckId)}`,
-			{
-				headers: {
-					Authorization: `Token ${token}`,
-				},
-			}
+			)}&truck_id=${handleTransFormTextInNumber(
+				truckId
+			)}&trip_number=${handleTransFormTextInString(tripNumber)}`
 		)
+);
+
+const fetchAllApprovalsWithApprovedAndPendingStatus = createAsyncThunk<
+	IApprovalResponse,
+	any
+>(
+	types.GET_ALL_APPROVALS_WITH_APPROVED_STATUS,
+
+	// request fetch groups
+	async ({ page, status = "" }: Data) =>
+		await instanceAxios.get(`/documentos?page=${Number(page)}&status=${status}`)
 );
 
 /**
  * EXPORTS
  */
-export { fetchAllApprovals };
+export { fetchAllApprovals, fetchAllApprovalsWithApprovedAndPendingStatus };

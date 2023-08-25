@@ -8,13 +8,16 @@ import { type IButtonProps } from "./interface";
 
 const Container = styled.button<IButtonProps>`
 	width: ${({ width }) => width ?? "100%"};
-	height: 2.5rem;
+	height: 2.2.5rem;
 	border: 1px;
 	background-color: ${({ backgroundColor, theme }) =>
 		backgroundColor ?? theme.colors.natural};
 	padding: 10px;
 	border-radius: 4px;
 	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 	cursor: ${({ disabled }) => disabled && "not-allowed !important;"};
 

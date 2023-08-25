@@ -1,8 +1,7 @@
 /**
  * IMPORTS
  */
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
+import { Oval } from "react-loader-spinner";
 // typings
 import { type IButtonProps } from "./interface";
 
@@ -31,7 +30,17 @@ const Button = ({
 			disabled={disabled}
 		>
 			{loading ? (
-				<AiOutlineLoading3Quarters size={22} color={color ?? "#fff"} />
+				<Oval
+					height={22}
+					width={22}
+					color={"#0d6efd"}
+					wrapperClass=""
+					visible={true}
+					ariaLabel="oval-loading"
+					secondaryColor="#FFF"
+					strokeWidth={2}
+					strokeWidthSecondary={2}
+				/>
 			) : (
 				<Title color={color ?? "#fff"} weight={weight}>
 					{title}

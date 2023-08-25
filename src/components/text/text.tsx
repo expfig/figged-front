@@ -6,7 +6,7 @@ import { TextStyled } from "./styles";
 import { type ITextProps } from "./interface";
 
 const Text: React.FC<ITextProps> = ({
-	id,
+	dataTestId,
 	text,
 	color,
 	size,
@@ -23,7 +23,7 @@ const Text: React.FC<ITextProps> = ({
 	...rest
 }) => (
 	<TextStyled
-		id={id}
+		data-testid={dataTestId}
 		color={color}
 		width={width}
 		size={size}

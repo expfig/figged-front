@@ -37,7 +37,7 @@ const Title = styled(Link)`
 `;
 
 const WrapperTitleRighr = styled.div`
-	width: 320px;
+	width: 340px;
 	height: 5rem;
 	display: flex;
 	align-items: center;
@@ -93,7 +93,7 @@ const SubTitleTwo = styled(Link)`
 `;
 
 const WrapperTitleBorder = styled.div`
-	width: 230px;
+	width: 210px;
 	height: 3.75rem;
 	display: flex;
 	align-items: center;

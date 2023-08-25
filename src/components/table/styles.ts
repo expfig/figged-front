@@ -71,7 +71,7 @@ const Th = styled.th`
 	font-size: 1rem;
 	font-weight: 600;
 	letter-spacing: 0.5px;
-	color: ${({ theme }) => theme.colors.black_200};
+	color: ${({ theme }) => theme.colors.black_100};
 	opacity: 1;
 	padding: 8px 1rem;
 	vertical-align: top;
@@ -150,12 +150,21 @@ const FooterTable = styled.div`
 	background-color: transparent;
 `;
 
-const WrapperTextNoData = styled.div`
+const WrapperImageNotFoundData = styled.div`
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
+	margin-bottom: 34px;
 	padding-bottom: 34px;
+`;
+
+const ImageNotFoundData = styled.img`
+	width: 80px;
+	height: 80px;
 `;
 
 const ButtonPreview = styled.button`
@@ -238,7 +247,8 @@ export {
 	Tbody,
 	Td,
 	FooterTable,
-	WrapperTextNoData,
+	WrapperImageNotFoundData,
+	ImageNotFoundData,
 	ButtonPreview,
 	TextSpanLeft,
 	ButtonNext,

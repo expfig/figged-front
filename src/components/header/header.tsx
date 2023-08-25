@@ -1,7 +1,6 @@
 /**
  * IMPORTS
  */
-import { useNavigate } from "react-router-dom";
 import {
 	Container,
 	WrapperTitle,
@@ -15,35 +14,27 @@ import {
 } from "./styles";
 
 const Header = () => {
-	const navigate = useNavigate();
-
-	const handleReloadPage = () => {
-		navigate("/");
-		window.location.reload();
-	};
 	return (
 		<>
 			<Container>
 				<WrapperTitle>
-					<Title to={"/"} onClick={handleReloadPage}>
-						Figged
-					</Title>
+					<Title to={"/"}>Figged</Title>
 				</WrapperTitle>
 
 				<WrapperTitleRighr>
-					<TitleTwo to={"aprovacao-pedentes"}>Aprovação Pendentes</TitleTwo>
-					<TitleTwo to={"aprovation-listing"}>Todas Aprovação</TitleTwo>
+					<TitleTwo to={"aprovacao-pedentes"}>Aprovações Pendentes</TitleTwo>
+					<TitleTwo to={"aprovation-listing"}>Todas Aprovações</TitleTwo>
 				</WrapperTitleRighr>
 			</Container>
 
 			<WrapperBorderCustom>
 				<BorderCustom>
 					<WrapperTitleBorder>
+						<SubTitleTwo to={"/"}>Home</SubTitleTwo>
+						<span style={{ color: "#666666" }}>/</span>
 						<SubTitleTwo to={"aprovation-listing"}>
 							Lista de Aprovações
 						</SubTitleTwo>
-						<span>/</span>
-						<SubTitleTwo to={"aprovacao"}>Atualizar</SubTitleTwo>
 					</WrapperTitleBorder>
 				</BorderCustom>
 			</WrapperBorderCustom>

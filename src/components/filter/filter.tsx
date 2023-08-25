@@ -15,7 +15,7 @@ import { Text } from "../text/text";
 import { SelectAsyncPaginate } from "./components/async-paginate/async-paginate";
 
 // typings
-import { type FilterProps } from "./interface";
+import { type IDataSelectProps, type FilterProps } from "./interface";
 
 // styles
 import {
@@ -37,31 +37,36 @@ const Filter = ({
 	onChangeTextPlateId,
 	onClickButtonFilter,
 	onClickCleanFilter,
+	onChangeTextCoillNumber,
+	onChangeTextTripNumber,
 }: FilterProps) => {
 	const theme = useTheme();
 
-	const [coils, setCoils] = useState(null);
-	const [nameDriver, setNameDriver] = useState(null);
-	const [plates, setPlates] = useState(null);
-	const [tripNumber, setTripNumber] = useState(null);
+	const [coils, setCoils] = useState<string | null>(null);
+	const [nameDriver, setNameDriver] = useState<string | null>(null);
+	const [plates, setPlates] = useState<string | null>(null);
+	const [tripNumber, setTripNumber] = useState<string | null>(null);
 
-	const handleOnchangeSelectCoils = (item: any) => {
+	const handleOnchangeSelectCoils = (item: IDataSelectProps | any) => {
+		onChangeTextCoillNumber(item);
 		setCoils(item);
 	};
 
-	const handleOnchangeSelectDrivers = (item: any) => {
+	const handleOnchangeSelectDrivers = (item: IDataSelectProps | any) => {
 		onChangeTextNameDriver(item);
 		setNameDriver(item);
 	};
 
-	const handleOnchangeSelectPlates = (item: any) => {
+	const handleOnchangeSelectPlates = (item: IDataSelectProps | any) => {
 		onChangeTextPlateId(item);
 		setPlates(item);
 	};
 
-	const handleOnchangeTripNumber = (item: any) => {
+	const handleOnchangeTripNumber = (item: IDataSelectProps | any) => {
+		onChangeTextTripNumber(item);
 		setTripNumber(item);
 	};
+
 	return (
 		<ContainerFiltered>
 			<WrapperTitle>
@@ -70,7 +75,7 @@ const Filter = ({
 					text="Filtrar Resultados"
 					align="left"
 					letterHeight={36}
-					color={theme.colors.black_200}
+					color={theme.colors.black_100}
 					size={24}
 					marginLeft={16}
 					weight="600"
@@ -124,7 +129,7 @@ const Filter = ({
 				<SelectAsyncPaginate
 					regionName=""
 					nameTypeRequest="coils"
-					placeholder="Selecione o número da bobina"
+					placeholder="Selecione o Número da bobina"
 					onChange={handleOnchangeSelectCoils}
 					value={coils}
 				/>
@@ -133,7 +138,7 @@ const Filter = ({
 				<SelectAsyncPaginate
 					regionName=""
 					nameTypeRequest="drivers"
-					placeholder={"Selecione o nome do motorista(a)"}
+					placeholder={"Selecione o Nome do motorista(a)"}
 					onChange={handleOnchangeSelectDrivers}
 					value={nameDriver}
 				/>
@@ -142,7 +147,7 @@ const Filter = ({
 				<SelectAsyncPaginate
 					regionName=""
 					nameTypeRequest="plates"
-					placeholder={"Selecione uma placa"}
+					placeholder={"Selecione uma Placa"}
 					onChange={handleOnchangeSelectPlates}
 					value={plates}
 				/>
@@ -151,10 +156,11 @@ const Filter = ({
 				<SelectAsyncPaginate
 					regionName=""
 					nameTypeRequest="trip_number"
-					placeholder={"Selecione número da viagem"}
+					placeholder={"Selecione o Número da viagem"}
 					onChange={handleOnchangeTripNumber}
 					value={tripNumber}
 				/>
+
 				<FooterBottom>
 					<Button
 						onClick={onClickCleanFilter}

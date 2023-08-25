@@ -8,14 +8,13 @@ import { actions as ActionsFilter } from "../../../features/filter";
 // typings
 import { type FetchingAllDataForFilteringProps } from "./interface-functions";
 import {
-	type FilterDataProps,
+	type IFilterDataProps,
 	type IFilterRequestProps,
-	type FilterDataGroupsProps,
+	type IFilterDataGroupsProps,
 } from "../interface";
 
 const fetchingAllDataForFiltering = async ({
 	setLoading,
-	token,
 	dispatch,
 	setGroups,
 	setTypes,
@@ -26,16 +25,17 @@ const fetchingAllDataForFiltering = async ({
 
 		// action que busca todos os grupos disponiveis
 		const responseFilterGroups: IFilterRequestProps = dispatch(
-			ActionsFilter.fetchAllgroups({ token })
-		);
-		// action que busca todos os tipos(comprovante, bobina) disponiveis
-		const responseFilterTypes: IFilterRequestProps = dispatch(
-			ActionsFilter.fetchAllTypes({ token })
+			ActionsFilter.fetchAllgroups()
 		);
 
-		// action que busca todos os status(aprovado, aguardando,novo, pendente  ) disponiveis
+		// action que busca todos os tipos(comprovante, bobina) disponiveis
+		const responseFilterTypes: IFilterRequestProps = dispatch(
+			ActionsFilter.fetchAllTypes()
+		);
+
+		// action que busca todos os status(aprovado, aguardando,novo, pendente) disponiveis
 		const responseFilterStatus: IFilterRequestProps = dispatch(
-			ActionsFilter.fetchAllStatus({ token })
+			ActionsFilter.fetchAllStatus()
 		);
 
 		// tratando todas a promessas
@@ -44,12 +44,11 @@ const fetchingAllDataForFiltering = async ({
 			responseFilterTypes,
 			responseFilterStatus,
 		]);
-
-		// as actions (grupos) retornou dados da api iremos montar nossos dados da forma que necessitamos
-		const responseGroups: FilterDataGroupsProps[] = [];
+		// a action (grupos) retornou dados da api, agora iremos montar nossos dados da forma que necessitamos
+		const responseGroups: IFilterDataGroupsProps[] = [];
 		if (filterGroups.payload.data.data.length > 0) {
 			const newData = filterGroups.payload.data?.data.map(
-				(data: FilterDataProps) => {
+				(data: IFilterDataProps) => {
 					return {
 						value: data?.id,
 						label: data?.text,
@@ -61,12 +60,12 @@ const fetchingAllDataForFiltering = async ({
 		}
 		setGroups(responseGroups);
 
-		const responseTypes: FilterDataGroupsProps[] = [];
+		const responseTypes: IFilterDataGroupsProps[] = [];
 
-		// as actions (tipos) retornou dados da api iremos montar nossos dados da forma que necessitamos
+		// a action (tipos) retornou dados da api, agora iremos montar nossos dados da forma que necessitamos
 		if (filterTypes.payload.data.data.length > 0) {
 			const newData = filterTypes.payload.data?.data.map(
-				(data: FilterDataProps) => {
+				(data: IFilterDataProps) => {
 					return {
 						value: data?.id,
 						label: data?.text,
@@ -77,11 +76,11 @@ const fetchingAllDataForFiltering = async ({
 		}
 		setTypes(responseTypes);
 
-		// as actions (status) retornou dados da api iremos montar nossos dados da forma que necessitamos
-		const responseStatus: FilterDataGroupsProps[] = [];
+		// a action (status) retornou dados da api, agora iremos montar nossos dados da forma que necessitamos
+		const responseStatus: IFilterDataGroupsProps[] = [];
 		if (filterStatus.payload.data.data.length > 0) {
 			const newDataStatus = filterStatus.payload.data?.data.map(
-				(data: FilterDataProps) => {
+				(data: IFilterDataProps) => {
 					return {
 						value: data?.id,
 						label: data?.text,
@@ -93,10 +92,11 @@ const fetchingAllDataForFiltering = async ({
 		}
 		setStatus(responseStatus);
 
-		setLoading(false);
 		return responseFilterGroups;
 	} catch (error) {
 		return error;
+	} finally {
+		setLoading(false);
 	}
 };
 /**

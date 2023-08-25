@@ -5,6 +5,7 @@
 interface LoadingProps {
 	color?: string;
 	size?: number;
+	dataTestId?: string;
 }
 /**
  * EXPORTS

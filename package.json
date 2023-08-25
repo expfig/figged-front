@@ -23,6 +23,7 @@
 		"react-final-form": "^6.5.9",
 		"react-hook-form": "^7.29.0",
 		"react-icons": "^4.9.0",
+		"react-loader-spinner": "^5.3.4",
 		"react-modal": "^3.16.1",
 		"react-redux": "^7.2.6",
 		"react-router-bootstrap": "^0.26.1",
@@ -44,12 +45,18 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "jest",
-		"test:dev": "jest --watchAll=true",
+		"test": "jest --colors",
+		"test:dev": "jest --colors --watchAll=true",
+		"test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx,tsx}",
 		"lint": "eslint . --fix --max-warnings=0",
 		"format": "prettier . --write",
 		"eject": "react-scripts eject",
 		"prepare": "husky install"
+	},
+	"husky": {
+		"hooks": {
+			"applypatch-msg": "echo \"[Husky] applypatch-msg\""
+		}
 	},
 	"lint-staged": {
 		"*.{tsx,ts}": "eslint --cache --fix",

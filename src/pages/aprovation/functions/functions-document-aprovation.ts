@@ -16,7 +16,6 @@ import { type IDocomentApprovalOneProps } from "./interface-functions";
 const handleDocomentApprovalOne = async ({
 	setLoadingAprovation,
 	dispatch,
-	token,
 	handleGetCurrentData,
 	idImage,
 	setIsModal,
@@ -37,7 +36,6 @@ const handleDocomentApprovalOne = async ({
 		// response da aprovação
 		const responseApprovedDocument = await dispatch(
 			ActionsDocument.patchOneDocument({
-				token,
 				idDocument: idImage,
 				dataOdUpdate: patchData,
 			})

@@ -1,7 +1,7 @@
 <div align="center">
     <img alt="figged-front" title="#Innovally" src="https://jestjs.io/img/opengraph.png" />
 
-# Configuração de Teste em React Js
+# Configuração de Teste em React JS
 
 </div>
 

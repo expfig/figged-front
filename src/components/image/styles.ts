@@ -15,6 +15,9 @@ const Container = styled.div`
 	display: column;
 	align-items: center;
 	justify-content: space-around;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 
 	// quando a tela atingir 768px
 	@media screen and (max-width: 768px) {
@@ -26,33 +29,34 @@ const Container = styled.div`
 
 const WrapperHeader = styled.div<WrapperHeaderProps>`
 	width: 100%;
-	height: 40px;
+	height: 36px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: ${({ theme, type }) =>
-		type === "aprovado" ? theme.colors.green_200 : theme.colors.blue_80};
+		(type === "rejeitado" && theme.colors.red_300) ||
+		(type === "aprovado" && theme.colors.green_200) ||
+		(type === "novo" && theme.colors.blue_80) ||
+		(type === "aguardando" && theme.colors.blue_80)};
+	opacity: 0.8;
 	border-top-right-radius: 0.25rem;
 	border-top-left-radius: 0.25rem;
 `;
-
 const WrapperImage = styled.div`
 	width: 100%;
 	height: 17.5rem;
+	cursor: pointer;
 `;
-
 const Image = styled.img`
 	width: 100%;
 	height: 100%;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 `;
-
 const WrapperUserMain = styled.div`
 	width: 100%;
 	padding: 0 1rem;
 `;
-
 const WrapperUser = styled.div`
 	width: 100%;
 	height: 45px;
@@ -62,16 +66,39 @@ const WrapperUser = styled.div`
 	justify-content: center;
 	border-radius: 0.25rem;
 	border: 1px solid ${({ theme }) => theme.colors.gray_200};
+	padding: 0 0.8rem;
 `;
-
 const WrapperTextUser = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+`;
+const WrapperRow = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: flex-start;
 `;
+const TitleUserOrDate = styled.strong`
+	font-size: 16px;
+	font-weight: 600;
+	color: ${({ theme }) => theme.colors.black_200};
 
+	// quando a tela atingir 1070px
+	@media screen and (max-width: 1070px) {
+		:first-child span {
+			display: none;
+		}
+	}
+`;
+const SubTitleUserOrDate = styled.p`
+	font-size: 14px;
+	color: ${({ theme }) => theme.colors.black_100};
+	margin-left: 8px;
+`;
 const FooterImage = styled.div`
 	width: 100%;
 	height: 5.72rem;
@@ -101,5 +128,8 @@ export {
 	WrapperUserMain,
 	WrapperUser,
 	WrapperTextUser,
+	WrapperRow,
+	TitleUserOrDate,
+	SubTitleUserOrDate,
 	FooterImage,
 };

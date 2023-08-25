@@ -1,15 +1,13 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /**
  * IMPORTS
  */
 
 import { useCallback, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
-
 import { toast } from "react-toastify";
 
 // redux
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 
 import { actions as ActionsApproval } from "../../features/approval";
 
@@ -20,10 +18,15 @@ import { Loading } from "../../components/loading";
 import { Filter } from "../../components/filter";
 
 // typings
-import { type IDataPagesProps, type FilterDataGroupsProps } from "./interface";
+import {
+	type IDataPagesProps,
+	type IFilterDataGroupsProps,
+	type IDataApprovalProps,
+} from "./interface";
 
 // functions
 import { fetchingAllDataForFiltering } from "./functions/functions";
+import { handleScrollTop } from "./functions/function-scrooll";
 
 // styles
 import {
@@ -36,31 +39,33 @@ import {
 const Home = () => {
 	const theme = useTheme();
 
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
-
 	// use dispatch
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
-	const [groups, setGroups] = useState<FilterDataGroupsProps[]>([]);
-	const [types, setTypes] = useState<FilterDataGroupsProps[]>([]);
-	const [status, setStatus] = useState<FilterDataGroupsProps[]>([]);
+	const [groups, setGroups] = useState<IFilterDataGroupsProps[]>([]);
+	const [types, setTypes] = useState<IFilterDataGroupsProps[]>([]);
+	const [status, setStatus] = useState<IFilterDataGroupsProps[]>([]);
 
-	const [approvalData, setApprovalData] = useState([]);
-	const [pagesData, setPagesData] = useState([]);
+	const [approvalData, setApprovalData] = useState<IDataApprovalProps[]>([]);
+	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
+
 	const [countPage, setCountPage] = useState(1);
+	const [lastPage, setLastPage] = useState(1);
 	const [loading, setLoading] = useState(false);
 
-	// dados para o filtro
+	// estados para o filtro
 	const [groupFilter, setGroupFilter] = useState(null);
 	const [statusFilter, setStatusFilter] = useState(null);
 	const [typeFilter, setTypeFilter] = useState(null);
 	const [driverIdFilter, setDriveIdFilter] = useState(null);
 	const [platesIdFilter, setPlatesIdFilter] = useState(null);
+	const [coilNumber, setCoillNumber] = useState(null);
+	const [tripNumber, setTripNumber] = useState(null);
 
+	// buscando dados para colocar no componente filtro
 	const handleFetchDataForTheFilter = useCallback(async () => {
-		fetchingAllDataForFiltering({
+		await fetchingAllDataForFiltering({
 			setLoading,
-			token,
 			dispatch,
 			setGroups,
 			setTypes,
@@ -68,33 +73,37 @@ const Home = () => {
 		});
 	}, []);
 
+	// buscando dados das aprovações para Gestor realizar (aprovação ou reprovação) de documentos
 	const handleFetchDataApprovals = useCallback(async () => {
 		try {
 			setLoading(true);
 			const response = await dispatch(
 				ActionsApproval.fetchAllApprovals({
-					token,
-					page: countPage,
-					groupId: groupFilter,
-					tipo: typeFilter,
-					status: statusFilter,
-					coilNumber: null,
-					driverId: driverIdFilter,
-					truckId: platesIdFilter,
+					page: countPage ?? null,
+					groupId: groupFilter ?? null,
+					tipo: typeFilter ?? null,
+					status: statusFilter ?? null,
+					coilNumber: coilNumber ?? null,
+					driverId: driverIdFilter ?? null,
+					truckId: platesIdFilter ?? null,
+					tripNumber: tripNumber ?? null,
 				})
 			);
 
 			setApprovalData(response?.payload?.data?.data?.data);
 
-			const responseFiltered = response?.payload?.data?.data?.links.filter(
+			const responseFiltered = response?.payload?.data?.data?.links?.filter(
 				(link: IDataPagesProps) =>
 					link.label !== "&laquo; Anterior" &&
 					link.label !== "..." &&
 					link.label !== "Próxima &raquo;"
 			);
 
+			setLastPage(response.payload.data.data.last_page);
 			setPagesData(responseFiltered);
-			setLoading(false);
+
+			handleCleanDataFilter();
+
 			toast.success("Busca realizada com sucesso!", {
 				position: "top-right",
 				autoClose: 5000,
@@ -104,7 +113,7 @@ const Home = () => {
 				draggable: false,
 			});
 		} catch (error) {
-			toast.success("Ops, algo deu errado entre contato com suporte!", {
+			toast.error("Ops, algo deu errado entre contato com suporte!", {
 				position: "top-right",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -113,6 +122,8 @@ const Home = () => {
 				draggable: false,
 			});
 			return error;
+		} finally {
+			setLoading(false);
 		}
 	}, [
 		countPage,
@@ -121,18 +132,23 @@ const Home = () => {
 		statusFilter,
 		driverIdFilter,
 		platesIdFilter,
+		coilNumber,
+		tripNumber,
 	]);
 
+	// selecionando o elemento pelo id
+	const btn = document.querySelector("#back-to-top");
+
+	// limpando o  estado dos dados do filtro realizado
 	const handleCleanDataFilter = () => {
 		setLoading(true);
 		setGroupFilter(null);
 		setTypeFilter(null);
 		setStatusFilter(null);
+		setPlatesIdFilter(null);
 		setDriveIdFilter(null);
-
-		setTimeout(() => {
-			setLoading(false);
-		}, 2000);
+		setCoillNumber(null);
+		setTripNumber(null);
 	};
 
 	// função levar usuário pra poxima paganina ou para a anterior
@@ -159,8 +175,9 @@ const Home = () => {
 		handleFetchDataForTheFilter();
 		handleFetchDataApprovals();
 	}, [countPage]);
+
 	return (
-		<>
+		<div id="back-to-top">
 			{loading ? (
 				<Loading color={theme.colors.blue_100} size={34} />
 			) : (
@@ -168,11 +185,11 @@ const Home = () => {
 					<WrapperTitle>
 						<Text
 							marginTop={18}
-							text="Lista de Documentos:"
+							text="Documentos:"
 							align="left"
 							letterHeight={24}
 							letterSpacing={0.5}
-							color={theme.colors.black_200}
+							color={theme.colors.black_100}
 							size={24}
 							weight="600"
 							marginBottom={30}
@@ -200,8 +217,16 @@ const Home = () => {
 							onChangeTextPlateId={(option: any) => {
 								setPlatesIdFilter(option.id);
 							}}
+							onChangeTextCoillNumber={(option: any) => {
+								setCoillNumber(option?.text);
+							}}
+							onChangeTextTripNumber={(option: any) => {
+								setTripNumber(option?.text);
+							}}
 							onClickButtonFilter={() => {
+								setCountPage(1);
 								handleFetchDataApprovals();
+								handleScrollTop(btn);
 							}}
 							onClickCleanFilter={() => {
 								handleCleanDataFilter();
@@ -214,17 +239,24 @@ const Home = () => {
 						<Table
 							data={approvalData}
 							pages={pagesData}
-							onClickNext={(pageCount: any) => {
+							firstPage={countPage}
+							lastPage={lastPage}
+							isLoading={loading}
+							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
+								handleScrollTop(btn);
+								return pageCount;
 							}}
-							onClickPreview={(pageCount: any) => {
+							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
+								handleScrollTop(btn);
+								return pageCount;
 							}}
 						/>
 					</WrapperTable>
 				</ContainerMain>
 			)}
-		</>
+		</div>
 	);
 };
 

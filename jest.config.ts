@@ -5,39 +5,39 @@ export default {
 	// Stop running tests after `n` failures
 	// bail: 0,
 
-	// The directory where Jest should store its cached dependency information
+	// O diretório onde o Jest deve armazenar suas informações de dependência em cache
 	// cacheDirectory: "C:\\Users\\Luan.Sousa\\AppData\\Local\\Temp\\jest",
 
-	// Automatically clear mock calls, instances, contexts and results before every test
+	// Limpe automaticamente chamadas simuladas, instâncias, contextos e resultados antes de cada teste
 	clearMocks: true,
 
-	// Indicates whether the coverage information should be collected while executing the test
-	// collectCoverage: false,
+	// Indica se as informações de cobertura devem ser coletadas durante a execução do teste
+	collectCoverage: false,
 
-	// An array of glob patterns indicating a set of files for which coverage information should be collected
-	// collectCoverageFrom: undefined,
+	// Uma matriz de padrões glob indicando um conjunto de arquivos para os quais as informações de cobertura devem ser coletadas
+	collectCoverageFrom: ["src/**/*.{js,jsx,tsx}"],
 
 	// The directory where Jest should output its coverage files
 	// coverageDirectory: undefined,
 
-	// An array of regexp pattern strings used to skip coverage collection
-	// coveragePathIgnorePatterns: [
-	//   "\\\\node_modules\\\\"
-	// ],
+	// Uma matriz de strings de padrão regexp usadas para ignorar a coleta de cobertura
+	coveragePathIgnorePatterns: ["\\\\node_modules\\\\"],
 
-	// Indicates which provider should be used to instrument code for coverage
-	coverageProvider: 'v8',
+	// Indica qual provedor deve ser usado para o código do instrumento para cobertura
+	coverageProvider: "v8",
 
-	// A list of reporter names that Jest uses when writing coverage reports
-	// coverageReporters: [
-	//   "json",
-	//   "text",
-	//   "lcov",
-	//   "clover"
-	// ],
+	// Uma lista de nomes de repórteres que Jest usa ao escrever relatórios de cobertura
+	coverageReporters: ["json", "text", "lcov", "clover"],
 
-	// An object that configures minimum threshold enforcement for coverage results
-	// coverageThreshold: undefined,
+	// Um objeto que configura a imposição de limite mínimo para resultados de cobertura
+	coverageThreshold: {
+		global: {
+			branches: 100,
+			functions: 100,
+			lines: 100,
+			statements: 100,
+		},
+	},
 
 	// A path to a custom dependency extractor
 	// dependencyExtractor: undefined,
@@ -71,16 +71,16 @@ export default {
 	// ],
 
 	// An array of file extensions your modules use
-	// moduleFileExtensions: [
-	//   "js",
-	//   "mjs",
-	//   "cjs",
-	//   "jsx",
-	//   "ts",
-	//   "tsx",
-	//   "json",
-	//   "node"
-	// ],
+	moduleFileExtensions: [
+		"js",
+		"mjs",
+		"cjs",
+		"jsx",
+		"ts",
+		"tsx",
+		"json",
+		"node",
+	],
 
 	// A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
 	// moduleNameMapper: {},
@@ -129,8 +129,8 @@ export default {
 	// The paths to modules that run some code to configure or set up the testing environment before each test
 	// setupFiles: [],
 
-	// A list of paths to modules that run some code to configure or set up the testing framework before each test
-	setupFilesAfterEnv: ['<rootDir>/config/test/setup-dom.ts'],
+	// Uma lista de caminhos para módulos que executam algum código para configurar ou definir a estrutura de teste antes de cada teste
+	setupFilesAfterEnv: ["<rootDir>/config/test/setup-dom.ts"],
 
 	// The number of seconds after which a test is considered as slow and reported as such in the results.
 	// slowTestThreshold: 5,
@@ -139,7 +139,7 @@ export default {
 	// snapshotSerializers: [],
 
 	// The test environment that will be used for testing
-	testEnvironment: 'jsdom',
+	testEnvironment: "jsdom",
 
 	// Options that will be passed to the testEnvironment
 	// testEnvironmentOptions: {},
@@ -167,14 +167,14 @@ export default {
 	// This option allows use of a custom test runner
 	// testRunner: "jest-circus/runner",
 
-	// A map from regular expressions to paths to transformers
+	// Um mapa de expressões regulares para caminhos para transformadores
 	transform: {
-		'^.+\\.(t|j)sx?$': [
-			'@swc/jest',
+		"^.+\\.(t|j)sx?$": [
+			"@swc/jest",
 			{
 				jsc: {
 					parser: {
-						syntax: 'typescript',
+						syntax: "typescript",
 						tsx: true,
 						decorators: true,
 					},
@@ -183,12 +183,12 @@ export default {
 						legacyDecorator: true,
 						decoratorMetadata: true,
 						react: {
-							runtime: 'automatic',
+							runtime: "automatic",
 						},
 					},
 				},
 				module: {
-					type: 'es6',
+					type: "es6",
 					noInterop: false,
 				},
 			},

@@ -9,7 +9,7 @@ const Container = styled.div`
 	align-items: flex-start;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	padding: 0 16px;
+	padding: 0 1rem;
 `;
 
 const WrapperContent = styled.div`
@@ -24,7 +24,7 @@ const WrapperContent = styled.div`
 const WrapperTitle = styled.div`
 	width: 100%;
 	border-bottom: 2px solid ${({ theme }) => theme.colors.gray_200};
-	margin-bottom: 34px;
+	margin-bottom: 2rem;
 
 	@media screen and (max-width: 768px) {
 		:first-child p {
@@ -33,7 +33,27 @@ const WrapperTitle = styled.div`
 	}
 `;
 
+const WrapperContentNotFound = styled.div`
+	width: 100%;
+	height: 70vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+`;
+
+const ImageNotFoundData = styled.img`
+	width: 100px;
+	height: 100px;
+`;
+
 /**
  * EXPORTS
  */
-export { Container, WrapperContent, WrapperTitle };
+export {
+	Container,
+	WrapperContent,
+	WrapperTitle,
+	WrapperContentNotFound,
+	ImageNotFoundData,
+};

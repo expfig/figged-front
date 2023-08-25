@@ -1,7 +1,5 @@
-/* eslint-disable no-case-declarations */
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { FiLoader } from "react-icons/fi";
 import { AsyncPaginate } from "react-select-async-paginate";
 
 // redux
@@ -9,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { actions as ActionsFilter } from "../../../../features/filter";
 
 // components
-import { Text } from "../../../text";
+import { LoadingTextPagination } from "../loading-text-pagination";
 
 // typings
 import {
@@ -28,96 +26,151 @@ const SelectAsyncPaginate = ({
 	const [pages, setPages] = useState(1);
 
 	const loadOptions = async (
-		searchQuery: any,
+		searchQuery: string,
 		{ page }: any // PAGINA ATUAL
 	) => {
-		const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
-
 		switch (nameTypeRequest) {
 			case "coils":
-				const responseFilterCoils: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllCoils({ token, page: pages })
-				);
-				const responseCoils = responseFilterCoils.payload.data.data;
+				if (searchQuery) {
+					const responseFilterCoilsNumber: IFilterRequestProps = await dispatch(
+						ActionsFilter.filterCoilsNumber({
+							page: 1,
+							propFilter: searchQuery,
+						})
+					);
+					const responseCoilsFiltered =
+						responseFilterCoilsNumber.payload.data.data;
 
-				setPages(pages + 1);
-				return {
-					options: responseCoils,
-					hasMore: responseCoils.length >= 1,
-					additional: {
-						page: searchQuery ? 2 : Number(page) + 1,
-					},
-				};
+					return {
+						options: responseCoilsFiltered,
+						hasMore: responseCoilsFiltered.length >= 10,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				} else {
+					const responseFilterCoils: IFilterRequestProps = await dispatch(
+						ActionsFilter.fetchAllCoils({ page: pages })
+					);
+					const responseCoils = responseFilterCoils.payload.data.data;
 
+					setPages(pages + 1);
+					return {
+						options: responseCoils,
+						hasMore: responseCoils.length >= 1,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				}
 			case "drivers":
-				const responseFilterGroups: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllDrivers({ token, page: pages })
-				);
-				const responseMotorista = responseFilterGroups.payload.data.data;
+				if (searchQuery) {
+					const responseFilterDriversName: IFilterRequestProps = await dispatch(
+						ActionsFilter.filterDriversName({
+							page: 1,
+							propFilter: searchQuery,
+						})
+					);
+					const responseNameDrivers =
+						responseFilterDriversName.payload.data.data;
 
-				setPages(pages + 1);
-				return {
-					options: responseMotorista,
-					hasMore: responseMotorista.length >= 1,
-					additional: {
-						page: searchQuery ? 2 : Number(page) + 1,
-					},
-				};
+					return {
+						options: responseNameDrivers,
+						hasMore: responseNameDrivers.length >= 10,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				} else {
+					const responseFilterGroups: IFilterRequestProps = await dispatch(
+						ActionsFilter.fetchAllDrivers({ page: pages })
+					);
+					const responseMotorista = responseFilterGroups.payload.data.data;
 
+					setPages(pages + 1);
+
+					return {
+						options: responseMotorista,
+						hasMore: responseMotorista.length >= 1,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				}
 			case "plates":
-				const responseFilterPlates: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllPlates({ token, page: pages })
-				);
-				const responsePlates = responseFilterPlates.payload.data.data;
+				if (searchQuery) {
+					const responseFilterPlatesNumber: IFilterRequestProps =
+						await dispatch(
+							ActionsFilter.filterPlatesNumber({
+								page: 1,
+								propFilter: searchQuery,
+							})
+						);
+					const responsePlatesFiltered =
+						responseFilterPlatesNumber.payload.data.data;
 
-				setPages(pages + 1);
-				return {
-					options: responsePlates,
-					hasMore: responsePlates.length >= 1,
-					additional: {
-						page: searchQuery ? 2 : Number(page) + 1,
-					},
-				};
+					return {
+						options: responsePlatesFiltered,
+						hasMore: responsePlatesFiltered.length >= 10,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				} else {
+					const responseFilterPlates: IFilterRequestProps = await dispatch(
+						ActionsFilter.fetchAllPlates({ page: pages })
+					);
+					const responsePlates = responseFilterPlates.payload.data.data;
 
+					setPages(pages + 1);
+					return {
+						options: responsePlates,
+						hasMore: responsePlates.length >= 1,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				}
 			case "trip_number":
-				const responseFilterTripNumber: IFilterRequestProps = await dispatch(
-					ActionsFilter.fetchAllTripNumber({ token, page: pages })
-				);
-				const responseTripNumber = responseFilterTripNumber.payload.data.data;
+				if (searchQuery) {
+					const responseFilterTripNumber: IFilterRequestProps = await dispatch(
+						ActionsFilter.filterTripeNumber({
+							page: 1,
+							propFilter: searchQuery,
+						})
+					);
+					const resTripNumber = responseFilterTripNumber.payload.data.data;
 
-				setPages(pages + 1);
-				return {
-					options: responseTripNumber,
-					hasMore: responseTripNumber.length >= 1,
-					additional: {
-						page: searchQuery ? 2 : Number(page) + 1,
-					},
-				};
+					setPages(pages + 1);
+					return {
+						options: resTripNumber,
+						hasMore: resTripNumber.length >= 10,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				} else {
+					const responseTripNumber: IFilterRequestProps = await dispatch(
+						ActionsFilter.fetchAllTripNumber({ page: pages })
+					);
+					const responseTripNumb = responseTripNumber.payload.data.data;
+
+					setPages(pages + 1);
+					return {
+						options: responseTripNumb,
+						hasMore: responseTripNumb.length >= 1,
+						additional: {
+							page: searchQuery ? 2 : Number(page) + 1,
+						},
+					};
+				}
 		}
 	};
 
-	const onChangeAsync = (option: any) => {
+	const hanleOnChangeAsync = (option: any) => {
 		if (typeof onChange === "function") {
 			onChange(option);
 		}
-	};
-
-	const ComponetTextProps = () => {
-		return (
-			<>
-				<FiLoader size={34} color={"#0d6efd"} />
-				<Text
-					marginTop={18}
-					text="Carregando"
-					align="center"
-					letterHeight={24}
-					letterSpacing={0.5}
-					color={"#cdcdcd"}
-					size={16}
-					weight="400"
-				/>
-			</>
-		);
 	};
 
 	return (
@@ -128,14 +181,14 @@ const SelectAsyncPaginate = ({
 				placeholder={placeholder}
 				// @ts-expect-error
 				loadOptions={loadOptions}
-				onChange={onChangeAsync}
-				getOptionValue={(option: any) => option.text} // Resolve dados de opção em uma string para comparar opções e especificar atributos de valor
-				getOptionLabel={(option: any) => option.text} // Resolve os dados de opção para uma string a ser exibida como rótulo por componentes
-				isSearchable={false} // usuário interagir com o input
-				loadingMessage={ComponetTextProps}
+				onChange={hanleOnChangeAsync}
+				getOptionValue={(option: any) => String(option?.text)?.trim()} // Resolve dados de opção em uma string para comparar opções e especificar atributos de valor
+				getOptionLabel={(option: any) => String(option?.text)?.trim()} // Resolve os dados de opção para uma string a ser exibida como rótulo por componentes
+				isSearchable={true} // usuário interagir com o input
+				loadingMessage={() => <LoadingTextPagination />}
 				additional={{
 					page: 1,
-				}} // Não requerido. Padrão additionalpara a primeira solicitação para cada pesquisa.
+				}} // Não requerido. Padrão additional para a primeira solicitação para cada pesquisa.
 			/>
 		</div>
 	);

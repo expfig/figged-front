@@ -26,6 +26,9 @@ import {
 	WrapperUserMain,
 	WrapperUser,
 	WrapperTextUser,
+	WrapperRow,
+	TitleUserOrDate,
+	SubTitleUserOrDate,
 	FooterImage,
 } from "./styles";
 
@@ -35,6 +38,7 @@ const ImageCustom = ({
 	onClickDisapproved,
 	imageUri,
 	username,
+	approvalDate = "",
 }: ImageProps) => {
 	const theme = useTheme();
 	const { idBobina } = useParams();
@@ -54,8 +58,7 @@ const ImageCustom = ({
 				rotateLeft: 4,
 				rotateRight: 4,
 			},
-			title: () =>
-				`Documento da Bobina ${JSON.stringify(idBobina)}(Aguardando)`,
+			title: () => `Documento da Bobina ${String(idBobina)}(Aguardando)`,
 			hide: () => hide,
 		};
 		const viewer = new Viewer(event.target, config);
@@ -76,7 +79,7 @@ const ImageCustom = ({
 					letterHeight={24}
 					letterSpacing={0.5}
 					color={theme.colors.natural}
-					size={24}
+					size={18}
 					weight="600"
 				/>
 			</WrapperHeader>
@@ -99,31 +102,22 @@ const ImageCustom = ({
 			<WrapperUserMain>
 				<WrapperUser>
 					<WrapperTextUser>
-						<Text
-							text="Úsuario:"
-							align="left"
-							letterHeight={24}
-							letterSpacing={0.5}
-							color={theme.colors.black_200}
-							size={18}
-							weight="600"
-							marginLeft={12}
-							width={"30%"}
-						/>
-						<Text
-							text={
-								handleTrasformStringInCapitalize({
-									dataString: username,
-								}) ?? "Não definido"
-							}
-							align="left"
-							letterHeight={28}
-							letterSpacing={0.5}
-							color={theme.colors.black_200}
-							size={16}
-							weight="400"
-							marginLeft={6}
-						/>
+						<WrapperRow>
+							<TitleUserOrDate>Usuário:</TitleUserOrDate>
+							<SubTitleUserOrDate>
+								{handleTrasformStringInCapitalize({
+									dataString: username ?? "Indefinido",
+								})}
+							</SubTitleUserOrDate>
+						</WrapperRow>
+						<WrapperRow>
+							<TitleUserOrDate>
+								Data <span>aprovação</span>:
+							</TitleUserOrDate>
+							<SubTitleUserOrDate>
+								{approvalDate ?? "Indefinido"}
+							</SubTitleUserOrDate>
+						</WrapperRow>
 					</WrapperTextUser>
 				</WrapperUser>
 			</WrapperUserMain>

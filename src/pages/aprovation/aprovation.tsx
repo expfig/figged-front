@@ -48,7 +48,6 @@ import {
 
 const Aprovation = () => {
 	const theme = useTheme();
-	const token = "ec4c56361ddbb8c058be23575e8bb7cff585c2c9";
 
 	const { idAprovacao, idDriveName } = useParams();
 
@@ -71,6 +70,7 @@ const Aprovation = () => {
 	const [pagesData, setPagesData] = useState<IDataPagesProps[]>([]);
 
 	const [countPage, setCountPage] = useState(1);
+	const [lastPage, setLastPage] = useState(0);
 	const [idImage, setImageID] = useState<any>();
 	const [messageApproval, setMessageApproval] = useState("");
 
@@ -80,12 +80,12 @@ const Aprovation = () => {
 			await handleGetAllDocuments({
 				setLoading,
 				dispatch,
-				token,
 				idAprovacao,
 				countPage,
 				idDriveName,
 				setDocuments,
 				setDataTable,
+				setLastPage,
 				setPagesData,
 			});
 		}
@@ -127,7 +127,6 @@ const Aprovation = () => {
 									setIsModal,
 									setImageID,
 									setLoading,
-									token,
 									dispatch,
 									handleGetCurrentData,
 									idImage,
@@ -149,7 +148,6 @@ const Aprovation = () => {
 									setIsModalReproach,
 									setImageID,
 									setLoading,
-									token,
 									dispatch,
 									handleGetCurrentData,
 									idImage,
@@ -181,7 +179,7 @@ const Aprovation = () => {
 								align="left"
 								letterHeight={24}
 								letterSpacing={0.5}
-								color={theme.colors.black_200}
+								color={theme.colors.black_100}
 								size={24}
 								weight="600"
 								marginBottom={16}
@@ -193,7 +191,7 @@ const Aprovation = () => {
 									{documents.data.map((doc: any, index) => (
 										<ImageCustom
 											key={String(index)}
-											type={documents.aprovacao.status}
+											type={doc.status}
 											username={doc.user}
 											approvalDate={doc?.formatted_updated_at}
 											imageUri={doc?.file_url}
@@ -221,7 +219,7 @@ const Aprovation = () => {
 										align="center"
 										letterHeight={18}
 										letterSpacing={0.5}
-										color={theme.colors.black_200}
+										color={theme.colors.black_100}
 										size={24}
 										weight="600"
 									/>
@@ -233,11 +231,16 @@ const Aprovation = () => {
 						<Table
 							data={dataTable}
 							pages={pagesData}
-							onClickNext={(pageCount: any) => {
+							firstPage={countPage}
+							lastPage={lastPage}
+							isLoading={false}
+							onClickNext={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("next", Number(pageCount));
+								return pageCount;
 							}}
-							onClickPreview={(pageCount: any) => {
+							onClickPreview={(pageCount: number) => {
 								handleOnclickPageNextOrPreview("preview", Number(pageCount));
+								return pageCount;
 							}}
 						/>
 					</ContainerMain>

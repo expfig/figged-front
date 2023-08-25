@@ -17,9 +17,12 @@ jobs:
           node-version: '16.x'
       - name: Build web-app
         run: yarn install && yarn build
+      - name: Run the Test
+        run: yarn test
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+     
