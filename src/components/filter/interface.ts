@@ -64,6 +64,12 @@ interface FilterProps {
 	onClickCleanFilter: () => void;
 }
 
+interface IDataSelectProps {
+	id: string | number;
+	text: string;
+	cpf?: string;
+}
+
 /**
  * EXPORTS
  */
@@ -72,4 +78,5 @@ export type {
 	IFilterRequestProps,
 	FilterDataGroupsProps,
 	FilterProps,
+	IDataSelectProps,
 };

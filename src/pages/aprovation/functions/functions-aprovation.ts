@@ -9,6 +9,7 @@ import { actions as ActionsDocument } from "../../../features/document";
 import { actions as ActionsApproval } from "../../../features/approval";
 
 // typings
+import { type IReduxRequestProps } from "../../../dtos/request-redux";
 import {
 	type IFunctionAprovationProps,
 	type IDataPagesProps,
@@ -30,7 +31,7 @@ const handleGetAllDocuments = async ({
 }: IFunctionAprovationProps) => {
 	try {
 		setLoading(true);
-		const documentDataResponse = await dispatch(
+		const documentDataResponse: IReduxRequestProps = await dispatch(
 			ActionsDocument.fetchAllDocuments({ idAprovacao })
 		);
 

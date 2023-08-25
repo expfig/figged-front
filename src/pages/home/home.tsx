@@ -73,7 +73,7 @@ const Home = () => {
 		});
 	}, []);
 
-	// buscando dados das aprovações para usuário realizar (aprovação ou reprovação) de documentos
+	// buscando dados das aprovações para Gestor realizar (aprovação ou reprovação) de documentos
 	const handleFetchDataApprovals = useCallback(async () => {
 		try {
 			setLoading(true);

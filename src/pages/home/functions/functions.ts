@@ -44,7 +44,6 @@ const fetchingAllDataForFiltering = async ({
 			responseFilterTypes,
 			responseFilterStatus,
 		]);
-
 		// a action (grupos) retornou dados da api, agora iremos montar nossos dados da forma que necessitamos
 		const responseGroups: IFilterDataGroupsProps[] = [];
 		if (filterGroups.payload.data.data.length > 0) {

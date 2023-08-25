@@ -10,6 +10,7 @@ import { actions as ActionApproval } from "../../../features/approval";
 // typings
 import { type IFunctionDocumentsProps } from "./interface-functions";
 import { type IDataPagesProps } from "../interface";
+import { type IReduxRequestProps } from "../../../dtos/request-redux";
 
 /**
  * FUNÇÃO QUE BUSCAR TODOS DOCUMENTOS QUE FORAM APROVADOS
@@ -27,7 +28,7 @@ const handleGetDocumentApprovel = async ({
 		setIsLoading(true);
 
 		// response de documentos aprovados
-		const responseApprovedDocument = await dispatch(
+		const responseApprovedDocument: IReduxRequestProps = await dispatch(
 			ActionApproval.fetchAllApprovalsWithApprovedAndPendingStatus({
 				page,
 				status,
